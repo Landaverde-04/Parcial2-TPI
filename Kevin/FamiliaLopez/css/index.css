@@ -1,0 +1,270 @@
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #8B4513 0%, #CD853F 50%, #D2691E 100%);
+      min-height: 100vh;
+      padding: 2rem 0;
+    }
+    
+    .main-card {
+      background: linear-gradient(145deg, #FFF8DC 0%, #FAEBD7 50%, #F5DEB3 100%);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(139, 69, 19, 0.3);
+      border: none;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .main-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #FF8C00 0%, #D2691E 50%, #CD853F 100%);
+    }
+    
+    .header-section {
+      background: linear-gradient(135deg, #D2691E 0%, #FF8C00 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .header-section::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #FF8C00;
+    }
+    
+    .header-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .header-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      font-weight: 300;
+    }
+    
+    .content-section {
+      padding: 4rem 3rem 3rem;
+    }
+    
+    .info-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 20px rgba(139, 69, 19, 0.15);
+      border: 2px solid #F5DEB3;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, #FF8C00, #D2691E);
+    }
+    
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(139, 69, 19, 0.25);
+    }
+    
+    .info-label {
+      color: #8B4513;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .info-value {
+      color: #5D4037;
+      font-size: 1.4rem;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid #F5DEB3;
+      transition: border-color 0.3s ease;
+    }
+    
+    .info-card:hover .info-value {
+      border-color: #FF8C00;
+    }
+    
+    .decoration-icon {
+      font-size: 4rem;
+      color: #FF8C00;
+      opacity: 0.1;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .info-card:hover .decoration-icon {
+      opacity: 0.2;
+      transform: rotate(15deg);
+    }
+    
+    .family-illustration {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    
+    .illustration-container {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .illustration {
+      filter: drop-shadow(0 8px 16px rgba(139, 69, 19, 0.2));
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .welcome-message {
+      background: linear-gradient(135deg, #FFF8DC 0%, white 100%);
+      border-radius: 15px;
+      padding: 2.5rem;
+      text-align: center;
+      border: 3px solid #F5DEB3;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .welcome-message::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, #FF8C00 0%, transparent 70%);
+      opacity: 0.05;
+      animation: rotate 20s linear infinite;
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .welcome-text {
+      color: #8B4513;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .highlight-text {
+      color: #D2691E;
+      font-weight: 600;
+    }
+    
+    /* Animaciones de entrada */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .fade-in-delay-1 {
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    .fade-in-delay-2 {
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+    
+    .fade-in-delay-3 {
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+    
+    .fade-in-delay-4 {
+      animation: fadeInUp 0.8s ease-out 0.8s both;
+    }
+    
+    .fade-in-delay-5 {
+      animation: fadeInUp 0.8s ease-out 1s both;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem 0;
+      }
+      
+      .header-title {
+        font-size: 2rem;
+      }
+      
+      .header-subtitle {
+        font-size: 1rem;
+      }
+      
+      .content-section {
+        padding: 3rem 1.5rem 2rem;
+      }
+      
+      .info-card {
+        padding: 1.5rem;
+      }
+      
+      .info-value {
+        font-size: 1.2rem;
+      }
+      
+      .decoration-icon {
+        font-size: 3rem;
+      }
+    }
+    
+    /* Efectos especiales */
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #FFD700;
+      border-radius: 50%;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+    
+    .sparkle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+    .sparkle:nth-child(2) { top: 40%; right: 15%; animation-delay: 0.5s; }
+    .sparkle:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 1s; }
+    .sparkle:nth-child(4) { bottom: 60%; right: 25%; animation-delay: 1.5s; }
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }

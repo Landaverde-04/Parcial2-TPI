@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario de Alimentos</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/productos.css">
+ </head>
+<body class="bg-light">
+   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <!-- Brand -->
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-boxes me-2"></i>
+        Inventario de Alimentos
+      </a>
+      
+      <!-- Toggler Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Navigation Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <i class="bi bi-house-door me-2"></i>
+              Inicio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gestioncategorias.html">
+              <i class="bi bi-tags me-2"></i>
+              Categorías
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="productos.html">
+              <i class="bi bi-box-seam me-2"></i>
+              Productos
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col">
+        <div class="d-flex align-items-center">
+          <i class="bi bi-box-seam-fill text-primary me-2 fs-3"></i>
+          <h1 class="mb-0">Gestión de Productos</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row mb-4">
+      <div class="col-lg-7 col-xl-6">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">
+              <i class="bi bi-plus-circle me-2"></i>
+              Nuevo Producto
+            </h5>
+          </div>
+          <div class="card-body">
+            <form id="formProducto">
+              <input type="hidden" id="idProducto">
+              
+              <div class="row mb-3">
+                <div class="col-md-8">
+                  <label for="nombreProducto" class="form-label fw-bold">
+                    <i class="bi bi-box me-1"></i>
+                    Nombre del Producto
+                  </label>
+                  <input type="text" class="form-control" id="nombreProducto" required 
+                         placeholder="Ej: Leche descremada">
+                </div>
+                <div class="col-md-4">
+                  <label for="cantidadProducto" class="form-label fw-bold">
+                    <i class="bi bi-123 me-1"></i>
+                    Cantidad
+                  </label>
+                  <input type="number" class="form-control" id="cantidadProducto" required 
+                         placeholder="0" min="0">
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="unidadMedida" class="form-label fw-bold">
+                    <i class="bi bi-rulers me-1"></i>
+                    Unidad de Medida
+                  </label>
+                  <input type="text" class="form-control" id="unidadMedida" 
+                         placeholder="kg, litros, unidades..." required>
+                </div>
+                <div class="col-md-6">
+                  <label for="precioProducto" class="form-label fw-bold">
+                    <i class="bi bi-currency-dollar me-1"></i>
+                    Precio Unitario ($)
+                  </label>
+                  <input type="number" step="0.01" class="form-control" id="precioProducto" required 
+                         placeholder="0.00" min="0">
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="fechaVencimiento" class="form-label fw-bold">
+                    <i class="bi bi-calendar-event me-1"></i>
+                    Fecha de Vencimiento
+                  </label>
+                  <input type="date" class="form-control" id="fechaVencimiento" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="categoriaProducto" class="form-label fw-bold">
+                    <i class="bi bi-tag me-1"></i>
+                    Categoría
+                  </label>
+                  <select class="form-select" id="categoriaProducto" required>
+                    <option value="">Seleccionar categoría...</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="bi bi-save me-2"></i>
+                  Guardar Producto
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-5 col-xl-6 d-none d-lg-block">
+        <div class="card shadow-sm h-100 bg-gradient">
+          <div class="card-body d-flex align-items-center justify-content-center p-4">
+            <div class="text-center">
+              <div class="illustration-container mb-3">
+                <svg width="320" height="280" viewBox="0 0 320 280" class="illustration">
+                  <rect x="40" y="50" width="240" height="180" rx="8" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+                  <line x1="40" y1="110" x2="280" y2="110" stroke="#dee2e6" stroke-width="2"/>
+                  <line x1="40" y1="170" x2="280" y2="170" stroke="#dee2e6" stroke-width="2"/>
+                  <line x1="160" y1="50" x2="160" y2="230" stroke="#dee2e6" stroke-width="1" opacity="0.5"/>
+                  
+                  <g class="product-item">
+                    <rect x="60" y="70" width="25" height="30" rx="3" fill="#0d6efd" opacity="0.9"/>
+                    <text x="72.5" y="88" text-anchor="middle" fill="white" font-size="8" font-weight="bold">LECHE</text>
+                  </g>
+                  
+                  <g class="product-item">
+                    <rect x="95" y="70" width="25" height="30" rx="3" fill="#198754" opacity="0.9"/>
+                    <text x="107.5" y="88" text-anchor="middle" fill="white" font-size="8" font-weight="bold">PAN</text>
+                  </g>
+                  
+                  <g class="product-item">
+                    <rect x="180" y="70" width="25" height="30" rx="3" fill="#dc3545" opacity="0.9"/>
+                    <text x="192.5" y="88" text-anchor="middle" fill="white" font-size="8" font-weight="bold">CARNE</text>
+                  </g>
+                  
+                  <g class="product-item">
+                    <rect x="215" y="70" width="25" height="30" rx="3" fill="#fd7e14" opacity="0.9"/>
+                    <text x="227.5" y="88" text-anchor="middle" fill="white" font-size="8" font-weight="bold">QUESO</text>
+                  </g>
+                  
+                  <g class="product-item">
+                    <circle cx="75" cy="145" r="15" fill="#6f42c1" opacity="0.9"/>
+                    <text x="75" y="148" text-anchor="middle" fill="white" font-size="8" font-weight="bold">ARROZ</text>
+                  </g>
+                  
+                  <g class="product-item">
+                    <circle cx="115" cy="145" r="15" fill="#20c997" opacity="0.9"/>
+                    <text x="115" y="148" text-anchor="middle" fill="white" font-size="8" font-weight="bold">PASTA</text>
+                  </g>
+                  
+                  <g class="product-item">
+                    <circle cx="195" cy="145" r="15" fill="#e83e8c" opacity="0.9"/>
+                    <text x="195" y="148" text-anchor="middle" fill="white" font-size="7" font-weight="bold">YOGURT</text>
+                  </g>
+                  
+                  <g class="product-item">
+                    <circle cx="235" cy="145" r="15" fill="#6610f2" opacity="0.9"/>
+                    <text x="235" y="148" text-anchor="middle" fill="white" font-size="8" font-weight="bold">MIEL</text>
+                  </g>
+                  <g class="product-item">
+                    <ellipse cx="80" cy="205" rx="20" ry="12" fill="#ffc107" opacity="0.9"/>
+                    <text x="80" y="208" text-anchor="middle" fill="black" font-size="7" font-weight="bold">ACEITE</text>
+                  </g>
+                  
+                  <g class="product-item">
+                    <ellipse cx="130" cy="205" rx="20" ry="12" fill="#17a2b8" opacity="0.9"/>
+                    <text x="130" y="208" text-anchor="middle" fill="white" font-size="7" font-weight="bold">VINAGRE</text>
+                  </g>
+                  
+                  <g class="product-item">
+                    <ellipse cx="200" cy="205" rx="20" ry="12" fill="#28a745" opacity="0.9"/>
+                    <text x="200" y="208" text-anchor="middle" fill="white" font-size="7" font-weight="bold">VERDURAS</text>
+                  </g>
+                  
+                  <rect x="50" y="240" width="30" height="15" rx="2" fill="#fff" stroke="#dee2e6"/>
+                  <text x="65" y="250" text-anchor="middle" fill="#495057" font-size="8">$2.50</text>
+                  
+                  <rect x="145" y="240" width="30" height="15" rx="2" fill="#fff" stroke="#dee2e6"/>
+                  <text x="160" y="250" text-anchor="middle" fill="#495057" font-size="8">$1.99</text>
+                  
+                  <rect x="240" y="240" width="30" height="15" rx="2" fill="#fff" stroke="#dee2e6"/>
+                  <text x="255" y="250" text-anchor="middle" fill="#495057" font-size="8">$3.75</text>
+                  
+                  <rect x="90" y="20" width="140" height="25" rx="12" fill="#0d6efd" opacity="0.1" stroke="#0d6efd" stroke-width="1"/>
+                  <text x="160" y="35" text-anchor="middle" fill="#0d6efd" font-size="12" font-weight="bold">GESTIÓN DE PRODUCTOS</text>
+                </svg>
+              </div>
+              <h5 class="text-muted mb-2">Control total de inventario</h5>
+              <p class="text-muted small mb-0">
+                Administra detalles de tus productos: precios, cantidades, fechas de vencimiento y más
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <h5 class="card-title mb-0">
+              <i class="bi bi-list-ul me-2"></i>
+              Lista de Productos
+            </h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col" class="text-center">
+                      <i class="bi bi-hash me-1"></i>
+                      ID
+                    </th>
+                    <th scope="col">
+                      <i class="bi bi-box me-1"></i>
+                      Nombre
+                    </th>
+                    <th scope="col" class="text-center">
+                      <i class="bi bi-123 me-1"></i>
+                      Cantidad
+                    </th>
+                    <th scope="col">
+                      <i class="bi bi-rulers me-1"></i>
+                      Unidad
+                    </th>
+                    <th scope="col" class="text-end">
+                      <i class="bi bi-currency-dollar me-1"></i>
+                      Precio
+                    </th>
+                    <th scope="col" class="text-center">
+                      <i class="bi bi-calendar-event me-1"></i>
+                      Vencimiento
+                    </th>
+                    <th scope="col">
+                      <i class="bi bi-tag me-1"></i>
+                      Categoría
+                    </th>
+                    <th scope="col" class="text-center">
+                      <i class="bi bi-gear me-1"></i>
+                      Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="listaProductos">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+  <!-- Footer -->
+  <footer class="bg-primary text-white text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-0">
+        <i class="bi bi-boxes me-2"></i>
+       Inventario de Alimentos - Gestión Eficiente
+      </p>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <script src="js/productos.js"></script>
+</body>
+</html>

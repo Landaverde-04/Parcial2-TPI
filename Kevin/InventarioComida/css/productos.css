@@ -1,0 +1,278 @@
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+    
+    .navbar {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      padding: 0.75rem 1rem;
+      margin: 0 0.25rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+    
+    .navbar-nav .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white !important;
+      transform: translateY(-1px);
+    }
+    
+    .navbar-nav .nav-link.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white !important;
+      font-weight: 600;
+    }
+    
+    .navbar-toggler {
+      border: none;
+      padding: 0.5rem;
+    }
+    
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    
+    .card {
+      border: none;
+      border-radius: 12px;
+      transition: transform 0.2s ease-in-out;
+    }
+    
+    .card:hover {
+      transform: translateY(-2px);
+    }
+    
+    .card-header {
+      border-radius: 12px 12px 0 0 !important;
+      border-bottom: none;
+      padding: 1.2rem 1.5rem;
+    }
+    
+    .card-body {
+      padding: 1.5rem;
+    }
+    .acciones{
+        text-align: center;
+    }
+    button{
+        color: #dee2e6;
+           border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      background: linear-gradient(45deg, #0d6efd, #0056b3);
+   
+    }
+    
+    
+    .form-control, .form-select {
+      border-radius: 8px;
+      border: 2px solid #e9ecef;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+      transform: translateY(-1px);
+    }
+    
+    .form-label {
+      color: #495057;
+      margin-bottom: 0.75rem;
+    }
+    
+    .btn {
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(45deg, #0d6efd, #0056b3);
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(45deg, #0056b3, #004085);
+    }
+    
+    .table {
+      border-radius: 0 0 12px 12px;
+    }
+    
+    .table th {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      padding: 1rem;
+      border-bottom: 2px solid #dee2e6;
+    }
+    
+    .table td {
+      padding: 1rem;
+      vertical-align: middle;
+      border-bottom: 1px solid #f8f9fa;
+    }
+    
+    .table-hover tbody tr:hover {
+      background-color: #f8f9fa;
+      transition: background-color 0.2s ease;
+    }
+    
+    .table-dark th {
+      background: linear-gradient(45deg, #495057, #343a40);
+      color: white;
+    }
+    
+    .shadow-sm {
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    .bg-light {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+      min-height: 100vh;
+    }
+    
+    .navbar {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .text-primary {
+      color: #0d6efd !important;
+    }
+    
+    /* Estilos para la ilustración */
+    .bg-gradient {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f4 100%);
+    }
+    
+    .illustration-container {
+      position: relative;
+    }
+    
+    .illustration {
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    /* Animaciones de productos */
+    .product-item {
+      animation: productFloat 4s ease-in-out infinite;
+    }
+    
+    .product-item:nth-child(2) { animation-delay: 0.5s; }
+    .product-item:nth-child(3) { animation-delay: 1s; }
+    .product-item:nth-child(4) { animation-delay: 1.5s; }
+    .product-item:nth-child(5) { animation-delay: 2s; }
+    
+    @keyframes productFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-5px) scale(1.02); }
+    }
+    
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .card, .navbar {
+      animation: fadeIn 0.6s ease-out;
+    }
+    
+    /* Estilos responsivos */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+      
+      .card-body {
+        padding: 1rem;
+      }
+      
+      .table th, .table td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+      }
+      
+      .btn-lg {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+      }
+      
+      .row > .col-lg-7 {
+        margin-bottom: 2rem;
+      }
+    }
+    
+    /* Estados de validación */
+    .is-invalid {
+      border-color: #dc3545;
+    }
+    
+    .is-valid {
+      border-color: #198754;
+    }
+    
+    /* Estilos para inputs específicos */
+    input[type="number"] {
+      text-align: right;
+    }
+    
+    input[type="date"] {
+      color: #495057;
+    }
+    
+    /* Loading state */
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid #0d6efd;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
