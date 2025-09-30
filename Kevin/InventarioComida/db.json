@@ -1,0 +1,48 @@
+{
+  "categorias": [
+    {
+      "id": "1",
+      "nombre": "Frutas",
+      "descripcion": "Categoría de frutas frescas"
+    },
+    {
+      "id": "2",
+      "nombre": "Verduras",
+      "descripcion": "Categoría de verduras"
+    },
+    {
+      "id": "3",
+      "nombre": "Bebidas",
+      "descripcion": "Agua, Sodas"
+    }
+  ],
+  "productos": [
+    {
+      "nombre": "Manzana",
+      "cantidad": 20,
+      "unidadMedida": "kg",
+      "precio": 1.5,
+      "fechaVencimiento": "2025-09-26",
+      "categoriaId": 1,
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "nombre": "Leche Entera",
+      "cantidad": 1,
+      "unidadMedida": "litros",
+      "precio": 3.06,
+      "fechaVencimiento": "2025-09-26",
+      "categoriaId": 3
+    },
+    {
+      "nombre": "Prueba",
+      "cantidad": 1,
+      "unidadMedida": "litros",
+      "precio": 0.05,
+      "fechaVencimiento": "2025-09-30",
+      "categoriaId": 2,
+      "id": "3"
+    }
+  ]
+}

@@ -1,100 +1,187 @@
-    if (!localStorage.getItem("productos")) {
-      const iniciales = [
-        { id: 1, nombre: "Leche Entera", cantidad: 10, unidad: "litros", precio: 1.20, vencimiento: "2025-10-01", idCategoria: 1 },
-        { id: 2, nombre: "Pollo Entero", cantidad: 5, unidad: "kg", precio: 3.50, vencimiento: "2025-09-30", idCategoria: 2 },
-        { id: 3, nombre: "Zanahoria", cantidad: 20, unidad: "kg", precio: 0.80, vencimiento: "2025-09-28", idCategoria: 3 }
-      ];
-      localStorage.setItem("productos", JSON.stringify(iniciales));
+const API_URL = "http://localhost:3000/productos";
+const CATEGORIAS_URL = "http://localhost:3000/categorias";
+
+const form = document.getElementById("formProducto");
+const lista = document.getElementById("listaProductos");
+const idInput = document.getElementById("idProducto");
+const nombreInput = document.getElementById("nombreProducto");
+const cantidadInput = document.getElementById("cantidadProducto");
+const unidadMedidaInput = document.getElementById("unidadMedida");
+const precioInput = document.getElementById("precioProducto");
+const fechaVencimientoInput = document.getElementById("fechaVencimiento");
+const categoriaSelect = document.getElementById("categoriaProducto");
+
+// Función para obtener el siguiente ID disponible
+async function obtenerSiguienteId() {
+  try {
+    const res = await fetch(API_URL);
+    const productos = await res.json();
+    
+    if (productos.length === 0) {
+      return 1;
     }
+    
+    const maxId = Math.max(...productos.map(prod => parseInt(prod.id) || 0));
+    return maxId + 1;
+  } catch (error) {
+    console.error("Error al obtener siguiente ID:", error);
+    return 1;
+  }
+}
 
-    const form = document.getElementById("formProducto");
-    const lista = document.getElementById("listaProductos");
-    const selectCategoria = document.getElementById("categoriaProducto");
+// Cargar categorías en el select
+async function cargarCategorias() {
+  try {
+    const res = await fetch(CATEGORIAS_URL);
+    const categorias = await res.json();
 
-    function cargarCategoriasSelect() {
-      selectCategoria.innerHTML = "";
-      const categorias = JSON.parse(localStorage.getItem("categorias")) || [];
-      categorias.forEach(cat => {
-        const option = document.createElement("option");
-        option.value = cat.id;
-        option.textContent = cat.nombre;
-        selectCategoria.appendChild(option);
+    categoriaSelect.innerHTML = '<option value="">Seleccionar categoría...</option>';
+    categorias.forEach(cat => {
+      const option = document.createElement("option");
+      option.value = cat.id;
+      option.textContent = cat.nombre;
+      categoriaSelect.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error al cargar categorías:", error);
+  }
+}
+
+// Obtener nombre de categoría por ID
+function obtenerNombreCategoria(categoriaId) {
+  const option = categoriaSelect.querySelector(`option[value="${categoriaId}"]`);
+  return option ? option.textContent : "Sin categoría";
+}
+
+// Cargar productos en la tabla
+async function cargarProductos() {
+  lista.innerHTML = "";
+  try {
+    const res = await fetch(API_URL);
+    const productos = await res.json();
+
+    productos.forEach(prod => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="text-center">${prod.id}</td>
+        <td>${prod.nombre}</td>
+        <td class="text-center">${prod.cantidad}</td>
+        <td>${prod.unidadMedida || ""}</td>
+        <td class="text-end">$${parseFloat(prod.precio).toFixed(2)}</td>
+        <td class="text-center">${prod.fechaVencimiento}</td>
+        <td>${obtenerNombreCategoria(prod.categoriaId)}</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-warning me-2" onclick="editarProducto('${prod.id}')">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" onclick="eliminarProducto('${prod.id}')">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      `;
+      lista.appendChild(tr);
+    });
+  } catch (error) {
+    console.error("Error al cargar productos:", error);
+  }
+}
+
+// Guardar o editar producto
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const id = idInput.value;
+  const nombre = nombreInput.value.trim();
+  const cantidad = parseInt(cantidadInput.value);
+  const unidadMedida = unidadMedidaInput.value.trim();
+  const precio = parseFloat(precioInput.value);
+  const fechaVencimiento = fechaVencimientoInput.value;
+  const categoriaId = parseInt(categoriaSelect.value);
+
+  if (!nombre) return alert("El nombre del producto es obligatorio");
+  if (!unidadMedida) return alert("La unidad de medida es obligatoria");
+  if (!fechaVencimiento) return alert("La fecha de vencimiento es obligatoria");
+  if (!categoriaId) return alert("Debe seleccionar una categoría");
+
+  try {
+    let response;
+    const productoData = {
+      nombre,
+      cantidad,
+      unidadMedida,
+      precio,
+      fechaVencimiento,
+      categoriaId
+    };
+
+    if (id) {
+      // Editar
+      productoData.id = parseInt(id);
+      response = await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(productoData)
+      });
+    } else {
+      // Crear
+      const nuevoId = await obtenerSiguienteId();
+      productoData.id = nuevoId;
+      response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(productoData)
       });
     }
 
-    function cargarProductos() {
-      lista.innerHTML = "";
-      const productos = JSON.parse(localStorage.getItem("productos")) || [];
-      const categorias = JSON.parse(localStorage.getItem("categorias")) || [];
+    form.reset();
+    idInput.value = "";
+    await cargarProductos();
+    
+  } catch (error) {
+    console.error("Error al guardar producto:", error);
+  }
+});
 
-      productos.forEach(prod => {
-        const categoria = categorias.find(c => c.id == prod.idCategoria);
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${prod.id}</td>
-          <td>${prod.nombre}</td>
-          <td>${prod.cantidad}</td>
-          <td>${prod.unidad}</td>
-          <td>$${prod.precio.toFixed(2)}</td>
-          <td>${prod.vencimiento}</td>
-          <td>${categoria ? categoria.nombre : "Sin categoría"}</td>
-          <td class="acciones">
-            <button class="edit" onclick="editarProducto(${prod.id})">Editar</button>
-            <button class="delete" onclick="eliminarProducto(${prod.id})">Eliminar</button>
-          </td>
-        `;
-        lista.appendChild(tr);
-      });
-    }
+// Editar producto
+async function editarProducto(id) {
+  try {
+    const response = await fetch(`${API_URL}/${id}`);
+    const prod = await response.json();
 
-    function guardarProducto(e) {
-      e.preventDefault();
+    idInput.value = prod.id;
+    nombreInput.value = prod.nombre;
+    cantidadInput.value = prod.cantidad;
+    unidadMedidaInput.value = prod.unidadMedida || "";
+    precioInput.value = prod.precio;
+    fechaVencimientoInput.value = prod.fechaVencimiento;
+    categoriaSelect.value = prod.categoriaId;
+    
+  } catch (error) {
+    console.error("Error al editar producto:", error);
+  }
+}
 
-      const id = document.getElementById("idProducto").value;
-      const nombre = document.getElementById("nombreProducto").value;
-      const cantidad = parseInt(document.getElementById("cantidadProducto").value);
-      const unidad = document.getElementById("unidadMedida").value;
-      const precio = parseFloat(document.getElementById("precioProducto").value);
-      const vencimiento = document.getElementById("fechaVencimiento").value;
-      const idCategoria = parseInt(document.getElementById("categoriaProducto").value);
+// Eliminar producto
+async function eliminarProducto(id) {
+  if (!confirm("¿Seguro que deseas eliminar este producto?")) return;
 
-      let productos = JSON.parse(localStorage.getItem("productos")) || [];
+  try {
+    const response = await fetch(`${API_URL}/${id}`, { 
+      method: "DELETE" 
+    });
+    
+    await cargarProductos();
+  } catch (error) {
+    console.error("Error al eliminar producto:", error);
+  }
+}
 
-      if (id) {
-        productos = productos.map(p =>
-          p.id == id ? { id: p.id, nombre, cantidad, unidad, precio, vencimiento, idCategoria } : p
-        );
-      } else {
-        const nuevoId = productos.length ? productos[productos.length - 1].id + 1 : 1;
-        productos.push({ id: nuevoId, nombre, cantidad, unidad, precio, vencimiento, idCategoria });
-      }
+// Inicializar
+document.addEventListener('DOMContentLoaded', async function() {
+  await cargarCategorias();
+  await cargarProductos();
+});
 
-      localStorage.setItem("productos", JSON.stringify(productos));
-      form.reset();
-      document.getElementById("idProducto").value = "";
-      cargarProductos();
-    }
-
-    function editarProducto(id) {
-      const productos = JSON.parse(localStorage.getItem("productos")) || [];
-      const prod = productos.find(p => p.id == id);
-      document.getElementById("idProducto").value = prod.id;
-      document.getElementById("nombreProducto").value = prod.nombre;
-      document.getElementById("cantidadProducto").value = prod.cantidad;
-      document.getElementById("unidadMedida").value = prod.unidad;
-      document.getElementById("precioProducto").value = prod.precio;
-      document.getElementById("fechaVencimiento").value = prod.vencimiento;
-      document.getElementById("categoriaProducto").value = prod.idCategoria;
-    }
-
-    function eliminarProducto(id) {
-      let productos = JSON.parse(localStorage.getItem("productos")) || [];
-      productos = productos.filter(p => p.id != id);
-      localStorage.setItem("productos", JSON.stringify(productos));
-      cargarProductos();
-    }
-
-    form.addEventListener("submit", guardarProducto);
-    cargarCategoriasSelect();
-    cargarProductos();
-  
+// Hacer las funciones globales
+window.editarProducto = editarProducto;
+window.eliminarProducto = eliminarProducto;
