@@ -2,47 +2,74 @@
   "categorias": [
     {
       "id": "1",
-      "nombre": "Frutas",
-      "descripcion": "Categoría de frutas frescas"
+      "nombre": "Lácteos"
     },
     {
-      "id": "2",
-      "nombre": "Verduras",
-      "descripcion": "Categoría de verduras"
+      "nombre": "Pan",
+      "id": "2"
     },
     {
       "id": "3",
-      "nombre": "Bebidas",
-      "descripcion": "Agua, Sodas"
+      "nombre": "Carnes"
+    },
+    {
+      "id": "4",
+      "nombre": "Bebidas"
+    },
+    {
+      "id": "5",
+      "nombre": "Frutas"
+    },
+    {
+      "id": 6,
+      "nombre": "Verduras"
     }
   ],
   "productos": [
     {
-      "nombre": "Manzana",
-      "cantidad": 20,
-      "unidadMedida": "kg",
-      "precio": 1.5,
-      "fechaVencimiento": "2025-09-26",
+      "nombre": "Leche descremada",
+      "cantidad": 10,
+      "unidadMedida": "litros",
+      "precio": 2.5,
+      "fechaVencimiento": "2025-12-31",
       "categoriaId": 1,
       "id": "1"
     },
     {
-      "id": "2",
-      "nombre": "Leche Entera",
-      "cantidad": 1,
-      "unidadMedida": "litros",
-      "precio": 3.06,
-      "fechaVencimiento": "2025-09-26",
-      "categoriaId": 3
+      "nombre": "Pan integral",
+      "cantidad": 25,
+      "unidadMedida": "unidades",
+      "precio": 1.2,
+      "fechaVencimiento": "2025-10-15",
+      "categoriaId": 2,
+      "id": "2"
     },
     {
-      "nombre": "Prueba",
-      "cantidad": 1,
-      "unidadMedida": "litros",
-      "precio": 0.05,
-      "fechaVencimiento": "2025-09-30",
-      "categoriaId": 2,
+      "nombre": "Carne de res",
+      "cantidad": 15,
+      "unidadMedida": "kg",
+      "precio": 8.75,
+      "fechaVencimiento": "2025-11-10",
+      "categoriaId": 3,
       "id": "3"
+    },
+    {
+      "nombre": "Jugo de naranja",
+      "cantidad": 30,
+      "unidadMedida": "litros",
+      "precio": 3,
+      "fechaVencimiento": "2026-01-20",
+      "categoriaId": 4,
+      "id": "4"
+    },
+    {
+      "id": 5,
+      "nombre": "Tres leches",
+      "cantidad": 4,
+      "unidadMedida": "unidades",
+      "precio": 0.33,
+      "fechaVencimiento": "2025-09-30",
+      "categoriaId": 2
     }
   ]
 }
