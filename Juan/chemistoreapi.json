@@ -1,0 +1,372 @@
+{
+"categorias":[
+{
+  "id":1,
+  "nombre": "Retro"
+},
+{
+  "id":2,
+  "nombre": "Actualidad"
+},
+{
+  "id":3,
+  "nombre": "Niños"
+},
+{
+  "id":4,
+  "nombre": "Hombre"
+},
+{
+  "id":5,
+  "nombre": "Mujer"
+}
+],
+
+"tallas": [
+{ 
+  "id": 1, 
+  "nombre": "XS" 
+},
+{
+  "id": 2, 
+  "nombre": "S" 
+},
+{ 
+  "id": 3, 
+  "nombre": "M" 
+},
+{ 
+  "id": 4, 
+  "nombre": "L" 
+},
+{ 
+  "id": 5, 
+  "nombre": "XL" 
+},
+{ 
+  "id": 6, 
+  "nombre": "XXL" 
+}
+],
+
+"camisetas":[
+{
+  "id": 1,
+  "img": "/imagenes/camisas-retro/atleticomadridSpiderman.png",
+  "nombre": "Camiseta Atlético de Madrid 2004/2005",
+  "descripcion": "Camiseta de la marca Nike con patrocinador especial debido al estreno de la pelicula Spiderman, la cual es de las pocas de su época, colores rojo y blanco condetalles en amarillo a sus costados.",
+  "precio": 119.99,
+  "categoriaId": 1,
+  "talla": [3,4,5]
+},
+{
+  "id": 2,
+  "img": "/imagenes/camisas-retro/bayernopel.png",
+  "nombre": "Camiseta Bayern Muchen 1995",
+  "descripcion": "Camiseta de Bayern Muchen de Alemania, temporada 1995, colores azul y rojo, detalles en blanco y cuello.",
+  "precio": 89.99,
+  "categoriaId": 1,
+  "talla": [2,3]
+},
+{
+  "id": 3,
+  "img": "/imagenes/camisas-retro/bocajrquilmes.png",
+  "nombre": "Camiseta Boca Juniors 1998/1999",
+  "descripcion": "Camiseta marca Nike, equipación usada en la temporada 1998/1999 por Boca Juniors colores azul y amarillo, con cuello.",
+  "precio": 79.99,
+  "categoriaId": 1,
+  "talla": [1,3,6]
+},
+{
+  "id": 4,
+"img": "/imagenes/camisas-retro/españa2010.png",
+  "nombre": "Camiseta selección España mundial 2010",
+  "descripcion": "Camiseta de la marca Adidas, usada por la selección Española durante el mundial 2010 el cual acabo ganando, colores en azul negro y detalles en rojo y amariilo, dorsal 6 de Andres Iniesta.",
+  "precio": 69.99,
+  "categoriaId": 1,
+  "talla": [4,5,6]
+},
+{
+  "id": 5,
+"img": "/imagenes/camisas-retro/liverpool2005.png",
+  "nombre": "Camiseta Liverppol F.C. 2005",
+  "descripcion": "Camiseta marca Adidas, usada durante la temporada 2004/2005, donde el equipo gano la Uefa Champions League, colores en rojo y detalles en blanco, manga corta.",
+  "precio": 79.99,
+  "categoriaId": 1,
+  "talla": [2,3,5]
+},
+{
+  "id": 6,
+"img": "/imagenes/camisas-retro/madrid-teka.png",
+  "nombre": "Camiseta Real Madrid 1999/2000",
+  "descripcion": "Camiseta marca Adidas, usada durante la temporada 1999/2000, colores en blanco, detalles en negro, con cuello y manga corta.",
+  "precio": 89.99,
+  "categoriaId": 1,
+  "talla": [1,2,3]
+},
+{
+  "id": 7,
+"img": "/imagenes/camisas-retro/milan2007.png",
+  "nombre": "Camiseta AC Milán 2007/2008",
+  "descripcion": "Camiseta marca Adidas, usada durante la temporada 2007/2008, colores en blanco y detalles en rojo y negro, manga corta.",
+  "precio": 79.99,
+  "categoriaId": 1,
+  "talla": [2,3]
+},
+{
+  "id": 8,
+"img": "/imagenes/camisas-actualidad/acmilan.png",
+  "nombre": "Camiseta AC Milán 2023/2024",
+  "descripcion": "Camiseta marca Puma, usada en la temporada 2023/2024, con colores en franjas verticales rojas y negras, detalles en blanco, manga corta.",
+  "precio": 79.99,
+  "categoriaId": 2,
+  "talla": [4,5,6]
+},
+{
+  "id": 9,
+"img": "/imagenes/camisas-actualidad/atleticbilbao.png",
+  "nombre": "Camiseta Atletic de Bilbao 2025",
+  "descripcion": "Camiseta marca Nike, usada durante la presente temporad, colores en franjas verticales en blanco y rojo, manga corta.",
+  "precio": 79.99,
+  "categoriaId": 2,
+  "talla": [1,5,6]
+},
+{
+  "id": 10,
+"img": "/imagenes/camisas-actualidad/barca23-24.png",
+  "nombre": "Camiseta F.C. Barcelona 23/24",
+  "descripcion": "Camiseta marca Nike, usada durante la temporada 23/24, con colores en franjas verticales en azul y rojo, manga corta.",
+  "precio": 79.99,
+  "categoriaId": 2,
+  "talla": [2,3,6]
+},
+{
+  "id": 11,
+"img": "/imagenes/camisas-actualidad/liverpool24-25.png",
+  "nombre": "Camiseta Liverpool F.C. 24/25",
+  "descripcion": "Camiseta marca Adidas, usada durante la presente temporada, con colores en rojo y detalles en blanco, manga corta.",
+  "precio": 99.99,
+  "categoriaId": 2,
+  "talla": [2]
+},
+{
+  "id": 12,
+"img": "/imagenes/camisas-actualidad/realmadrid24-35.png",
+  "nombre": "Camiseta Real Madrid 24/25",
+  "descripcion": "Camiseta marca Adidas, usada durante la presente temporada, con colores en blanco, detalles en gris, negro y amarillo, manga corta.",
+  "precio": 78.99,
+  "categoriaId": 2,
+  "talla": [2,5,6]
+},
+{
+  "id": 13,
+"img": "/imagenes/camisas-actualidad/riverplate22-23.png",
+  "nombre": "Camiseta River Plate 22/23",
+  "descripcion": "Camiseta marca Adidas, usada en la temporada 22/23, colores en blanco con franja en rojo, detalles en negro, manga corta.",
+  "precio": 59.99,
+  "categoriaId": 2,
+  "talla": [4]
+},
+{
+  "id": 14,
+"img": "/imagenes/camisas-actualidad/roma24-25.png",
+  "nombre": "Camiseta Roma 24/25",
+  "descripcion": "Camiseta marca Adidas, usada en la actual temporada, con colores en rojo y detalles en dorado, manga corta.",
+  "precio": 79.97,
+  "categoriaId": 2,
+  "talla": [3,4]
+},
+{
+  "id": 15,
+"img": "/imagenes/camisas-niños/brasil10.png",
+  "nombre": "Conjunto selección Brasil Copa América 2024",
+  "descripcion": "Conjunto marca Nike, usado durante la copa américa 2024, colores amarillo y azul detalles en verde amarela, dorsal 10.",
+  "precio": 89.99,
+  "categoriaId": 3,
+  "talla": [1,2]
+},
+{
+  "id": 16,
+"img": "/imagenes/camisas-niños/francia2018.png",
+  "nombre": "Conjunto selección Francia mundial 2018",
+  "descripcion": "Conjunto marca Nike, usado durante la conquista de la copa del mundo en el mundial 2018 colores en azul negro y blanco, detalles en dorado, dorsal 10.",
+  "precio": 79.99,
+  "categoriaId": 3,
+  "talla": [1,2,3]
+},
+{
+  "id": 17,
+"img": "/imagenes/camisas-niños/intermiamimessi.png",
+  "nombre": "Conjunto Inter Miami 24/25",
+  "descripcion": "Conjunto de Inter Mianmi de MLS, dorsal 10 de Messi, colores en negro y detalles en rosado.",
+  "precio": 49.99,
+  "categoriaId": 3,
+  "talla": [1,2]
+},
+{
+  "id": 18,
+"img": "/imagenes/camisas-niños/madrid-bell.png",
+  "nombre": "Conjunto Real Madrid 24/25",
+  "descripcion": "Conjunto marca Adidas, dorsal 5 de Bellingham, temporada 24/25, color blanco, detalles en negro y dorado.",
+  "precio": 59.99,
+  "categoriaId": 3,
+  "talla": [1,6]
+},
+{
+  "id": 19,
+"img": "/imagenes/camisas-niños/mexico.png",
+  "nombre": "Conjunto selección México 24/25",
+  "descripcion": "Conjunto de temporada actual, colores en verde y blanco, detalles en rojo manga corta.",
+  "precio": 49.99,
+  "categoriaId": 3,
+  "talla": [2,3]
+},
+{
+  "id": 20,
+"img": "/imagenes/camisas-niños/portugalronaldo.png",
+  "nombre": "Conjunto selección Portugal 24/25",
+  "descripcion": "Conjunto selección Portugal, colores rojo y verde, detalles en blanco y negro, dorsal 7 de Ronaldo.",
+  "precio": 79.99,
+  "categoriaId": 3,
+  "talla": [1,2,3]
+},
+{
+  "id": 21,
+"img": "/imagenes/camisas-niños/tottenham.png",
+  "nombre": "Conjunto Tottenham 24/25",
+  "descripcion": "Conjunto marca Nike, usado en la temporada actual, colores blanco y azul negro detalles en blanco y rojo, manga corta.",
+  "precio": 59.99,
+  "categoriaId": 3,
+  "talla": [2,3]
+},
+{
+  "id": 22,
+"img": "/imagenes/camisas-hombre/argentina2010.png",
+  "nombre": "Camiseta selección Argentina mundial 2010",
+  "descripcion": "Camiseta marca Adidas, usada durante el mundial 2010,dorsal 19, colores azul negro, detalles en celeste y blanco, manga corta.",
+  "precio": 29.99,
+  "categoriaId": 4,
+  "talla": [1,5,6]
+},
+{
+  "id": 23,
+"img": "/imagenes/camisas-hombre/brasilblanca.png",
+  "nombre": "Camiseta selección Brasil 2024",
+  "descripcion": "Camiseta marca Nike, usada en la temporada 2024, color blanca, detalles en azul, manga corta.",
+  "precio": 39.99,
+  "categoriaId": 4,
+  "talla": [3,4]
+},
+{
+  "id": 24,
+"img": "/imagenes/camisas-hombre/colombiaentreno.png",
+  "nombre": "Camiseta entreno selección Colombia",
+  "descripcion": "Camiseta de entreno marca Adidas, colores blanco con detalles en rojo, manga corta.",
+  "precio": 19.99,
+  "categoriaId": 4,
+  "talla": [3,4]
+},
+{
+  "id": 25,
+"img": "/imagenes/camisas-hombre/fiorentina.png",
+  "nombre": "Camiseta Fiorentina 1998/1999",
+  "descripcion": "Camiseta marca Fila, usada en la temporada 98/99, color morado con detalles en blanco, manga larga.",
+  "precio": 89.99,
+  "categoriaId": 4,
+  "talla": [4,5,6]
+},
+{
+  "id": 26,
+"img": "/imagenes/camisas-hombre/francia98.png",
+  "nombre": "Camiseta selección Francia mundial 98",
+  "descripcion": "Camiseta marca Adidas, usada en el triunfo de Francia en el mundial del 98, dorsal 10 de Zidane, color blanco con detalles en azul y rojo, manga corta.",
+  "precio": 119.99,
+  "categoriaId": 4,
+  "talla": [2,3]
+},
+{
+  "id": 27,
+"img": "/imagenes/camisas-hombre/hamburgo.png",
+  "nombre": "Camiseta Hamburgo 2025",
+  "descripcion": "Camiseta marca Adidas, usada en la temporada actual, color en blanco, con detalles en negro y azul, manga corta.",
+  "precio": 99.99,
+  "categoriaId": 4,
+  "talla": [4,5]
+},
+{
+  "id": 28,
+"img": "/imagenes/camisas-hombre/italiaactual.png",
+  "nombre": "Camiseta selección Italia 2025",
+  "descripcion": "Camiseta selección Italia, edición especial 2025, colores azul, con detalles en azul negro, manga corta. ",
+  "precio": 139.99,
+  "categoriaId": 4,
+  "talla": [2,3,4]
+},
+{
+  "id": 29,
+"img": "/imagenes/camisas-mujer/arsenalwomen.png",
+  "nombre": "Camiseta Arsenal femenino 2025",
+  "descripcion": "Camisa de Arsenal femenino, usado en la presente temporada, color blanco con detalles en celeste y rosa.",
+  "precio": 59.99,
+  "categoriaId": 5,
+  "talla": [1,2]
+},
+{
+  "id": 30,
+"img": "/imagenes/camisas-mujer/brasilwomen.png",
+  "nombre": "Camiseta selección Brasil mujer 2014",
+  "descripcion": "Camiseta de mujer selección Brasil, color amarillo y detalles en verde, manga corta.",
+  "precio": 29.99,
+  "categoriaId": 5,
+  "talla": [1,2,3]
+},
+{
+  "id": 31,
+"img": "/imagenes/camisas-mujer/flamengowomen.png",
+  "nombre": "Camiseta Flamengo 2023",
+  "descripcion": "Camisa de mujer Flamengo, color rosa, con detalles en azul negro, manga corta.",
+  "precio": 69.99,
+  "categoriaId": 5,
+  "talla": [1,3]
+},
+{
+  "id": 32,
+"img": "/imagenes/camisas-mujer/inglaterrawomen.png",
+  "nombre": "Camiseta selección Inglaterra 2025",
+  "descripcion": "Camiseta de la selección de Inglaterra femenina, color blanca sin detalles en otro color.",
+  "precio": 85.99,
+  "categoriaId": 5,
+  "talla": [2,4]
+},
+{
+  "id": 33,
+"img": "/imagenes/camisas-mujer/japonrosa.png",
+  "nombre": "Camiseta selección Japón mujer 2024",
+  "descripcion": "Camiseta rosa con detalles en tonos morado lila, edición especial.",
+  "precio": 31.99,
+  "categoriaId": 5,
+  "talla": [1,2]
+},
+{
+  "id": 34,
+"img": "/imagenes/camisas-mujer/mexicowomen.png",
+  "nombre": "Camiseta selección México 2025",
+  "descripcion": "Camiste en color verde, detalles en rojo, versión local, manga corta.",
+  "precio": 59.99,
+  "categoriaId": 5,
+  "talla": [3.4]
+},
+{
+  "id": 35,
+"img": "/imagenes/camisas-mujer/racingwomen.png",
+  "nombre": "Camiseta Racing visitante 2025",
+  "descripcion": "Camiseta visitante de Racing, marca Kappa, versión mujer, color azul negro con detalles en azul.",
+  "precio": 40.99,
+  "categoriaId": 5,
+  "talla": [2,3]
+}
+
+]
+
+
+}

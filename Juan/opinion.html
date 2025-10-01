@@ -14,19 +14,19 @@
 
   <body>
     <div class="btn-arriba">
-      <a href="index.html">
+      <a href="">
         <i class="fa-solid fa-arrow-up"></i>
       </a>
     </div>
 
-    <header>
+        <header>
       <img src="/imagenes/logo-sf1.png" alt="logo sin fondo en el header" />
       <h2>Categorías de nuestros productos</h2>
 
       <div class="btn-carrito">
-        <a href="carrito.html">
+        <buttom href="">
           <i class="fa-solid fa-cart-shopping"></i>
-        </a>
+        </buttom>
       </div>
 
       <div class="categorias">
@@ -70,8 +70,19 @@
     </header>
 
     <main>
-      <h3>Catalogo de productos</h3>
-      <div id="productos-grid"></div>
+      <h2>Danos tu opinión</h2>
+      <p>En el siguiente apartado agradeceríamos que nos dieras tu opinión sobre tu experiencia en la tienda y sus productos, eso nos ayuda a mejorar y a ofrer a nuestros clientes siempre la mejor experiencia, puedes hacerlo de manera anónina, con tu nombre o como a ti te parezca mejor, muchas gracias por tu apoyo y preferencia.</p>>
+      <form id="review-form" class="review-form">
+        <label for="review-name">Nombre:</label>
+        <input type="text" id="review-name" required>
+
+        <label for="review-comment">Comentario:</label>
+        <textarea id="review-comment" required></textarea>
+
+        <button type="submit">Publicar</button>
+      </form>
+
+      <div id="reviews-list"></div>
     </main>
 
     <footer>
