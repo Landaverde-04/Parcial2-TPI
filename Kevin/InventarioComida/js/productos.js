@@ -1,6 +1,7 @@
 // js/productos.js
 document.addEventListener("DOMContentLoaded", async () => {
-  const API_BASE = `http://${window.location.hostname}:3000`; 
+  // Detectar automáticamente la URL base correcta
+  const API_BASE = window.location.origin;
   const API_PRODUCTOS = `${API_BASE}/productos`;
   const API_CATEGORIAS = `${API_BASE}/categorias`;
 
@@ -27,48 +28,68 @@ document.addEventListener("DOMContentLoaded", async () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // Procesar categoriaId correctamente
+    const categoriaValue = categoriaSelect.value.trim();
+    const categoriaId = categoriaValue && categoriaValue !== "" 
+      ? Number.parseInt(categoriaValue, 10) 
+      : null;
+
     const producto = {
       nombre: nombreProductoInput.value.trim(),
       cantidad: Number.parseInt(cantidadProductoInput.value, 10) || 0,
       unidadMedida: unidadMedidaInput.value.trim(),
       precio: Number.parseFloat(precioProductoInput.value) || 0,
       fechaVencimiento: fechaVencimientoInput.value,
-      categoriaId: categoriaSelect.value ? Number.parseInt(categoriaSelect.value, 10) : null
+      categoriaId: categoriaId
     };
 
     const id = idProductoInput.value;
 
     try {
       if (id) {
-        // Editar producto existente
-        await fetch(`${API_PRODUCTOS}/${id}`, {
+        // Editar producto existente - usar ruta REST estándar
+        const response = await fetch(`${API_PRODUCTOS}/${id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(producto)
         });
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Error response:", errorText);
+          throw new Error(`Error al actualizar: ${response.status}`);
+        }
       } else {
         // Obtener todos los productos para calcular el próximo ID
         const res = await fetch(API_PRODUCTOS);
         const productos = await res.json();
-        const maxId = productos.length > 0 ? Math.max(...productos.map(p => p.id)) : 0;
+        
+        // Calcular el siguiente ID y guardarlo como string
+        const maxId = productos.length > 0 
+          ? Math.max(...productos.map(p => parseInt(p.id) || 0)) 
+          : 0;
 
-        // Asignar el siguiente ID manualmente
-        producto.id = maxId + 1;
+        // Asignar el siguiente ID como STRING
+        producto.id = String(maxId + 1);
 
-        // Crear nuevo producto con ID incremental
-        await fetch(API_PRODUCTOS, {
+        // Crear nuevo producto con ID como string
+        const response = await fetch(API_PRODUCTOS, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(producto)
         });
+        
+        if (!response.ok) {
+          throw new Error(`Error al crear: ${response.status}`);
+        }
       }
 
       form.reset();
       idProductoInput.value = "";
-      await cargarCategoriasSelect();
-      cargarProductos();
+      await cargarProductos();
     } catch (error) {
       console.error("Error al guardar producto:", error);
+      alert("Error al guardar el producto. Revisa la consola para más detalles.");
     }
   });
 
@@ -90,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // cargar productos (sin ?_expand=categoria)
+  // cargar productos
   async function cargarProductos() {
     try {
       const res = await fetch(API_PRODUCTOS);
@@ -148,25 +169,39 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // editar
       row.querySelector(".btn-editar").addEventListener("click", () => {
-        idProductoInput.value = prod.id;
+        // Asegurar que el ID siempre sea string
+        idProductoInput.value = String(prod.id);
         nombreProductoInput.value = prod.nombre || "";
         cantidadProductoInput.value = prod.cantidad ?? "";
         unidadMedidaInput.value = prod.unidadMedida || "";
         precioProductoInput.value = prod.precio ?? "";
         fechaVencimientoInput.value = prod.fechaVencimiento || "";
 
+        // Asegurar que categoriaId se establece correctamente
         const catId = prod.categoriaId ?? (prod.categoria && prod.categoria.id) ?? "";
         categoriaSelect.value = catId ? String(catId) : "";
+        
+        // Scroll al formulario para mejor UX
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
 
       // eliminar
       row.querySelector(".btn-eliminar").addEventListener("click", async () => {
         if (confirm(`¿Seguro que deseas eliminar el producto "${prod.nombre}"?`)) {
           try {
-            await fetch(`${API_PRODUCTOS}/${prod.id}`, { method: "DELETE" });
+            // Asegurar que el ID sea string
+            const response = await fetch(`${API_PRODUCTOS}/${String(prod.id)}`, { 
+              method: "DELETE" 
+            });
+            
+            if (!response.ok) {
+              throw new Error(`Error al eliminar: ${response.status}`);
+            }
+            
             cargarProductos();
           } catch (error) {
             console.error("Error al eliminar producto:", error);
+            alert("Error al eliminar el producto");
           }
         }
       });

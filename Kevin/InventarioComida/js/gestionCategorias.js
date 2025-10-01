@@ -1,6 +1,7 @@
 // js/categorias.js
 document.addEventListener("DOMContentLoaded", () => {
-  const API_BASE = `http://${window.location.hostname}:3000`; 
+  // Detectar automáticamente la URL base correcta
+  const API_BASE = window.location.origin;
   const API_CATEGORIAS = `${API_BASE}/categorias`;
 
   const form = document.getElementById("formCategoria");
@@ -23,26 +24,40 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       if (id) {
         // Editar categoría existente
-        await fetch(`${API_CATEGORIAS}/${id}`, {
+        const response = await fetch(`${API_CATEGORIAS}/${id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(categoria)
         });
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Error response:", errorText);
+          throw new Error(`Error al actualizar: ${response.status}`);
+        }
       } else {
         // Obtener todas las categorías para calcular el próximo ID
         const res = await fetch(API_CATEGORIAS);
         const categorias = await res.json();
-        const maxId = categorias.length > 0 ? Math.max(...categorias.map(c => c.id)) : 0;
+        
+        // Calcular el siguiente ID y guardarlo como string
+        const maxId = categorias.length > 0 
+          ? Math.max(...categorias.map(c => parseInt(c.id) || 0)) 
+          : 0;
 
-        // Asignar el siguiente ID manualmente
-        categoria.id = maxId + 1;
+        // Asignar el siguiente ID como STRING
+        categoria.id = String(maxId + 1);
 
-        // Crear nueva categoría con ID incremental
-        await fetch(API_CATEGORIAS, {
+        // Crear nueva categoría con ID como string
+        const response = await fetch(API_CATEGORIAS, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(categoria)
         });
+        
+        if (!response.ok) {
+          throw new Error(`Error al crear: ${response.status}`);
+        }
       }
 
       form.reset();
@@ -50,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cargarCategorias();
     } catch (error) {
       console.error("Error al guardar categoría:", error);
+      alert("Error al guardar la categoría. Revisa la consola para más detalles.");
     }
   });
 
@@ -94,20 +110,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Botón editar
       row.querySelector(".btn-editar").addEventListener("click", () => {
-        idCategoriaInput.value = cat.id;
+        // Asegurar que el ID siempre sea string
+        idCategoriaInput.value = String(cat.id);
         nombreCategoriaInput.value = cat.nombre;
+        
+        // Scroll al formulario para mejor UX
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
 
       // Botón eliminar
       row.querySelector(".btn-eliminar").addEventListener("click", async () => {
         if (confirm(`¿Seguro que deseas eliminar la categoría "${cat.nombre}"?`)) {
           try {
-            await fetch(`${API_CATEGORIAS}/${cat.id}`, {
+            // Asegurar que el ID sea string
+            const response = await fetch(`${API_CATEGORIAS}/${String(cat.id)}`, {
               method: "DELETE"
             });
+            
+            if (!response.ok) {
+              throw new Error(`Error al eliminar: ${response.status}`);
+            }
+            
             cargarCategorias();
           } catch (error) {
             console.error("Error al eliminar categoría:", error);
+            alert("Error al eliminar la categoría");
           }
         }
       });
