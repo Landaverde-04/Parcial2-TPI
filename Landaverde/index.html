@@ -1,11 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mi sitio - Smartphones</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    
+  <header>
+    <h1>Smartphones — Portfolio</h1>
+    <nav>
+      <button id="tab-catalog">Catálogo</button>
+      <button id="tab-orders">Pedidos</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sección catálogo -->
+    <section id="catalog-section" class="tab active">
+      <h2>Catálogo de Smartphones</h2>
+
+      <form id="form-add-phone">
+        <h3>Agregar / Editar smartphone</h3>
+        <input type="hidden" id="phone-id" />
+        <input required id="brand" placeholder="Marca" />
+        <input required id="model" placeholder="Modelo" />
+        <input required id="price" type="number" placeholder="Precio" />
+        <input id="ram" placeholder="RAM (ej. 8GB)" />
+        <input id="storage" placeholder="Almacenamiento (ej. 128GB)" />
+        <input id="battery" placeholder="Batería (ej. 4500mAh)" />
+        <button type="submit">Guardar</button>
+        <button type="button" id="form-reset">Nuevo</button>
+      </form>
+
+      <div id="phones-list"></div>
+    </section>
+
+    <!-- Sección pedidos -->
+    <section id="orders-section" class="tab">
+      <h2>Pedidos</h2>
+
+      <form id="form-add-order">
+        <h3>Crear pedido</h3>
+        <select id="order-smartphone"></select>
+        <input required id="customer" placeholder="Nombre cliente" />
+        <input required id="quantity" type="number" min="1" value="1" />
+        <button type="submit">Crear pedido</button>
+      </form>
+
+      <div id="orders-list"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>

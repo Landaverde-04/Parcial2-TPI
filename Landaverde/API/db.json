@@ -1,0 +1,63 @@
+{
+  "smartphones": [
+    {
+      "id": "1",
+      "brand": "Galaxy",
+      "model": "S21 FE",
+      "price": 499,
+      "specs": {
+        "ram": "8GB",
+        "storage": "128GB",
+        "battery": "4500mAh"
+      }
+    },
+    {
+      "id": "2",
+      "brand": "Pixel",
+      "model": "6a",
+      "price": 349,
+      "specs": {
+        "ram": "6GB",
+        "storage": "128GB",
+        "battery": "4410mAh"
+      }
+    },
+    {
+      "id": "e2a6",
+      "brand": "Apple",
+      "model": "Iphone 17 pro max",
+      "price": 2399,
+      "specs": {
+        "ram": "6gb",
+        "storage": "512gb",
+        "battery": "400mha"
+      }
+    }
+  ],
+  "orders": [
+    {
+      "id": "e770",
+      "smartphoneId": null,
+      "customer": "Juan Jose",
+      "quantity": 2,
+      "status": "pending",
+      "createdAt": "2025-10-01T00:05:04.777Z"
+    },
+    {
+      "id": "ae49",
+      "smartphoneId": 2,
+      "customer": "Juan Jose",
+      "quantity": 4,
+      "status": "pending",
+      "createdAt": "2025-10-01T00:05:20.905Z"
+    },
+    {
+      "id": "e7ac",
+      "smartphoneId": 1,
+      "customer": "Juan Jose",
+      "quantity": 8,
+      "status": "pending",
+      "createdAt": "2025-10-01T00:05:30.049Z"
+    }
+  ]
+}
