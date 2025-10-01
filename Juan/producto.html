@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChemiStore</title>
+    <title>Producto - ChemiStore</title>
     <link rel="StyleSheet" href="estilos.css" type="text/css" media="screen" />
     <script src="code.js"></script>
     <script
@@ -44,14 +44,14 @@
               <img src="/imagenes/actualidad.png" alt="Camiseta actualidad" />
             </div>
           </div>
-          
+
             <div class="categoria-item">
             <a href="index.html?category=3" class="categoria-texto" data-category="3">Niños</a>
             <div class="categoria-imagen">
               <img src="/imagenes/niño1.png" alt="Camiseta niño" />
             </div>
           </div>
-          
+
             <div class="categoria-item">
             <a href="index.html?category=4" class="categoria-texto" data-category="4">Hombre</a>
             <div class="categoria-imagen">
@@ -69,9 +69,8 @@
       </div>
     </header>
 
-    <main>
-      <h3>Catalogo de productos</h3>
-      <div id="productos-grid"></div>
+    <main id="producto-detalle">
+      <!-- Product details will be loaded here -->
     </main>
 
     <footer>
@@ -134,5 +133,79 @@
       <p>Desarrollado por: Urrutia Najarro, Juan José</p>
       <p>Carnet: UN22001</p>
     </footer>
+
+    <script>
+      // Load product details
+      document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id'));
+
+        if (productId) {
+          fetch('chemistoreapi.json')
+            .then(response => response.json())
+            .then(data => {
+              const producto = data.camisetas.find(p => p.id === productId);
+              const categoria = data.categorias.find(cat => cat.id === producto.categoriaId)?.nombre || 'Desconocida';
+              const tallasDisponibles = producto.talla.map(id => data.tallas.find(t => t.id === id)).filter(t => t);
+
+              if (producto) {
+                const main = document.getElementById('producto-detalle');
+                main.innerHTML = `
+                  <div class="producto-container">
+                    <div class="producto-imagen">
+                      <img src="${producto.img}" alt="${producto.nombre}">
+                    </div>
+                    <div class="producto-info">
+                      <h3>${producto.nombre}</h3>
+                      <p><strong>Categoría:</strong> ${categoria}</p>
+                      <p>${producto.descripcion}</p>
+                      <p class="precio">$${producto.precio}</p>
+                      <label for="talla-select">Talla:</label>
+                      <select id="talla-select">
+                        ${tallasDisponibles.map(t => `<option value="${t.id}">${t.nombre}</option>`).join('')}
+                      </select>
+                      <label for="cantidad-input">Cantidad:</label>
+                      <input type="number" id="cantidad-input" min="1" value="1">
+                      <button id="agregar-carrito">Agregar al Carrito</button>
+                    </div>
+                  </div>
+                `;
+
+                // Add to cart functionality
+                document.getElementById('agregar-carrito').addEventListener('click', function() {
+                  const tallaId = parseInt(document.getElementById('talla-select').value);
+                  const cantidad = parseInt(document.getElementById('cantidad-input').value);
+                  const tallaNombre = data.tallas.find(t => t.id === tallaId).nombre;
+
+                  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                  const existingItem = cart.find(item => item.id === productId && item.tallaId === tallaId);
+
+                  if (existingItem) {
+                    existingItem.cantidad += cantidad;
+                  } else {
+                    cart.push({
+                      id: productId,
+                      nombre: producto.nombre,
+                      img: producto.img,
+                      precio: producto.precio,
+                      tallaId: tallaId,
+                      tallaNombre: tallaNombre,
+                      cantidad: cantidad
+                    });
+                  }
+
+                  localStorage.setItem('cart', JSON.stringify(cart));
+                  alert('Producto agregado al carrito');
+                });
+              } else {
+                document.getElementById('producto-detalle').innerHTML = '<p>Producto no encontrado.</p>';
+              }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        } else {
+          document.getElementById('producto-detalle').innerHTML = '<p>ID de producto no especificado.</p>';
+        }
+      });
+    </script>
   </body>
 </html>
