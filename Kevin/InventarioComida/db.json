@@ -1,20 +1,24 @@
 {
   "categorias": [
     {
-      "id": "1",
-      "nombre": "Bebidas"
+      "nombre": "Bebida",
+      "id": "1"
     },
     {
       "nombre": "Lácteos",
       "id": "2"
     },
     {
-      "nombre": "Frutas1",
+      "nombre": "Frutas",
       "id": "3"
     },
     {
-      "nombre": "Verduras1",
+      "nombre": "Verduras",
       "id": "4"
+    },
+    {
+      "nombre": "Carnes1",
+      "id": "5"
     }
   ],
   "productos": [
@@ -42,8 +46,17 @@
       "unidadMedida": "unidades",
       "precio": 0.15,
       "fechaVencimiento": "2025-10-04",
-      "categoriaId": 3,
+      "categoriaId": 4,
       "id": "4"
+    },
+    {
+      "nombre": "Carne de res",
+      "cantidad": 5,
+      "unidadMedida": "kg",
+      "precio": 0.42,
+      "fechaVencimiento": "2025-10-15",
+      "categoriaId": 1,
+      "id": "5"
     }
   ]
 }
