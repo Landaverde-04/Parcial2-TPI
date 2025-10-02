@@ -38,6 +38,7 @@ function renderPhones(phones){
       <div>
         <button class="btn edit" data-id="${p.id}">Editar</button>
         <button class="btn delete" data-id="${p.id}">Borrar</button>
+        <a class="btn details" href="detalles.html?id=${p.id}">Detalles</a>
       </div>
     `;
     phonesList.appendChild(div);
