@@ -1,0 +1,59 @@
+    {
+    "productos": [
+        {
+        "id": "1",
+        "nombre": "Laptop Dell XPS 13",
+        "precio": 999,
+        "imagen": "laptop_dell.jpg",
+        "descripcion": "Laptop ultradelgada con pantalla 4K y procesador i7."
+        },
+        {
+        "id": "2",
+        "nombre": "Laptop HP Envy",
+        "precio": 850,
+        "imagen": "laptop_hp.jpg",
+        "descripcion": "Laptop potente con procesador i5 y 8GB de RAM."
+        }
+    ],
+    "clientes": [
+        {
+        "id": "1",
+        "nombre": "Juan Pérez",
+        "correo": "juan.perez@gmail.com"
+        },
+        {
+        "id": "2",
+        "nombre": "Ana López",
+        "correo": "ana.lopez@gmail.com"
+        },
+        {
+        "id": "68d8",
+        "nombre": "Caro Mendez",
+        "correo": "caro.mendez@gmail.com"
+        },
+        {
+        "id": "273c",
+        "nombre": "Capitan América",
+        "correo": "capitan.america@gmail.com"
+        },
+        {
+        "id": "1061",
+        "nombre": "Messi Siu",
+        "correo": "messi.siu@gmail.com"
+        }
+    ],
+    "usuarios": [
+        {
+        "id": "1",
+        "usuario": "cliente1",
+        "password": "1234",
+        "rol": "cliente"
+        },
+        {
+        "id": "2",
+        "usuario": "empleado1",
+        "password": "abcd",
+        "rol": "empleado"
+        }
+    ]
+    }

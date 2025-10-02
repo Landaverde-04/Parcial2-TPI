@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link rel="stylesheet" href="css/productos.css">
+</head>
+<body>
+    <header>
+        <h1>Postres Deliciosos</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="login.html">Cerrar Sesión</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Gestión de Productos</h2>
+        <form id="productoForm">
+            <input type="hidden" id="productoId">
+            <input type="text" id="nombre" placeholder="Nombre del producto" required>
+            <input type="number" id="precio" placeholder="Precio" required>
+            <input type="file" id="imagen" placeholder="Nombre imagen (ej: pastel1.jpg)" required>
+            <input type="text" id="descripcion" placeholder="Descripción" required>
+            <input type="number" id="stock" placeholder="Stock" required>
+            <button type="submit">Guardar</button>
+        </form>
+
+        <h3>Lista de Productos</h3>
+        <table id="productosTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Imagen</th>
+                    <th>Descripción</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+
+    <script src="js/productos.js"></script>
+</body>
+</html>
