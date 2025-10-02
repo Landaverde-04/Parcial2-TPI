@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Detalles del Smartphone — NextPhone</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="imagenes/logo.jpg" alt="Logo NextPhone" class="logo">
+      <h1>NextPhone — Detalles</h1>
+    </div>
+    <nav>
+      <a class="btn-nav" href="index.html">Inicio</a>
+      <a class="btn-nav" href="info-empresa.html">Sobre Nosotros</a>
+    </nav>
+  </header>
+
+  <main style="max-width: 800px; margin: 20px auto; padding: 20px;">
+    <section id="phone-details">
+      <h2>Detalles del Smartphone</h2>
+      <div id="details-container">
+        <p>Cargando información...</p>
+      </div>
+      <a href="index.html" class="btn" style="background: var(--accent); color: white; margin-top: 20px; display: inline-block;">← Volver</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <div class="contenedor-img1">
+          <img src="imagenes/logo.jpg" alt="logo footer" />
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="info-empresa.html">Sobre Nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contactanos</h3>
+        <ul>
+          <li><strong>E-mail:</strong> <a href="mailto:nextphone.sv@gmail.com">nextphone.sv@gmail.com</a></li>
+          <li><strong>Teléfono:</strong> +503 7777-7777</li>
+          <li><strong>Dirección:</strong> Final Av. La Revolución, San Salvador, El Salvador</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API = "http://localhost:3001"; // mismo puerto de json-server
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    async function loadDetails() {
+      const res = await fetch(`${API}/smartphones/${id}`);
+      if(!res.ok){
+        document.getElementById("details-container").innerHTML = "<p>Error: Smartphone no encontrado.</p>";
+        return;
+      }
+      const phone = await res.json();
+      document.getElementById("details-container").innerHTML = `
+        <div style="background:white; padding:20px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1)">
+          <h3>${phone.brand} ${phone.model}</h3>
+          <p><strong>Precio:</strong> $${phone.price}</p>
+          <p><strong>RAM:</strong> ${phone.specs?.ram || 'N/A'}</p>
+          <p><strong>Almacenamiento:</strong> ${phone.specs?.storage || 'N/A'}</p>
+          <p><strong>Batería:</strong> ${phone.specs?.battery || 'N/A'}</p>
+        </div>
+      `;
+    }
+    loadDetails();
+  </script>
+</body>
+</html>
