@@ -5,10 +5,6 @@
       "id": "1"
     },
     {
-      "nombre": "Lácteos",
-      "id": "2"
-    },
-    {
       "nombre": "Frutas",
       "id": "3"
     },
@@ -17,19 +13,19 @@
       "id": "4"
     },
     {
-      "nombre": "Carnes1",
+      "nombre": "Carnes",
       "id": "5"
     }
   ],
   "productos": [
     {
-      "id": "1",
-      "nombre": "Leche Entera",
-      "cantidad": 5,
+      "nombre": "Leche",
+      "cantidad": 10,
       "unidadMedida": "litros",
       "precio": 0.05,
       "fechaVencimiento": "2025-10-01",
-      "categoriaId": 2
+      "categoriaId": 1,
+      "id": "1"
     },
     {
       "id": "3",

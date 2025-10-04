@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const API_BASE = window.location.origin;
   const API_PRODUCTOS = `${API_BASE}/productos`;
   const API_CATEGORIAS = `${API_BASE}/categorias`;
-
   const form = document.getElementById("formProducto");
   const idProductoInput = document.getElementById("idProducto");
   const nombreProductoInput = document.getElementById("nombreProducto");
