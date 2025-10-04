@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conoce Más - Sistema de Gestión de Inventario</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">  
+<link rel="stylesheet" href="css/conoceMas.css">
+</head>
+<body class="bg-light">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-boxes me-2"></i>
+        Inventario de Alimentos
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <i class="bi bi-house-door me-2"></i>
+              Inicio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gestioncategorias.html">
+              <i class="bi bi-tags me-2"></i>
+              Categorías
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="productos.html">
+              <i class="bi bi-box-seam me-2"></i>
+              Productos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="conoceMas.html">
+              <i class="bi bi-book-half me-2"></i>
+              Conoce Más
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section fade-in">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h1 class="hero-title">
+            <i class="bi bi-book-half me-3"></i>
+            Conoce Más
+          </h1>
+          <p class="hero-subtitle">
+            Mantente actualizado con las últimas tendencias del mercado alimentario 
+            y aprende a seleccionar los mejores productos para tu inventario.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Artículos de Tendencia Section -->
+    <section class="fade-in-delay-1">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="bi bi-trending-up me-2"></i>
+          Tendencias del Mercado
+        </h2>
+        <p class="section-subtitle">
+          Descubre las últimas tendencias y análisis del mercado alimentario para optimizar tu gestión de inventario
+        </p>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div class="card article-card shadow-sm">
+            <div class="card-body">
+              <div class="article-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <h3 class="article-title">Análisis de Precios de Alimentos 2024</h3>
+              <p class="article-description">
+                Estudio completo sobre la evolución de precios en productos básicos, 
+                tendencias estacionales y factores que influyen en la volatilidad del mercado alimentario.
+                Descubre cómo optimizar tus compras y gestionar mejor tu inventario.
+              </p>
+              <a href="https://www.fao.org/worldfoodsituation/foodpricesindex/es/" 
+                 target="_blank" rel="noopener noreferrer" class="article-link">
+                Leer artículo completo
+                <i class="bi bi-arrow-right ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6 mb-4">
+          <div class="card article-card shadow-sm">
+            <div class="card-body">
+              <div class="article-icon">
+                <i class="bi bi-leaf"></i>
+              </div>
+              <h3 class="article-title">Sostenibilidad en la Cadena Alimentaria</h3>
+              <p class="article-description">
+                Explora las nuevas tendencias en sostenibilidad, productos orgánicos y 
+                prácticas responsables en la gestión de alimentos. Aprende sobre certificaciones,
+                reducción de desperdicios y gestión eficiente de inventarios sostenibles.
+              </p>
+              <a href="https://www.un.org/sustainabledevelopment/es/hunger/" 
+                 target="_blank" rel="noopener noreferrer" class="article-link">
+                Explorar tendencias sostenibles
+                <i class="bi bi-arrow-right ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guía de Selección de Productos -->
+    <section class="fade-in-delay-2">
+      <div class="guide-section">
+        <h2 class="guide-title">
+          <i class="bi bi-clipboard-check me-2"></i>
+          Guía para Seleccionar Productos de Calidad
+        </h2>
+        
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="guide-item">
+              <h4 class="guide-item-title">
+                <i class="bi bi-eye me-2"></i>
+                Inspección Visual
+              </h4>
+              <p class="guide-item-text">
+                Examina el color, textura y apariencia general. Las verduras frescas deben tener 
+                colores vibrantes, piel firme y sin manchas oscuras o signos de deterioro.
+              </p>
+            </div>
+            
+            <div class="guide-item">
+              <h4 class="guide-item-title">
+                <i class="bi bi-hand-index me-2"></i>
+                Prueba de Firmeza
+              </h4>
+              <p class="guide-item-text">
+                Presiona suavemente los productos. Las frutas y verduras frescas deben sentirse 
+                firmes al tacto. Evita productos que se sientan blandos o tengan áreas hundidas.
+              </p>
+            </div>
+            
+            <div class="guide-item">
+              <h4 class="guide-item-title">
+                <i class="bi bi-calendar-date me-2"></i>
+                Verificación de Fechas
+              </h4>
+              <p class="guide-item-text">
+                Siempre revisa las fechas de vencimiento y preferencia de consumo. 
+                Planifica tu inventario considerando la vida útil de cada producto.
+              </p>
+            </div>
+            
+            <div class="guide-item">
+              <h4 class="guide-item-title">
+                <i class="bi bi-thermometer me-2"></i>
+                Condiciones de Almacenamiento
+              </h4>
+              <p class="guide-item-text">
+                Verifica que los productos hayan sido almacenados a las temperaturas adecuadas. 
+                Los productos refrigerados deben estar fríos y los congelados completamente sólidos.
+              </p>
+            </div>
+            
+            <div class="guide-item">
+              <h4 class="guide-item-title">
+                <i class="bi bi-award me-2"></i>
+                Certificaciones y Etiquetas
+              </h4>
+              <p class="guide-item-text">
+                Busca certificaciones de calidad, orgánicos, comercio justo u otras etiquetas 
+                que garanticen estándares de producción y calidad del producto.
+              </p>
+            </div>
+          </div>
+          
+          <div class="col-lg-4">
+            <div class="image-placeholder">
+                <img src="img/img-frutas.jpg" alt="" srcset="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-0">
+        <i class="bi bi-boxes me-2"></i>
+        Inventario de Alimentos - Gestión Eficiente
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <script src="js/estiloConoceMas.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Reescritura: /parcial/carnet -> /carnet
+RewriteRule ^parcial/(.+)$ /$1 [R=301,L]
+
+# Redirección al siguiente compañero (mg22098 - Elías)
+RewriteCond %{HTTP_HOST} ^mg22098\.www4\.codesquad\.tpi$ [NC]
+RewriteRule ^(.*)$ https://mg22098.codesquad.tpi/$1 [R=301,L]

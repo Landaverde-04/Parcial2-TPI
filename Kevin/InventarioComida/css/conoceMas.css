@@ -1,0 +1,330 @@
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+    img{
+      object-fit: fill;
+      max-width: 100%;
+    }
+    
+    .navbar {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      padding: 0.75rem 1rem;
+      margin: 0 0.25rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+    
+    .navbar-nav .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white !important;
+      transform: translateY(-1px);
+    }
+    
+    .navbar-nav .nav-link.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white !important;
+      font-weight: 600;
+    }
+    
+    .navbar-toggler {
+      border: none;
+      padding: 0.5rem;
+    }
+    
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    .card {
+      border: none;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .card-body {
+      padding: 2rem;
+    }
+    
+    .shadow-sm {
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    .bg-light {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+      min-height: 100vh;
+    }
+    
+    .text-primary {
+      color: #0d6efd !important;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, #0d6efd 0%, #0056b3 100%);
+      color: white;
+      padding: 4rem 0;
+      margin-bottom: 3rem;
+    }
+    
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+    
+    /* Article Cards */
+    .article-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .article-card::before {
+      content: '';
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(13, 110, 253, 0.1), rgba(0, 86, 179, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .article-card:hover::before {
+      opacity: 1;
+    }
+    
+    .article-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(45deg, #0d6efd, #0056b3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .article-card:hover .article-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .article-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #495057;
+    }
+    
+    .article-description {
+      color: #6c757d;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .article-link {
+      color: #0d6efd;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .article-link:hover {
+      color: #0056b3;
+      transform: translateX(5px);
+    }
+    
+    /* Guide Section */
+    .guide-section {
+      background: white;
+      border-radius: 15px;
+      padding: 3rem 2rem;
+      margin: 3rem 0;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    }
+    
+    .guide-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #0d6efd;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .guide-item {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+      border-left: 4px solid #0d6efd;
+    }
+    
+    .guide-item:hover {
+      background: #e3f2fd;
+      transform: translateX(10px);
+    }
+    
+    .guide-item-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0d6efd;
+      margin-bottom: 0.5rem;
+    }
+    
+    .guide-item-text {
+      color: #495057;
+      line-height: 1.6;
+      margin: 0;
+    }
+    
+    .image-placeholder {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border: 2px dashed #0d6efd;
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #0d6efd;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .image-placeholder:hover {
+      background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
+      transform: scale(1.02);
+    }
+    
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #0d6efd;
+      margin-bottom: 1rem;
+    }
+    
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: #6c757d;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    .fade-in-delay-1 {
+      animation: fadeIn 0.8s ease-out 0.2s both;
+    }
+    
+    .fade-in-delay-2 {
+      animation: fadeIn 0.8s ease-out 0.4s both;
+    }
+    
+    .fade-in-delay-3 {
+      animation: fadeIn 0.8s ease-out 0.6s both;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 991.98px) {
+      .navbar-nav {
+        padding-top: 1rem;
+      }
+      
+      .navbar-nav .nav-link {
+        padding: 0.75rem 0;
+        margin: 0.25rem 0;
+        border-radius: 6px;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .guide-title {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 3rem 0;
+      }
+      
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .guide-section {
+        padding: 2rem 1rem;
+      }
+      
+      .article-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+      }
+      
+      .guide-item {
+        padding: 1rem;
+      }
+      
+      .guide-item:hover {
+        transform: translateX(5px);
+      }
+    }
+

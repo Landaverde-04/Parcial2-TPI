@@ -1,0 +1,58 @@
+{
+  "categorias": [
+    {
+      "nombre": "Bebida",
+      "id": "1"
+    },
+    {
+      "nombre": "Frutas",
+      "id": "3"
+    },
+    {
+      "nombre": "Verduras",
+      "id": "4"
+    },
+    {
+      "nombre": "Carnes",
+      "id": "5"
+    }
+  ],
+  "productos": [
+    {
+      "nombre": "Leche",
+      "cantidad": 10,
+      "unidadMedida": "litros",
+      "precio": 0.05,
+      "fechaVencimiento": "2025-10-01",
+      "categoriaId": 1,
+      "id": "1"
+    },
+    {
+      "id": "3",
+      "nombre": "Peras",
+      "cantidad": 4,
+      "unidadMedida": "kg",
+      "precio": 0.11,
+      "fechaVencimiento": "2025-10-03",
+      "categoriaId": 3
+    },
+    {
+      "nombre": "Tomate",
+      "cantidad": 6,
+      "unidadMedida": "unidades",
+      "precio": 0.15,
+      "fechaVencimiento": "2025-10-04",
+      "categoriaId": 4,
+      "id": "4"
+    },
+    {
+      "nombre": "Carne de res",
+      "cantidad": 5,
+      "unidadMedida": "kg",
+      "precio": 0.42,
+      "fechaVencimiento": "2025-10-15",
+      "categoriaId": 1,
+      "id": "5"
+    }
+  ]
+}
