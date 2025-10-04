@@ -1,0 +1,58 @@
+{
+  "tools": [
+    {
+      "id": "1",
+      "name": "Multímetro Digital",
+      "brand": "Fluke",
+      "model": "01",
+      "price": 300,
+      "category": "medicion",
+      "description": "Multímetro industrial"
+    },
+    {
+      "id": "2",
+      "name": "Estación de Soldadura",
+      "brand": "Weller",
+      "model": "02",
+      "price": 200,
+      "category": "soldadura",
+      "description": "Estación de soldadura analógica con control de temperatura"
+    },
+    {
+      "id": "3",
+      "name": "Osciloscopio Digital",
+      "brand": "Rigol",
+      "model": "03",
+      "price": 500,
+      "category": "osciloscopio",
+      "description": "Osciloscopio de 4 canales"
+    },
+    {
+      "name": "Arduino uno",
+      "brand": "Arduino",
+      "price": 15,
+      "category": "microcontroladores",
+      "model": "04",
+      "description": "Placa base para proyectos de electrónica.",
+      "id": "4"
+    },
+    {
+      "id": "5",
+      "name": "Fuente de Alimentación",
+      "brand": "mio",
+      "model": "05",
+      "price": 750,
+      "category": "fuentes",
+      "description": "Fuente de alimentación"
+    },
+    {
+      "name": "tester",
+      "brand": "fluke",
+      "price": 159,
+      "category": "medicion",
+      "model": "0012",
+      "description": "Prueba actual",
+      "id": "7"
+    }
+  ]
+}

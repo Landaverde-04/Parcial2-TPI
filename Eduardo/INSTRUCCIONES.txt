@@ -1,0 +1,13 @@
+
+INSTRUCCIONES:
+
+1. npm install -g json-server
+
+2. cd API
+
+3. json-server --watch db.json --port 3001
+
+4. Abrir index.html 
+
+PUERTO API: 3001
+

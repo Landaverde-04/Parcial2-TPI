@@ -1,11 +1,270 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ElectroBox - Herramientas de Electrónica</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    
+    <header>
+        <div class="brand">
+            <div class="logo-container">
+                <img src="imagenes/logo.png" alt="ElectroTools Logo" class="logo-image" onerror="this.style.display='none'">
+                <span class="logo-text">ElectroTools</span>
+            </div>
+            <h1>Herramientas de Electrónica Profesional</h1>
+        </div>
+        <nav>
+            <button id="tab-catalog" class="nav-btn active">
+                <i class="fas fa-tools"></i> Catálogo
+            </button>
+            <button id="tab-services" class="nav-btn">
+                <i class="fas fa-cogs"></i> Servicios
+            </button>
+            <button id="tab-about" class="nav-btn">
+                <i class="fas fa-info-circle"></i> Nosotros
+            </button>
+            <button id="tab-contact" class="nav-btn">
+                <i class="fas fa-envelope"></i> Contacto
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Sección Catálogo de Herramientas -->
+        <section id="catalog-section" class="tab-content active">
+            <div class="section-header">
+                <div class="section-image">
+                    <img src="imagenes/catalogo.jpg" alt="Catálogo de Herramientas" onerror="this.style.display='none'">
+                </div>
+                <h2><i class="fas fa-tools"></i> Catálogo de Herramientas</h2>
+                <p>Administra el inventario de herramientas de electrónica</p>
+            </div>
+
+            <div class="form-container">
+                <form id="form-add-tool">
+                    <h3><i class="fas fa-plus-circle"></i> Agregar / Editar Herramienta</h3>
+                    <input type="hidden" id="tool-id">
+                    <div class="form-grid">
+                        <input required id="tool-name" placeholder="Nombre de la herramienta">
+                        <input required id="tool-brand" placeholder="Marca">
+                        <input required id="tool-price" type="number" step="0.01" placeholder="Precio ($)">
+                        <select required id="tool-category">
+                            <option value="">Seleccionar categoría</option>
+                            <option value="medicion">Medición</option>
+                            <option value="soldadura">Soldadura</option>
+                            <option value="corte">Corte y Pelado</option>
+                            <option value="manuales">Herramientas Manuales</option>
+                            <option value="fuentes">Fuentes de Alimentación</option>
+                            <option value="osciloscopio">Osciloscopios</option>
+                        </select>
+                        <input id="tool-model" placeholder="Modelo">
+                        <textarea id="tool-description" placeholder="Descripción"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit"><i class="fas fa-save"></i> Guardar</button>
+                        <button type="button" id="form-reset"><i class="fas fa-plus"></i> Nuevo</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tools-grid" id="tools-list"></div>
+        </section>
+
+        <!-- Sección Servicios -->
+        <section id="services-section" class="tab-content">
+            <div class="section-header">
+                <div class="section-image">
+                    <img src="imagenes/servicios.jpg" alt="Servicios Técnicos" onerror="this.style.display='none'">
+                </div>
+                <h2><i class="fas fa-cogs"></i> Servicios Técnicos</h2>
+                <p>Servicios especializados en electrónica y automatización</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3>Reparación de Equipos</h3>
+                    <p>Diagnóstico y reparación de equipos electrónicos, osciloscopios, fuentes de alimentación y multímetros profesionales.</p>
+                    <div class="service-price">Desde $25</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Capacitación Técnica</h3>
+                    <p>Cursos especializados en uso de herramientas de electrónica, soldadura profesional y manejo de equipos de medición.</p>
+                    <div class="service-price">$150/curso</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>Calibración de Equipos</h3>
+                    <p>Servicio de calibración y certificación para multímetros, osciloscopios y fuentes de alimentación según estándares internacionales.</p>
+                    <div class="service-price">$75-$200</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Asesoría Técnica</h3>
+                    <p>Consultoría especializada en selección de herramientas, diseño de laboratorios y implementación de procesos de calidad.</p>
+                    <div class="service-price">$50/hora</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Mantenimiento Preventivo</h3>
+                    <p>Programas de mantenimiento para equipos de laboratorio y herramientas de precisión para garantizar su óptimo funcionamiento.</p>
+                    <div class="service-price">Planes desde $100/mes</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>Instalación y Configuración</h3>
+                    <p>Servicio completo de instalación, configuración y puesta en marcha de equipos y sistemas de medición electrónicos.</p>
+                    <div class="service-price">Cotización personalizada</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Sobre Nosotros -->
+        <section id="about-section" class="tab-content">
+            <div class="about-container">
+                <div class="section-header">
+                    <div class="section-image">
+                        <img src="imagenes/nosotros.jpg" alt="Sobre ElectroTools" onerror="this.style.display='none'">
+                    </div>
+                    <h2><i class="fas fa-info-circle"></i> Sobre ElectroTools</h2>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>¿Quiénes Somos?</h3>
+                        <p>
+                            ElectroTools es una empresa especializada en proveer herramientas y servicios de electrónica profesional 
+                            para técnicos, ingenieros y entusiastas de la electrónica.
+                        </p>
+
+                        <h3>¿Porqué son importantes las Herramientas de Electrónica correctas?</h3>
+                        <p>
+                            La adquisión y uso de las herramientas correctas es de vital importancia en cualquier área que se desee desempeñar, nosotros nos comprometemos a ofrecer siempre
+                            lo mejor en calidad y precio para las necesidades específicas de nuestros clientes, garantizandoles una excelente experiencia en el desarrollo de sus proyectos y labores, consideramos
+                            que tanto en el trabajo o proyectos personales se debe contar con la mayor facilidad y apoyo posible, por lo que estaremos a su completo servicio para cualquier inquietud
+                        </p>
+                    </div>
+                    
+                    <div class="about-media">
+                        <div class="video-container">
+                            <h4>Videos de introducción a la electrónica</h4>
+                            <iframe width="853" height="480" src="https://www.youtube.com/embed/o_YTYVRGoL0" title="herramientas básicas para reparación electrónica e ingeniería(# 5 tip reparación)" 
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen></iframe>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/FDyjVHr-PBY?si=pLhUiQy_LC1xg6-A" 
+                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe width="853" height="480" src="https://www.youtube.com/embed/1NRFL6YYtzg" 
+                            title="COMPONENTES ELECTRÓNICOS - Resumen / Idea intuitiva" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        
+                        <div class="external-links">
+                            <h4>Enlaces Externos de Interés:</h4>
+                            <ul>
+                                <li><a href="https://www.proyectoelectronico.com/" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Proyecto Electrónico
+                                </a></li>
+                                <li><a href="https://mrchunckuee.blogspot.com/" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Mr. Chunk
+                                </a></li>
+                                <li><a href="https://www.micropic.es/" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Micropic
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Contacto -->
+        <section id="contact-section" class="tab-content">
+            <div class="contact-container">
+                <div class="section-header">
+                    <div class="section-image">
+                        <img src="imagenes/contactenos.jpg" alt="Contacto" onerror="this.style.display='none'">
+                    </div>
+                    <h2><i class="fas fa-envelope"></i> Contactanos</h2>
+                    <p>Ponte en contacto con nuestros expertos</p>
+                </div>
+
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Dirección</h4>
+                        <p>San Salvador, El Salvador</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <h4>Teléfono</h4>
+                        <p>+503 2525-2525</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p>electrotools@gmail.com</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Horarios</h4>
+                        <p>Lun-Vie: 8:00 AM - 6:00 PM<br>Sáb: 8:00 AM - 12:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="imagenes/logo.png" alt="ElectroTools Logo" onerror="this.style.display='none'">
+                    <h3>ElectroTools</h3>
+                </div>
+                <p>Tu socio confiable en herramientas de electrónica profesional</p>
+              
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +503 2525-2525</li>
+                    <li><i class="fas fa-envelope"></i> electrotools@gmail.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> San Salvador, El Salvador</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 ElectroTools. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
