@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./catalogo.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img src="./assets/Icono-header.png" alt="" class="header-icono">
+        <ul class="nav-links">
+          <li><a href="./index.html">Inicio</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+          <li><a href="./venta.html">Vender</a></li>
+          <li><a href="./review.html">Reseñas</a></li>
+          <li><a href="#" id="cerrarSesion">Cerrar sesión</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section>
+      <h1>Catálogo de Autos</h1>
+      <div class="busqueda">
+        <input type="text" id="buscar" placeholder="Buscar por modelo o marca...">
+      </div>
+      <div id="catalogo" class="catalogo-container"></div>
+    </section>
+
+    <footer>
+      <p>© 2025 AutoLux Agencia de Autos. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+      const API_URL = "https://172.23.18.211/api";
+      const catalogo = document.getElementById("catalogo");
+      const buscarInput = document.getElementById("buscar");
+
+      let autos = [];
+      let paginaActual = 1;
+      const autosPorPagina = 6;
+
+
+      const usuarioActual = localStorage.getItem('usuario');
+      console.log('Usuario actual:', usuarioActual);
+      if (!usuarioActual) {
+        window.location.href = './login.html';
+      }
+
+      document.getElementById('cerrarSesion').addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('usuario');
+        window.location.href = './login.html';
+      });
+
+      async function cargarAutos() {
+        try {
+          const res = await fetch(`${API_URL}/autos`);
+          autos = await res.json();
+          mostrarCatalogo();
+        } catch (err) {
+          console.error("Error al cargar autos:", err);
+        }
+      }
+      function mostrarCatalogo() {
+        catalogo.innerHTML = "";
+        const filtro = buscarInput.value.toLowerCase();
+
+        const autosFiltrados = autos.filter(auto => 
+          auto.modelo.toLowerCase().includes(filtro) ||
+          auto.marca.toLowerCase().includes(filtro)
+        );
+
+        const totalPaginas = Math.ceil(autosFiltrados.length / autosPorPagina);
+        if (paginaActual > totalPaginas) paginaActual = 1;
+
+        const inicio = (paginaActual - 1) * autosPorPagina;
+        const fin = inicio + autosPorPagina;
+        const autosPagina = autosFiltrados.slice(inicio, fin);
+
+        autosPagina.forEach(auto => {
+          const esPropio = auto.usuario.trim() === usuarioActual.trim();
+          console.log('Usuario actual:', usuarioActual);
+          console.log("usuario base:", auto.usuario);
+          console.log(esPropio)
+          
+          const item = document.createElement("div");
+          item.classList.add("catalogo-item");
+
+          let acciones = '';
+          if (esPropio) {
+            acciones = `
+              <button class="btn-editar" title="Editar" data-id="${auto.id}">
+                <img src="./assets/lapiz.png" alt="Editar" style="width:24px;height:24px;">
+              </button>
+              <button class="btn-eliminar" title="Eliminar" data-id="${auto.id}">
+                <img src="./assets/basura.png" alt="Eliminar" style="width:24px;height:24px;">
+              </button>
+            `;
+          } else {
+            acciones = `
+              <button class="btn-comprar" title="Comprar" data-id="${auto.id}">
+                <img src="./assets/bolsa-de-la-compra.png" alt="Comprar" style="width:24px;height:24px;">
+              </button>
+            `;
+          }
+
+          item.innerHTML = `
+            <div class="card-actions" style="display:flex; justify-content:flex-end; gap:10px; margin-bottom:8px;">
+              ${acciones}
+            </div>
+            <img src="${auto.imagen || './assets/Auto1.png'}" alt="${auto.marca}" style="width:100%;max-width:220px;border-radius:8px;box-shadow:0 2px 8px #0002;">
+            <div class="card-info" style="padding:10px 0;">
+              <p><strong>Modelo:</strong> ${auto.modelo}</p>
+              <p><strong>Marca:</strong> ${auto.marca}</p>
+              <p><strong>Año:</strong> ${auto.anio}</p>
+              <p><strong>Estado:</strong> ${auto.estado || ''}</p>
+              <p><strong>Precio:</strong> ${auto.precio ? '$' + auto.precio : ''}</p>
+            </div>
+          `;
+          catalogo.appendChild(item);
+
+          if (esPropio) {
+            item.querySelector('.btn-eliminar').addEventListener('click', async () => {
+              if (confirm('¿Seguro que deseas eliminar este auto?')) {
+                await fetch(`${API_URL}/autos/${auto.id}`, { method: 'DELETE' });
+                cargarAutos();
+              }
+            });
+
+            item.querySelector('.btn-editar').addEventListener('click', () => {
+              window.location.href = `venta.html?id=${auto.id}`;
+            });
+          } else {
+            item.querySelector('.btn-comprar').addEventListener('click', async() => {
+               if (confirm('¿Seguro que deseas comprar este auto?')) {
+                await fetch(`${API_URL}/autos/${auto.id}`, { method: 'DELETE' });
+                cargarAutos();
+              }
+              alert('¡Gracias por tu compra!');
+            });
+          }
+        });
+      }
+
+     
+      buscarInput.addEventListener("input", () => {
+        paginaActual = 1;
+        mostrarCatalogo();
+      });
+
+      cargarAutos();
+      
+    </script>
+  </body>
+</html>

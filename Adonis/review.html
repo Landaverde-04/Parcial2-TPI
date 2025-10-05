@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./review.css">
+    <title>Reseña</title>
+</head>
+<body>
+   <header>
+    <nav>
+    <img src="./assets/Icono-header.png" alt="" class="header-icono">
+    <ul class="nav-links"><li><a href="./catalogo.html">catalogo</a></li>
+    <li><a href="./contacto.html">contacto</a></li>
+    <li><a href="./index.html">inicio</a></li>
+    <li><a href="./venta.html">Vender</a></li>
+    <li><a href="#" id="cerrarSesion">Cerrar sesión</a></li>
+  </ul>
+    </nav>
+  </header>
+    <section>
+      <div class="reseñas-container">
+    <h2>Reseñas de nuestros clientes</h2>
+    <form class="form-reseña">
+        <label for="reseña">Escribe tu reseña:</label>
+        <textarea id="reseña" class="reseña-textarea" placeholder="Comparte tu experiencia..."></textarea>
+        <label>Calificación:</label>
+        <div class="rating" id="rating">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+        </div>
+
+        <button type="submit">Enviar Reseña</button>
+    </form>
+</div>
+
+    </section>
+    <footer> <p>© 2025 AutoLux Agencia de Autos. Todos los derechos reservados.</p></footer>
+</body>
+<script>
+  const stars = document.querySelectorAll("#rating span");
+  let rating = 0;
+
+  // Manejar la selección de estrellas
+  stars.forEach((star, index) => {
+    star.addEventListener("click", () => {
+      rating = parseInt(star.getAttribute("data-value"));
+
+      stars.forEach(s => s.classList.remove("selected"));
+      for (let i = 0; i <= index; i++) {
+        stars[i].classList.add("selected");
+      }
+      console.log("Calificación seleccionada:", rating);
+    });
+  });
+
+  // Enviar reseña
+  document.querySelector('.form-reseña').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const usuarioActual = localStorage.getItem('usuario');
+    if (!usuarioActual) {
+      alert("Debes iniciar sesión para enviar una reseña");
+      window.location.href = './login.html';
+      return;
+    }
+
+    const texto = document.getElementById('reseña').value;
+    const reseña = {
+      usuario: usuarioActual, // enviamos usuario
+      texto: texto,
+      calificacion: rating
+    };
+
+    try {
+    if (!texto.trim()) {
+      alert('Por favor escribe tu reseña.');
+      return;
+    }
+      await fetch('https://172.23.18.211/api/reseñas/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reseña)
+      });
+
+      document.getElementById('reseña').value = '';
+      stars.forEach(s => s.classList.remove("selected"));
+      rating = 0;
+
+      mostrarReseñas(); // recargar reseñas
+    } catch (err) {
+      alert('Error al enviar la reseña');
+      console.error(err);
+    }
+  });
+
+  let paginaActual = 1;
+  const reseñasPorPagina = 4;
+
+  async function mostrarReseñas() {
+    const contenedor = document.querySelector('.reseñas-container');
+    contenedor.querySelectorAll('.reseña-dinamica, .reseñas-navbar').forEach(r => r.remove());
+
+    const usuarioActual = localStorage.getItem('usuario'); // usuario como string
+    if (!usuarioActual) {
+      window.location.href = './login.html';
+      return;
+    }
+
+    try {
+      const res = await fetch('https://172.23.18.211/api/reseñas/');
+      let reseñas = await res.json();
+      reseñas = reseñas.reverse();
+
+      const totalPaginas = Math.ceil(reseñas.length / reseñasPorPagina);
+      if (paginaActual > totalPaginas) paginaActual = 1;
+
+      const inicio = (paginaActual - 1) * reseñasPorPagina;
+      const fin = inicio + reseñasPorPagina;
+      const reseñasPagina = reseñas.slice(inicio, fin);
+
+      reseñasPagina.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'reseña reseña-dinamica';
+
+        let eliminarBtnHTML = '';
+        if (r.usuario === usuarioActual) { // solo si es propio
+          eliminarBtnHTML = `
+            <button class="btn-eliminar" title="Eliminar" data-id="${r.id}" style="background:none; border:none; cursor:pointer; align-self:end;">
+              <img src="./assets/basura.png" alt="Eliminar" style="width:24px;height:24px;filter:brightness(0.7);">
+            </button>
+          `;
+        }
+
+        div.innerHTML = `
+          <span class="nombre-usuario">${r.usuario}</span>
+          ${eliminarBtnHTML}
+          <div class="estrellas">${'★'.repeat(r.calificacion)}${'☆'.repeat(5 - r.calificacion)}</div>
+          <p>${r.texto}</p>
+        `;
+
+        contenedor.insertBefore(div, contenedor.querySelector('.form-reseña'));
+
+        const btnEliminar = div.querySelector('.btn-eliminar');
+        if (btnEliminar) {
+          btnEliminar.addEventListener('click', async function() {
+            if (confirm('¿Seguro que deseas eliminar esta reseña?')) {
+              await fetch(`https://172.23.18.211/api/reseñas/${r.id}/`, { method: 'DELETE' });
+              mostrarReseñas();
+            }
+          });
+        }
+      });
+
+      // Paginación
+      if (reseñas.length > reseñasPorPagina) {
+        const navbar = document.createElement('div');
+        navbar.className = 'reseñas-navbar';
+
+        for (let i = 1; i <= totalPaginas; i++) {
+          const btn = document.createElement('button');
+          btn.textContent = i;
+          btn.className = (i === paginaActual) ? 'active' : '';
+          btn.addEventListener('click', () => {
+            paginaActual = i;
+            mostrarReseñas();
+          });
+          navbar.appendChild(btn);
+        }
+        contenedor.insertBefore(navbar, contenedor.querySelector('.form-reseña'));
+      }
+
+    } catch (err) {
+      console.error('Error al cargar reseñas:', err);
+    }
+  }
+
+  mostrarReseñas();
+
+  // Cerrar sesión
+  const btnCerrar = document.getElementById('cerrarSesion');
+  if (btnCerrar) {
+    btnCerrar.addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('usuario');
+      window.location.href = './login.html';
+    });
+  }
+</script>
+
+</html>
