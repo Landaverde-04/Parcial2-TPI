@@ -1,0 +1,147 @@
+.reseñas-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.reseña {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.reseña .nombre-usuario {
+  font-weight: bold;
+  color: #174a7c;
+  font-size: 16px;
+}
+
+.reseña .estrellas {
+  color: #FFD700;
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.reseña p {
+  font-size: 14px;
+  color: #333;
+  margin: 8px 0;
+}
+
+.reseña .borrar {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.reseña .borrar:hover {
+  background-color: #c9302c;
+}
+
+/* FORMULARIO */
+.form-reseña {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-reseña label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #174a7c;
+}
+
+textarea {
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  min-height: 100px;
+}
+
+.rating {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.rating span {
+  font-size: 28px;
+  color: #ccc; /* gris cuando no está seleccionada */
+  transition: color 0.3s;
+}
+
+.rating span.selected {
+  color: #FFD700; /* estrella seleccionada */
+}
+
+.form-reseña button {
+  background-color: #174a7c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form-reseña button:hover {
+  background-color: #0f3156;
+}
+
+.reseña-textarea{
+   align-self: center;
+  width: 80%;
+}
+
+.reseñas-navbar{
+  text-align: center;
+  margin: 20px 0;
+  padding-right: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap; 
+    }
+
+    .btn-eliminar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  padding-top:10px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  margin-left: 525px;
+}
+
+.btn-eliminar img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0.7);
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.btn-eliminar:hover {
+  box-shadow: 0 0 8px #174a7c55;
+  transform: scale(1.18);
+}
+
+.btn-eliminar:hover img {
+  filter: brightness(1.2);
+  transform: scale(1.18);
+}
