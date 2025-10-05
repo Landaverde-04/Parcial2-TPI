@@ -1,124 +1,139 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChemiStore</title>
-    <link rel="StyleSheet" href="estilos.css" type="text/css" media="screen" />
-    <script src="code.js"></script>
-    <script
-      src="https://kit.fontawesome.com/b20a70b737.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
 
-  <body>
-    <div class="btn-arriba">
-      <a href="">
-        <i class="fa-solid fa-arrow-up"></i>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito - ChemiStore</title>
+  <meta name="descripcion-page"
+    content="Somos una página de tienda de camisetas de fútbol, creada con la intención de hacer llegar lo mejor hasta tu hogar y unirnos como lo que somos, dentro y fuera de la cancha una familia." />
+  <link rel="StyleSheet" href="estilos.css" type="text/css" media="screen" />
+  <script src="code.js"></script>
+  <script src="https://kit.fontawesome.com/b20a70b737.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="btn-arriba">
+    <a href="index.html">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
+  </div>
+
+  <header>
+    <img src="/imagenes/logo-sf1.png" alt="logo sin fondo en el header" />
+    <h2>Categorías de nuestros productos</h2>
+
+    <div class="btn-carrito">
+      <a href="carrito.html">
+        <i class="fa-solid fa-cart-shopping"></i>
       </a>
     </div>
 
-        <header>
-      <img src="/imagenes/logo-sf1.png" alt="logo sin fondo en el header" />
-      <h2>Categorías de nuestros productos</h2>
-
-      <div class="btn-carrito">
-        <buttom href="">
-          <i class="fa-solid fa-cart-shopping"></i>
-        </buttom>
-      </div>
-
-      <div class="categorias">
-        <nav class="navegacion">
-          <div class="categoria-item">
-            <a href="index.html?category=1" class="categoria-texto" data-category="1">Retro</a>
-            <div class="categoria-imagen">
-              <img src="/imagenes/retro.png" alt="Camiseta retro" />
-            </div>
+    <div class="categorias">
+      <nav class="navegacion">
+        <div class="categoria-item">
+          <a href="index.html?category=1" class="categoria-texto" data-category="1">Retro</a>
+          <div class="categoria-imagen">
+            <img src="/imagenes/retro.png" alt="Camiseta retro" />
           </div>
-
-            <div class="categoria-item">
-            <a href="index.html?category=2" class="categoria-texto" data-category="2">Actualidad</a>
-            <div class="categoria-imagen">
-              <img src="/imagenes/actualidad.png" alt="Camiseta actualidad" />
-            </div>
+        </div>
+        <div class="categoria-item">
+          <a href="index.html?category=2" class="categoria-texto" data-category="2">Actualidad</a>
+          <div class="categoria-imagen">
+            <img src="/imagenes/actualidad.png" alt="Camiseta actualidad" />
           </div>
-          
-            <div class="categoria-item">
-            <a href="index.html?category=3" class="categoria-texto" data-category="3">Niños</a>
-            <div class="categoria-imagen">
-              <img src="/imagenes/niño1.png" alt="Camiseta niño" />
-            </div>
+        </div>
+        <div class="categoria-item">
+          <a href="index.html?category=3" class="categoria-texto" data-category="3">Niños</a>
+          <div class="categoria-imagen">
+            <img src="/imagenes/niño1.png" alt="Camiseta niño" />
           </div>
-          
-            <div class="categoria-item">
-            <a href="index.html?category=4" class="categoria-texto" data-category="4">Hombre</a>
-            <div class="categoria-imagen">
-              <img src="/imagenes/hombre1.png" alt="Camiseta hombre" />
-            </div>
+        </div>
+        <div class="categoria-item">
+          <a href="index.html?category=4" class="categoria-texto" data-category="4">Hombre</a>
+          <div class="categoria-imagen">
+            <img src="/imagenes/hombre1.png" alt="Camiseta hombre" />
           </div>
-
-            <div class="categoria-item">
-            <a href="index.html?category=5" class="categoria-texto" data-category="5">Mujer</a>
-            <div class="categoria-imagen">
-              <img src="/imagenes/mujer.png" alt="Camiseta mujer" />
-            </div>
+        </div>
+        <div class="categoria-item">
+          <a href="index.html?category=5" class="categoria-texto" data-category="5">Mujer</a>
+          <div class="categoria-imagen">
+            <img src="/imagenes/mujer.png" alt="Camiseta mujer" />
           </div>
-        </nav>
-      </div>
-    </header>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-    <main id="carrito-contenido">
-      <h3>Tu Carrito de Compras</h3>
-      <div id="carrito-items"></div>
-      <div id="carrito-total"></div>
-    </main>
+  <main id="carrito-contenido">
+    <h3>Tu Carrito de Compras</h3>
+    <div id="carrito-items"></div>
+    <div id="carrito-total"></div>
+  </main>
 
-    <script>
-      let cart = [];
-      let data = {};
+  <script>
+    let cart = [];
+    let data = {};
 
-      document.addEventListener('DOMContentLoaded', function() {
-        // Fetch data for sizes and products
-        fetch('chemistoreapi.json')
-          .then(response => response.json())
-          .then(fetchedData => {
-            data = fetchedData;
-            cart = JSON.parse(localStorage.getItem('cart')) || [];
-            renderCart();
-          })
-          .catch(error => console.error('Error fetching data:', error));
-      });
+    document.addEventListener('DOMContentLoaded', async function () {
+      cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-      function renderCart() {
-        const itemsContainer = document.getElementById('carrito-items');
-        const totalContainer = document.getElementById('carrito-total');
+      try {
+        const camisetasRes = await fetch('http://172.23.162.164:3000/camisetas');
+        const tallasRes = await fetch('http://172.23.162.164:3000/tallas');
 
-        if (cart.length === 0) {
-          itemsContainer.innerHTML = '<p>Tu carrito está vacío.</p>';
-          totalContainer.innerHTML = '';
-          return;
-        }
+        const camisetas = await camisetasRes.json();
+        const tallas = await tallasRes.json();
 
-        let total = 0;
-        itemsContainer.innerHTML = cart.map((item, index) => {
-          const subtotal = item.precio * item.cantidad;
-          total += subtotal;
+        data = { camisetas, tallas };
 
-          // Find product to get available sizes
-          const product = data.camisetas.find(p => p.id === item.id);
-          const availableTallas = product ? product.talla.map(id => data.tallas.find(t => t.id === id)).filter(t => t) : [];
+        cart.forEach(item => {
+          const product = camisetas.find(p => p.id.toString() === item.id.toString());
+          if (product) {
+            if (!item.tallaId || !product.talla.includes(parseInt(item.tallaId))) {
+              item.tallaId = product.talla[0];
+            }
+            item.tallaNombre = tallas.find(t => t.id.toString() === item.tallaId.toString())?.nombre || 'Desconocida';
+          }
+        });
 
-          return `
+        renderCart();
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    });
+
+    function renderCart() {
+      const itemsContainer = document.getElementById('carrito-items');
+      const totalContainer = document.getElementById('carrito-total');
+
+      if (cart.length === 0) {
+        itemsContainer.innerHTML = '<p>Tu carrito está vacío.</p>';
+        totalContainer.innerHTML = '';
+        return;
+      }
+
+      let total = 0;
+      itemsContainer.innerHTML = cart.map((item, index) => {
+        const product = data.camisetas.find(p => p.id.toString() === item.id.toString());
+        if (!product) return '';
+
+        const subtotal = item.precio * item.cantidad;
+        total += subtotal;
+
+        const availableTallas = product.talla
+          .map(id => data.tallas.find(t => t.id.toString() === id.toString()))
+          .filter(t => t);
+
+        return `
             <div class="carrito-item">
-              <img src="${item.img}" alt="${item.nombre}" style="width: 100px;">
+              <img src="${item.img}" alt="${item.nombre}" style="width:100px;">
               <div class="item-details">
                 <h4>${item.nombre}</h4>
                 <p>Precio unitario: $${item.precio}</p>
                 <label>Talla:
                   <select class="talla-select" data-index="${index}">
-                    ${availableTallas.map(t => `<option value="${t.id}" ${t.id === item.tallaId ? 'selected' : ''}>${t.nombre}</option>`).join('')}
+                    ${availableTallas.map(t => `<option value="${t.id}" ${t.id.toString() === item.tallaId.toString() ? 'selected' : ''}>${t.nombre}</option>`).join('')}
                   </select>
                 </label>
                 <label>Cantidad:
@@ -129,134 +144,131 @@
               </div>
             </div>
           `;
-        }).join('');
-        totalContainer.innerHTML = `<h4>Total: $${total.toFixed(2)}</h4>`;
+      }).join('');
 
-        // Add event listeners
-        document.querySelectorAll('.cantidad-input').forEach(input => {
-          input.addEventListener('change', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            const newQty = parseInt(this.value);
-            if (newQty >= 1) {
-              updateQuantity(index, newQty);
-            } else {
-              this.value = cart[index].cantidad; // Reset if invalid
-            }
-          });
+      totalContainer.innerHTML = `<h4>Total: $${total.toFixed(2)}</h4>`;
+
+
+      document.querySelectorAll('.cantidad-input').forEach(input => {
+        input.addEventListener('change', function () {
+          const index = parseInt(this.getAttribute('data-index'));
+          const newQty = parseInt(this.value);
+          if (newQty >= 1) {
+            updateQuantity(index, newQty);
+          } else {
+            this.value = cart[index].cantidad;
+          }
         });
+      });
 
-        document.querySelectorAll('.talla-select').forEach(select => {
-          select.addEventListener('change', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            const newTallaId = parseInt(this.value);
-            updateSize(index, newTallaId);
-          });
+      document.querySelectorAll('.talla-select').forEach(select => {
+        select.addEventListener('change', function () {
+          const index = parseInt(this.getAttribute('data-index'));
+          const newTallaId = parseInt(this.value);
+          updateSize(index, newTallaId);
         });
+      });
 
-        document.querySelectorAll('.remove-btn').forEach(btn => {
-          btn.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            removeItem(index);
-          });
+      document.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const index = parseInt(this.getAttribute('data-index'));
+          removeItem(index);
         });
-      }
+      });
+    }
 
-      function updateQuantity(index, newQty) {
-        cart[index].cantidad = newQty;
-        saveCart();
-        renderCart();
-      }
+    function updateQuantity(index, newQty) {
+      cart[index].cantidad = newQty;
+      saveCart();
+      renderCart();
+    }
 
-      function updateSize(index, newTallaId) {
-        const item = cart[index];
-        const newTallaNombre = data.tallas.find(t => t.id === newTallaId).nombre;
+    function updateSize(index, newTallaId) {
+      const item = cart[index];
+      const product = data.camisetas.find(p => p.id.toString() === item.id.toString());
+      if (!product) return;
 
-        // Check if another item with same id and new tallaId exists
-        const existingIndex = cart.findIndex(i => i.id === item.id && i.tallaId === newTallaId && i !== item);
-        if (existingIndex !== -1) {
-          // Merge quantities
-          cart[existingIndex].cantidad += item.cantidad;
-          // Remove current item
-          cart.splice(index, 1);
-        } else {
-          // Just update size
-          item.tallaId = newTallaId;
-          item.tallaNombre = newTallaNombre;
-        }
-        saveCart();
-        renderCart();
-      }
+      const tallaExists = product.talla.includes(newTallaId);
+      if (!tallaExists) return;
 
-      function removeItem(index) {
+      const existingIndex = cart.findIndex(i => i.id === item.id && i.tallaId === newTallaId && i !== item);
+      if (existingIndex !== -1) {
+        cart[existingIndex].cantidad += item.cantidad;
         cart.splice(index, 1);
-        saveCart();
-        renderCart();
+      } else {
+        item.tallaId = newTallaId;
+        item.tallaNombre = data.tallas.find(t => t.id.toString() === newTallaId.toString())?.nombre || 'Desconocida';
       }
+      saveCart();
+      renderCart();
+    }
 
-      function saveCart() {
-        localStorage.setItem('cart', JSON.stringify(cart));
-      }
-    </script>
+    function removeItem(index) {
+      cart.splice(index, 1);
+      saveCart();
+      renderCart();
+    }
 
-    <footer>
-      <div class="contenedor-img1">
-        <img src="/imagenes/logo-sf1.png" alt="logo sin fondo en footer" />
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  </script>
+
+  <footer>
+    <div class="contenedor-img1">
+      <img src="/imagenes/logo-sf1.png" alt="logo sin fondo en footer" />
+    </div>
+
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Contacto</h3>
+        <ul>
+          <li>
+            <strong>E-mail:</strong>
+            <a href="https://accounts.google.com/">chemistore.sv@gmail.com</a>
+          </li>
+          <li><strong>Teléfono:</strong> +503 1234-5678</li>
+          <li>
+            <strong>Dirección:</strong> Avenida Cuscatlán y 2° Calle Poniente,
+            local #34, San Salvador, El Salvador
+          </li>
+        </ul>
       </div>
 
-      <div class="footer-content">
-        <div class="footer-column">
-          <h3>Contacto</h3>
-          <ul>
-            <li>
-              <strong>E-mail:</strong>
-              <a href="https://accounts.google.com/">chemistore.sv@gmail.com</a>
-            </li>
-            <li><strong>Teléfono:</strong> +503 1234-5678</li>
-            <li>
-              <strong>Dirección:</strong> Avenida Cuscatlán y 2° Calle Poniente,
-              local #34, San Salvador, El Salvador
-            </li>
-          </ul>
-        </div>
-
-        <div class="footer-column">
-          <h3>Enlaces</h3>
-          <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="quiensomos.html">Sobre Nosotros</a></li>
-            <li><a href="carrito.html">Carrito</a></li>
-            <li><a href="opinion.html">Danos tu opinión</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column">
-          <h3>Siguenos</h3>
-          <ul class="footer-icons">
-            <li>
-              <a href="https://facebook.com" target="_blank"
-                ><i class="fab fa-facebook"></i
-              ></a>
-            </li>
-            <li>
-              <a href="https://instagram.com" target="_blank">
-                <i class="fab fa-instagram"></i
-              ></a>
-            </li>
-            <li>
-              <a href="https://www.tiktok.com/signup" target="_blank">
-                <i class="fab fa-tiktok"></i
-              ></a>
-            </li>
-            <li>
-              <a href="https://x.com" target="_blank">
-                <i class="fab fa-twitter"></i
-              ></a>
-            </li>
-          </ul>
-        </div>
+      <div class="footer-column">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="quiensomos.html">Sobre Nosotros</a></li>
+          <li><a href="carrito.html">Carrito</a></li>
+          <li><a href="opinion.html">Danos tu opinión</a></li>
+        </ul>
       </div>
-      <p>Desarrollado por: Urrutia Najarro, Juan José</p>
-      <p>Carnet: UN22001</p>
-    </footer>
-  </body>
+
+      <div class="footer-column">
+        <h3>Siguenos</h3>
+        <ul class="footer-icons">
+          <li>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+          </li>
+          <li>
+            <a href="https://instagram.com" target="_blank">
+              <i class="fab fa-instagram"></i></a>
+          </li>
+          <li>
+            <a href="https://www.tiktok.com/signup" target="_blank">
+              <i class="fab fa-tiktok"></i></a>
+          </li>
+          <li>
+            <a href="https://x.com" target="_blank">
+              <i class="fab fa-twitter"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <p>Desarrollado por: Urrutia Najarro, Juan José</p>
+    <p>Carnet: UN22001</p>
+  </footer>
+</body>
+
 </html>
