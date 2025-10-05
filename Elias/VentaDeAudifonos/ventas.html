@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas - AudioTech Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #d97706;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        #editSection {
+            display: none;
+        }
+
+        .total-display {
+            background: #f0f9ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0369a1;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Gestión de Ventas</h1>
+
+        <div class="card">
+            <h2>Registrar Venta</h2>
+            <form id="ventaForm">
+                <div class="form-group">
+                    <label for="productoId">Producto:</label>
+                    <select id="productoId" required>
+                        <option value="">Seleccione un producto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="cliente">Cliente:</label>
+                    <input type="text" id="cliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" required>
+                </div>
+                <div class="total-display" id="totalDisplay">Total: $0.00</div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Registrar Venta</button>
+            </form>
+        </div>
+
+        <div class="card" id="editSection">
+            <h2>Editar Venta</h2>
+            <form id="editForm">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label for="editProductoId">Producto:</label>
+                    <select id="editProductoId" required>
+                        <option value="">Seleccione un producto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editCantidad">Cantidad:</label>
+                    <input type="number" id="editCantidad" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="editCliente">Cliente:</label>
+                    <input type="text" id="editCliente" required>
+                </div>
+                <div class="form-group">
+                    <label for="editFecha">Fecha:</label>
+                    <input type="date" id="editFecha" required>
+                </div>
+                <div class="total-display" id="editTotalDisplay">Total: $0.00</div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                    <button type="button" class="btn btn-warning" onclick="cancelEdit()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Lista de Ventas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="ventasList"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/ventas.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "AirPods Pro",
+      "marca": "Apple",
+      "precio": "249.99",
+      "stock": "15"
+    },
+    {
+      "id": 2,
+      "nombre": "WH-1000XM5",
+      "marca": "Sony",
+      "precio": "399.99",
+      "stock": "8"
+    },
+    {
+      "id": 3,
+      "nombre": "QuietComfort 45",
+      "marca": "Bose",
+      "precio": "329.99",
+      "stock": "12"
+    },
+    {
+      "id": "111c",
+      "nombre": "m0",
+      "marca": "rr",
+      "precio": "4",
+      "stock": "7"
+    }
+  ],
+  "ventas": [
+    {
+      "id": 1,
+      "productoId": "1",
+      "nombreProducto": "AirPods Pro",
+      "cantidad": "2",
+      "total": "499.98",
+      "cliente": "Juan Pérez",
+      "fecha": "2025-10-01"
+    },
+    {
+      "id": 2,
+      "productoId": "2",
+      "nombreProducto": "WH-1000XM5",
+      "cantidad": "1",
+      "total": "399.99",
+      "cliente": "María García",
+      "fecha": "2025-10-03"
+    }
+  ]
+}

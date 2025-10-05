@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioTech Store - Audífonos Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .cta-section h2 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .brands {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .brands h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        .brand-item {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .brand-item:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #667eea;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>AudioTech Store</h1>
+        <p>La mejor selección de audífonos premium para tu estilo de vida</p>
+        <div class="hero-buttons">
+            <a href="productos.html" class="btn btn-primary">Ver Productos</a>
+            <a href="quienes-somos.html" class="btn btn-secondary">Conocer Más</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎧</div>
+                <h3>Alta Calidad</h3>
+                <p>Productos originales de las mejores marcas del mercado con garantía oficial.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Envío Rápido</h3>
+                <p>Recibe tus audífonos en tiempo récord con nuestro servicio de entrega express.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💯</div>
+                <h3>Garantía Total</h3>
+                <p>Todos nuestros productos cuentan con garantía del fabricante y soporte técnico.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Asesoría Experta</h3>
+                <p>Nuestro equipo te ayudará a elegir el audífono perfecto para tus necesidades.</p>
+            </div>
+        </div>
+
+        <div class="brands">
+            <h2>Marcas Disponibles</h2>
+            <div class="brands-grid">
+                <div class="brand-item">Apple</div>
+                <div class="brand-item">Sony</div>
+                <div class="brand-item">Bose</div>
+                <div class="brand-item">JBL</div>
+                <div class="brand-item">Samsung</div>
+                <div class="brand-item">Sennheiser</div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>¿Listo para mejorar tu experiencia de audio?</h2>
+            <p>Explora nuestro catálogo y encuentra los audífonos perfectos para ti</p>
+            <a href="productos.html" class="btn btn-primary">Explorar Catálogo</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 AudioTech Store. Todos los derechos reservados.</p>
+        <p>Tu destino de confianza para audífonos premium</p>
+        <div class="social-links">
+            <a href="#" title="Facebook">📘</a>
+            <a href="#" title="Instagram">📷</a>
+            <a href="#" title="Twitter">🐦</a>
+            <a href="#" title="WhatsApp">💬</a>
+        </div>
+    </footer>
+</body>
+</html>
