@@ -1,11 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Home</title>
 </head>
 <body>
-    
+   <header>
+    <nav>
+    <img src="./assets/Icono-header.png" alt="" class="header-icono">
+    <ul class="nav-links"><li><a href="./catalogo.html">Catalogo</a>
+    </li>
+    <li><a href="./contacto.html">Contacto</a></li>
+    <li> <a href="./venta.html">Vender</a></li>
+    <li><a href="./review.html">Reseñas</a></li>
+    <li><a href="#" id="cerrarSesion">Cerrar sesión</a></li>
+    </ul>
+    </nav>
+  </header>
+    <section>
+        <div class="Bienvenida">
+            <div class="Bienvenida-texto"><h1>Encuentra tu proximo auto en AutoLux</h1>
+            <h2>Los mejores autos nuevos y usados del mercado</h2>
+            <button onclick="location.href='./catalogo.html'">Ver Catalogo</button></div>
+            <img src="./assets/Auto-Inicio.png" alt="">
+        </div>
+        <div class="Secciones">
+            <div class="card-seccion"><h3>Autos nuevos</h3><p>Descubre una gran seleccion de autos nuevos</p></div>
+            <div class="card-seccion"><h3>Autos usados</h3><p>Encuentra autos de segunda mano en excelente estado</p></div>
+            <div class="card-seccion"><h3>Vender tu auto</h3><p>Vende tu auto de una manera facil, rapida y segura</p></div>
+        </div>
+    </section>
+    <footer>
+        <p>© 2025 AutoLux Agencia de Autos. Todos los derechos reservados.</p>
+</footer>
 </body>
+<script>
+  if (!localStorage.getItem('usuario')) {
+    window.location.href = './login.html';
+  }
+   document.getElementById('cerrarSesion').addEventListener('click', function(e) {
+    e.preventDefault();
+    localStorage.removeItem('usuario');
+    window.location.href = './login.html';
+  });
+</script>
 </html>

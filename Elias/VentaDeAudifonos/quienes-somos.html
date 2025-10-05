@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiénes Somos - AudioTech Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: #333;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .valor-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .valor-item h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .highlight h2 {
+            color: white;
+        }
+
+        .highlight p {
+            color: rgba(255, 255, 255, 0.95);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Quiénes Somos</h1>
+
+        <div class="card">
+            <h2>AudioTech Store</h2>
+            <p class="intro">Tu destino de confianza para audífonos premium y tecnología de audio de alta calidad.</p>
+            
+            <p>Desde nuestros inicios, AudioTech Store se ha dedicado a ofrecer la mejor experiencia en audio para nuestros clientes. Somos una empresa especializada en la venta de audífonos de las marcas más reconocidas del mercado, comprometidos con la calidad, innovación y satisfacción del cliente.</p>
+
+            <p>Entendemos que el audio es una parte fundamental de la vida moderna, ya sea para trabajar, estudiar, hacer deporte o simplemente disfrutar de tu música favorita. Por eso, seleccionamos cuidadosamente cada producto en nuestro catálogo para garantizar que nuestros clientes reciban solo lo mejor.</p>
+
+            <h3>Nuestra Historia</h3>
+            <p>Fundada en 2020, AudioTech Store nació de la pasión por la tecnología de audio y el deseo de hacer accesibles productos de alta calidad para todos. Lo que comenzó como una pequeña tienda ha crecido hasta convertirse en un referente en la venta de audífonos premium.</p>
+        </div>
+
+        <div class="card">
+            <h2>Nuestros Valores</h2>
+            <div class="valores-grid">
+                <div class="valor-item">
+                    <h3>Calidad</h3>
+                    <p>Solo ofrecemos productos de las mejores marcas con garantía de calidad y rendimiento superior.</p>
+                </div>
+                <div class="valor-item">
+                    <h3>Innovación</h3>
+                    <p>Mantenemos nuestro catálogo actualizado con las últimas tecnologías en audio.</p>
+                </div>
+                <div class="valor-item">
+                    <h3>Confianza</h3>
+                    <p>Construimos relaciones duraderas con nuestros clientes basadas en la honestidad y transparencia.</p>
+                </div>
+                <div class="valor-item">
+                    <h3>Servicio</h3>
+                    <p>Brindamos asesoría personalizada para ayudarte a encontrar el producto perfecto para ti.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Nuestros Números</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Años de Experiencia</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Clientes Satisfechos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Modelos Disponibles</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfacción</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="highlight">
+                <h2>Nuestra Misión</h2>
+                <p>Proporcionar productos de audio de la más alta calidad que mejoren la experiencia auditiva de nuestros clientes, ofreciendo un servicio excepcional y asesoramiento experto para ayudar a cada persona a encontrar el audífono perfecto que se adapte a sus necesidades y estilo de vida.</p>
+            </div>
+
+            <h3>¿Por qué elegirnos?</h3>
+            <p>En AudioTech Store no solo vendemos audífonos, creamos experiencias de audio excepcionales. Nuestro equipo de expertos está capacitado para asesorarte en cada paso del proceso de compra, desde la selección del producto hasta el soporte post-venta.</p>
+
+            <p>Trabajamos directamente con las marcas líderes del mercado como Apple, Sony, Bose, y muchas más, garantizando productos originales con garantía oficial. Además, nuestro sistema de gestión eficiente nos permite mantener precios competitivos sin sacrificar la calidad del servicio.</p>
+        </div>
+    </div>
+</body>
+</html>

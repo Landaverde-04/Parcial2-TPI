@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+     <link rel="stylesheet" href="./venta.css">
+    <title>venta</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="./assets/Icono-header.png" alt="" class="header-icono">
+            <ul class="nav-links">
+                <li><a href="./index.html">Inicio</a></li>
+                <li><a href="./catalogo.html">Catalogo</a></li>
+                <li><a href="./contacto.html">Contacto</a></li>
+                <li><a href="./review.html">Reseñas</a></li>
+                <li><a href="#" id="cerrarSesion">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h1 id="titulo-form" class="titulo-venta">Vender tu Auto</h1>
+        <form class="formulario-venta" id="form-venta">
+                        <label for="marca">Marca:</label>
+                        <input type="text" id="marca" name="marca" required>
+
+                        <label for="modelo">Modelo:</label>
+                        <input type="text" id="modelo" name="modelo" required>
+
+                        <label for="anio">Año:</label>
+                        <input type="number" id="anio" name="anio" required>
+
+                        <label for="estado">Estado:</label>
+                        <select id="estado" name="estado" required>
+                            <option value="nuevo">Nuevo</option>
+                            <option value="usado">Usado</option>
+                        </select>
+
+                        <label for="precio">Precio:</label>
+                        <input type="number" id="precio" name="precio" required>
+
+                        <label for="foto">Foto del auto:</label>
+                        <input type="file" id="foto" name="foto" accept="image/*">
+
+                        <button type="submit">Vender Auto</button>
+        </form>
+    </section>
+    <footer>
+        <p>© 2025 AutoLux Agencia de Autos. Todos los derechos reservados.
+        </p>
+    </footer>
+</body>
+<script>
+const form = document.getElementById('form-venta');
+const tituloForm = document.getElementById('titulo-form'); 
+const urlParams = new URLSearchParams(window.location.search);
+const autoId = urlParams.get('id');
+let imagen = ''; 
+
+const btnSubmit = form.querySelector('button[type="submit"]');
+
+if (autoId) {
+    tituloForm.textContent = "Actualiza tu auto";
+    btnSubmit.textContent = "Actualizar Auto";
+    let botonesAccion = document.createElement('div');
+    botonesAccion.className = "botones-accion";
+    botonesAccion.style.display = "flex";
+    botonesAccion.style.justifyContent = "center";
+    botonesAccion.style.marginTop = "18px";
+    botonesAccion.style.gap = "24px";
+    btnSubmit.parentNode.insertBefore(botonesAccion, btnSubmit);
+    botonesAccion.appendChild(btnSubmit);
+
+    let btnCancelar = document.createElement('button');
+    btnCancelar.type = "submit";
+    btnCancelar.textContent = "Cancelar";
+    btnCancelar.className = "btn-cancelar";
+    botonesAccion.appendChild(btnCancelar);
+
+
+    btnCancelar.addEventListener('click', function() {
+        window.location.href = './catalogo.html';
+    });
+    fetch(`https://172.23.18.211/api/autos/${autoId}`)
+        .then(res => res.json())
+        .then(auto => {
+            document.getElementById('marca').value = auto.marca;
+            document.getElementById('modelo').value = auto.modelo;
+            document.getElementById('anio').value = auto.anio;
+            document.getElementById('estado').value = auto.estado;
+           
+            document.getElementById('precio').value = auto.precio;
+            if (auto.imagen) {
+                imagen = auto.imagen;
+                const imgPreview = document.createElement('img');
+                imgPreview.src = auto.imagen;
+                imgPreview.style.maxWidth = '200px';
+                form.insertBefore(imgPreview, document.getElementById('foto').nextSibling);
+            }
+        })
+        .catch(err => console.error("Error al cargar auto:", err));
+} else {
+    tituloForm.textContent = "Vende tu auto";
+    btnSubmit.textContent = "Vender Auto";
+}
+
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const usuario = localStorage.getItem('usuario');
+    if (!usuario) {
+        window.location.href = './login.html';
+        return;
+    }
+
+    const marca = document.getElementById('marca').value.trim();
+    const modelo = document.getElementById('modelo').value.trim();
+    const anio = document.getElementById('anio').value;
+    const estado = document.getElementById('estado').value.trim();
+    const precio = document.getElementById('precio').value;
+    const imagenInput = document.getElementById('foto');
+
+    if (!/^\d{4}$/.test(anio) || anio < 1900 || anio > new Date().getFullYear()) {
+        alert('Ingresa un año válido (ejemplo: 2015)');
+        return;
+    }
+    if (!/^\d+$/.test(precio) || precio < 1000) {
+        alert('Ingresa un precio válido mayor a 1000');
+        return;
+    }
+
+    if (imagenInput.files[0]) {
+        imagen = await toBase64(imagenInput.files[0]);
+    }
+
+
+    const precioFormateado = Number(precio).toLocaleString('es-MX');
+
+    const autoData = { marca, modelo, anio, estado, precio: precioFormateado, imagen, usuario };
+
+    try {
+        if (autoId) {
+            await fetch(`https://172.23.18.211/api/autos/${autoId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(autoData)
+            });
+            alert('Auto actualizado correctamente!');
+        } else {
+            await fetch('https://172.23.18.211/api/autos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(autoData)
+            });
+            alert('Auto agregado correctamente!');
+        }
+        form.reset();
+        window.location.href = './catalogo.html'; 
+    } catch (err) {
+        console.error(err);
+        alert('Error al guardar el auto');
+    }
+});
+
+function toBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+    });
+}
+
+document.getElementById('cerrarSesion').addEventListener('click', function(e) {
+    e.preventDefault();
+    localStorage.removeItem('usuario');
+    window.location.href = './login.html';
+});
+</script>
+
+</html>

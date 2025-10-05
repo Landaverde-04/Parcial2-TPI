@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto</title>
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./contacto.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <img src="./assets/Icono-header.png" alt="" class="header-icono">
+      <ul class="nav-links">
+        <li><a href="./index.html">Inicio</a></li>
+        <li><a href="./catalogo.html">Catalogo</a></li>
+        <li><a href="./venta.html">Vender</a></li>
+        <li><a href="./review.html">Reseñas</a></li>
+        <li><a href="#" id="cerrarSesion">Cerrar sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <h1>Contacto</h1>
+    <div class="info-empresa">
+      <h2>AutoLux Agencia de Autos</h2>
+      <p><strong>Dirección:</strong> Av. Principal 123, Ciudad, País</p>
+      <p><strong>Teléfono:</strong> +503 7868-1455</p>
+      <p><strong>Email:</strong> autolux.agencia@gmail.com</p>
+      <p><strong>Horario de atención:</strong> Lunes a Viernes de 9:00 am a 06:00 pm</p>
+    </div>
+  </section>
+  <footer>
+    <p>© 2025 AutoLux Agencia de Autos. Todos los derechos reservados.
+    </p>
+  </footer>
+</body>
+<script>
+   document.getElementById('cerrarSesion').addEventListener('click', function(e) {
+    e.preventDefault();
+    localStorage.removeItem('usuario');
+    window.location.href = './login.html';
+  });
+</script>
+</html>

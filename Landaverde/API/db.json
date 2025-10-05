@@ -1,6 +1,7 @@
 {
   "smartphones": [
     {
+      "id": "4bc6",
       "brand": "Apple",
       "model": "Iphone 17 pro max",
       "price": 2399,
@@ -8,19 +9,10 @@
         "ram": "4gb",
         "storage": "512gb",
         "battery": "400mha"
-      },
-      "id": "8369"
+      }
     }
   ],
   "orders": [
-    {
-      "id": "ae49",
-      "smartphoneId": 2,
-      "customer": "Juan Jose",
-      "quantity": 4,
-      "status": "pending",
-      "createdAt": "2025-10-01T00:05:20.905Z"
-    },
     {
       "id": "e7ac",
       "smartphoneId": 1,

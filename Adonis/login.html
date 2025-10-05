@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="./index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./login.css">
+</head>
+<body>
+  <div class="login-container" id="loginBox">
+    <h2>Iniciar Sesión</h2>
+    <div class="error-msg" id="loginError"></div>
+    <input type="text" id="loginUsuario" placeholder="Usuario" autocomplete="username">
+    <input type="password" id="loginPassword" placeholder="Contraseña" autocomplete="current-password">
+    <button id="btnLogin">Entrar</button>
+    <div class="toggle">¿No tienes cuenta? <a id="showRegister">Regístrate</a></div>
+  </div>
+  <div class="login-container" id="registerBox" style="display:none;">
+    <h2>Registro</h2>
+    <div class="error-msg" id="registerError"></div>
+    <input type="text" id="registerUsuario" placeholder="Usuario" autocomplete="username">
+    <input type="password" id="registerPassword" placeholder="Contraseña" autocomplete="new-password">
+    <button id="btnRegister">Registrar</button>
+    <div class="toggle">¿Ya tienes cuenta? <a id="showLogin">Inicia sesión</a></div>
+  </div>
+  <script>
+
+    document.getElementById('showRegister').onclick = () => {
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('registerBox').style.display = 'block';
+    };
+    document.getElementById('showLogin').onclick = () => {
+      document.getElementById('registerBox').style.display = 'none';
+      document.getElementById('loginBox').style.display = 'block';
+    };
+
+
+    document.getElementById('btnLogin').onclick = async () => {
+      const usuario = document.getElementById('loginUsuario').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const error = document.getElementById('loginError');
+      error.textContent = '';
+      if (!usuario || !password) {
+        error.textContent = 'Completa todos los campos';
+        return;
+      }
+      try {
+        const res = await fetch(`https://172.23.18.211/api/usuarios?usuario=${encodeURIComponent(usuario)}&password=${encodeURIComponent(password)}`);
+        const users = await res.json();
+        if (users.length > 0) {
+          localStorage.setItem('usuario', usuario);
+          window.location.href = './index.html';
+        } else {
+          error.textContent = 'Usuario o contraseña incorrectos';
+        }
+      } catch {
+        error.textContent = 'Error de conexión';
+      }
+    };
+
+    document.getElementById('btnRegister').onclick = async () => {
+      const usuario = document.getElementById('registerUsuario').value.trim();
+      const password = document.getElementById('registerPassword').value;
+      const error = document.getElementById('registerError');
+      error.textContent = '';
+      if (!usuario || !password) {
+        error.textContent = 'Completa todos los campos';
+        return;
+      }
+      try {
+
+        const res = await fetch(`https://172.23.18.211/api/usuarios?usuario=${encodeURIComponent(usuario)}`);
+        const users = await res.json();
+        if (users.length > 0) {
+          error.textContent = 'El usuario ya existe';
+          return;
+        }
+        await fetch('https://172.23.18.211/api/usuarios', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ usuario, password })
+        });
+        alert('Usuario registrado. Ahora puedes iniciar sesión.');
+        document.getElementById('registerBox').style.display = 'none';
+        document.getElementById('loginBox').style.display = 'block';
+      } catch {
+        error.textContent = 'Error de conexión';
+      }
+    };
+  </script>
+</body>
+</html>
