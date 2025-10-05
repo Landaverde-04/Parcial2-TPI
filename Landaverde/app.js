@@ -1,19 +1,39 @@
-const API = 'http://localhost:3001'; // json-server
+const API = '/api'; // json-server
 
 // UI elements
 const tabCatalog = document.getElementById('tab-catalog');
 const tabOrders = document.getElementById('tab-orders');
 const catalogSection = document.getElementById('catalog-section');
 const ordersSection = document.getElementById('orders-section');
+const pioneersSection = document.getElementById('smartphone-pioneers');
+const pillarsSection  = document.getElementById('smartphone-pillars');
+const videoSection    = document.getElementById('video-info');
+const referencesSection = document.getElementById('references');
+
 
 tabCatalog.onclick = () => showTab('catalog');
 tabOrders.onclick = () => showTab('orders');
 
-function showTab(t){
+function showTab(t) {
   document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-  if(t === 'catalog') catalogSection.classList.add('active');
-  else ordersSection.classList.add('active');
+
+  const toggleExtras = (display) => {
+    if (pioneersSection)   pioneersSection.style.display   = display;
+    if (pillarsSection)    pillarsSection.style.display    = display;
+    if (videoSection)      videoSection.style.display      = display;
+    if (referencesSection) referencesSection.style.display = display;
+  };
+
+  if (t === 'catalog') {
+    catalogSection.classList.add('active');
+    toggleExtras('block');  // mostrar secciones adicionales
+  } else {
+    ordersSection.classList.add('active');
+    toggleExtras('none');   // ocultarlas en pedidos
+  }
 }
+
+
 
 /* ---------- Phones CRUD ---------- */
 const phonesList = document.getElementById('phones-list');
