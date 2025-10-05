@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles - ElectroTools</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <div class="logo-container">
+                <img src="imagenes/logo.png" alt="ElectroTools Logo" class="logo-image" onerror="this.style.display='none'">
+                <span class="logo-text">ElectroTools</span>
+            </div>
+            <h1>Detalles del Producto</h1>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-btn">
+                <i class="fas fa-home"></i> Inicio
+            </a>
+            <a href="index.html" class="nav-btn">
+                <i class="fas fa-tools"></i> Ver Catálogo
+            </a>
+        </nav>
+    </header>
+
+    <main style="max-width: 1000px; margin: 2rem auto; padding: 2rem;">
+        <div id="product-details" class="product-details-container">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary-color);"></i>
+                <p>Cargando información del producto...</p>
+            </div>
+        </div>
+
+        <div class="back-button-container" style="margin-top: 2rem;">
+            <a href="index.html" class="btn" style="background: var(--primary-color); color: white; text-decoration: none;">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="imagenes/logo.png" alt="ElectroTools Logo" onerror="this.style.display='none'">
+                    <h3>ElectroTools</h3>
+                </div>
+                <p>Tu socio confiable en herramientas de electrónica profesional</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +503 2525-2525</li>
+                    <li><i class="fas fa-envelope"></i> electrotools@gmail.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> San Salvador, El Salvador</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 ElectroTools. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:3001';
+        
+        // Obtener el ID del producto de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        async function loadProductDetails() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/tools/${productId}`);
+                
+                if (!response.ok) {
+                    throw new Error('Producto no encontrado');
+                }
+                
+                const tool = await response.json();
+                renderToolDetails(tool);
+            } catch (error) {
+                console.error('Error loading product:', error);
+                document.getElementById('product-details').innerHTML = `
+                    <div style="text-align: center; padding: 3rem; background: white; border-radius: 8px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--danger-color); margin-bottom: 1rem;"></i>
+                        <h2>Producto no encontrado</h2>
+                        <p>No se pudo cargar la información del producto solicitado.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderToolDetails(tool) {
+            const container = document.getElementById('product-details');
+            container.innerHTML = createToolDetailsHTML(tool);
+        }
+
+        function createToolDetailsHTML(tool) {
+            return `
+                <div class="product-detail-card">
+                    <div class="product-header">
+                        <div class="product-image">
+                            <i class="fas fa-tools product-icon"></i>
+                        </div>
+                        <div class="product-info">
+                            <h1>${tool.name}</h1>
+                            <h2>${tool.brand} ${tool.model || ''}</h2>
+                            <div class="price-tag">$${tool.price.toFixed(2)}</div>
+                            <div class="category-badge category-${tool.category}">
+                                ${getCategoryName(tool.category)}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-description">
+                        <h3><i class="fas fa-info-circle"></i> Descripción</h3>
+                        <p>${tool.description || 'Sin descripción disponible.'}</p>
+                    </div>
+                    
+                    <div class="product-specs">
+                        <h3><i class="fas fa-list"></i> Especificaciones</h3>
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <strong>Marca:</strong> ${tool.brand}
+                            </div>
+                            <div class="spec-item">
+                                <strong>Modelo:</strong> ${tool.model || 'No especificado'}
+                            </div>
+                            <div class="spec-item">
+                                <strong>Categoría:</strong> ${getCategoryName(tool.category)}
+                            </div>
+                            <div class="spec-item">
+                                <strong>Precio:</strong> $${tool.price.toFixed(2)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Funciones auxiliares
+        function getCategoryName(category) {
+            const categories = {
+                'medicion': 'Medición',
+                'soldadura': 'Soldadura',
+                'corte': 'Corte y Pelado',
+                'manuales': 'Herramientas Manuales',
+                'fuentes': 'Fuentes de Alimentación',
+                'osciloscopio': 'Osciloscopios'
+            };
+            return categories[category] || category;
+        }
+
+
+
+        // Cargar detalles al cargar la página
+        document.addEventListener('DOMContentLoaded', loadProductDetails);
+    </script>
+
+    <style>
+        .loading-spinner {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .product-details-container {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .product-detail-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+        }
+
+        .product-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .product-image {
+            flex-shrink: 0;
+        }
+
+        .product-icon {
+            font-size: 4rem;
+            opacity: 0.8;
+        }
+
+        .product-info h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info h2 {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .category-badge,
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .product-description,
+        .product-specs {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .product-description h3,
+        .product-specs h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .spec-item {
+            background: var(--light-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .product-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>
