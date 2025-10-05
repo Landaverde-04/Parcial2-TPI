@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Página no encontrada</title>
+<style>
+  :root{
+    --bg1:#0ea5e9; --bg2:#111827; --card:#0b1220; --ink:#e5e7eb; --accent:#38bdf8; --muted:#9ca3af;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    font-family: system-ui, Segoe UI, Roboto, Arial;
+    color:var(--ink);
+    background: radial-gradient(1000px 1000px at 10% 10%, #1f2937 0%, #0b1220 40%) no-repeat,
+                linear-gradient(135deg, var(--bg1), var(--bg2));
+    overflow:hidden;
+    display:grid;place-items:center;
+  }
+
+  /* Estrellitas */
+  .stars span{
+    position:absolute; top:-10px; left:0; width:2px; height:2px; background:#fff3;
+    box-shadow:0 0 6px #fff5;
+    animation: fall linear infinite;
+  }
+  @keyframes fall{
+    to{ transform: translateY(110vh) translateX(-10vw); opacity:.2; }
+  }
+
+  .wrap{
+    position:relative; z-index:2;
+    width:min(880px, 92vw);
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    backdrop-filter: blur(6px);
+    border:1px solid #ffffff18;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    text-align:center;
+  }
+  .tag{display:inline-block; padding:6px 10px; border-radius:999px; font-size:.8rem; color:#0b1220;
+       background:#fff; font-weight:600; margin-bottom:12px;}
+  h1{font-size: clamp(2rem, 4vw, 3rem); margin:.2rem 0 0.3rem}
+  p{color:var(--muted); margin:.2rem 0 1rem}
+
+  .scene{
+    margin: 14px auto 20px;
+    width: 240px; height: 240px; position: relative;
+  }
+  /* Teléfono SVG */
+  .phone{
+    width:220px; height:220px; margin:auto; display:block; filter: drop-shadow(0 10px 25px rgba(0,0,0,.45));
+    animation: shake 2s cubic-bezier(.36,.07,.19,.97) infinite;
+  }
+  @keyframes shake{
+    0%,100%{ transform: rotate(-3deg) translateY(0) }
+    15%{ transform: rotate(3deg) translateY(-2px) }
+    30%{ transform: rotate(-2deg) translateY(1px) }
+    45%{ transform: rotate(2deg) translateY(-1px) }
+    60%{ transform: rotate(-1deg) }
+    75%{ transform: rotate(1deg) }
+  }
+  /* Ondas de señal */
+  .wave{
+    position:absolute; inset:0; border-radius:50%;
+    border:2px solid #38bdf8;
+    opacity:.35;
+    transform: scale(.6);
+    animation: ping 2.4s ease-out infinite;
+  }
+  .wave:nth-child(2){ animation-delay:.4s; }
+  .wave:nth-child(3){ animation-delay:.8s; }
+  @keyframes ping{
+    0%{ transform: scale(.6); opacity:.35 }
+    80%{ opacity:.05 }
+    100%{ transform: scale(1.15); opacity:0 }
+  }
+
+  .actions{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:6px}
+  a.btn{
+    text-decoration:none; color:#0b1220; background: #a5f3fc;
+    padding:10px 14px; border-radius:12px; font-weight:700;
+    box-shadow: 0 8px 14px rgba(56,189,248,.25);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  a.btn.secondary{ background:#e5e7eb; color:#111827 }
+  a.btn:hover{ transform: translateY(-2px); box-shadow: 0 12px 18px rgba(56,189,248,.35) }
+
+  /* 404 grande al fondo */
+  .ghost404{
+    position:absolute; inset:auto 0 -14px 0; text-align:center; z-index:0;
+    font-weight:800; font-size: clamp(120px, 28vw, 260px); color:#ffffff08; letter-spacing:6px; user-select:none;
+  }
+
+  /* Responsive */
+  @media (max-width:560px){
+    .scene{ width:200px;height:200px }
+    .phone{ width:190px;height:190px }
+  }
+</style>
+</head>
+<body>
+
+<!-- estrellitas aleatorias -->
+<div class="stars" aria-hidden="true"></div>
+
+<div class="wrap" role="main">
+  <span class="tag">Oops</span>
+  <h1>404 — Teléfono fuera de cobertura</h1>
+  <p>No encontramos la página que marcaste. Quizá cambió de número o fue movida.</p>
+
+  <div class="scene">
+    <!-- ondas -->
+    <span class="wave"></span>
+    <span class="wave"></span>
+    <span class="wave"></span>
+
+    <!-- teléfono -->
+    <svg class="phone" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-label="Smartphone">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#38bdf8"/>
+          <stop offset="100%" stop-color="#0ea5e9"/>
+        </linearGradient>
+      </defs>
+      <rect x="85" y="40" rx="28" ry="28" width="130" height="220" fill="url(#g)" stroke="#0ea5e9" stroke-width="3"/>
+      <rect x="95" y="60" rx="18" ry="18" width="110" height="170" fill="#0b1220"/>
+      <circle cx="150" cy="245" r="7" fill="#e5e7eb"/>
+      <rect x="140" y="50" width="20" height="4" rx="2" fill="#e5e7eb" />
+      <!-- ícono de carrito tachado -->
+      <g transform="translate(115,120)">
+        <circle cx="35" cy="35" r="30" fill="#0ea5e9" opacity=".18"/>
+        <path d="M6 14h52l-6 24H18l-4-16H6z" fill="#38bdf8"/>
+        <line x1="10" y1="10" x2="60" y2="60" stroke="#e11d48" stroke-width="6" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="actions">
+    <a class="btn" href="/">Volver al inicio</a>
+    
+  </div>
+</div>
+
+<div class="ghost404">404</div>
+
+<script>
+  // Genera estrellitas flotando
+  const stars = document.querySelector('.stars');
+  for(let i=0;i<60;i++){
+    const s = document.createElement('span');
+    s.style.left = Math.random()*100 + 'vw';
+    s.style.animationDuration = (6+Math.random()*12)+'s';
+    s.style.animationDelay = (Math.random()*6)+'s';
+    s.style.opacity = (0.2+Math.random()*0.5);
+    stars.appendChild(s);
+  }
+</script>
+</body>
+</html>
