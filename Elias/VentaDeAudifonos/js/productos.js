@@ -1,4 +1,4 @@
-const API_URL = 'http://172.23.243.26:3000/productos';
+const API_URL = 'https://172.23.243.26:3000/productos'; //productos
 
 // Cargar productos al iniciar
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('productForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // NO incluimos el ID - JSON Server lo asignará automáticamente
     const producto = {
         nombre: document.getElementById('nombre').value.trim(),
         marca: document.getElementById('marca').value.trim(),
@@ -18,7 +17,8 @@ document.getElementById('productForm').addEventListener('submit', async (e) => {
     };
 
     try {
-        const response = await fetch(API_URL, {
+        // 👇 apuntar directamente al recurso 'productos'
+        const response = await fetch(`${API_URL}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,20 +29,23 @@ document.getElementById('productForm').addEventListener('submit', async (e) => {
         if (response.ok) {
             alert('Producto agregado exitosamente');
             document.getElementById('productForm').reset();
-            loadProducts();
+            loadProducts(); // recargar lista actualizada
         } else {
-            alert('Error al agregar producto');
+            const errorData = await response.text();
+            alert('Error al agregar producto: ' + errorData);
         }
     } catch (error) {
         alert('Error al agregar producto: ' + error.message);
     }
 });
 
+
 // Cargar y mostrar productos
 async function loadProducts() {
     try {
         const response = await fetch(API_URL);
-        const productos = await response.json();
+        const data = await response.json(); 
+        const productos = data.productos;   
         
         const tbody = document.getElementById('productList');
         tbody.innerHTML = '';
@@ -56,8 +59,8 @@ async function loadProducts() {
                 <td>$${parseFloat(producto.precio).toFixed(2)}</td>
                 <td>${producto.stock}</td>
                 <td class="actions">
-                    <button class="btn btn-warning" onclick="editProduct(${producto.id})">Editar</button>
-                    <button class="btn btn-danger" onclick="deleteProduct(${producto.id})">Eliminar</button>
+                    <button class="btn btn-warning" onclick="editProduct(${JSON.stringify(producto.id)})">Editar</button>
+                    <button class="btn btn-danger" onclick="deleteProduct(${JSON.stringify(producto.id)})">Eliminar</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -66,6 +69,7 @@ async function loadProducts() {
         alert('Error al cargar productos: ' + error.message);
     }
 }
+
 
 // Editar producto
 async function editProduct(id) {

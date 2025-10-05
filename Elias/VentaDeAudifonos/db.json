@@ -27,6 +27,20 @@
       "marca": "rr",
       "precio": "4",
       "stock": "7"
+    },
+    {
+      "id": "1759643356354",
+      "nombre": "m90",
+      "marca": "nuevos",
+      "precio": "55",
+      "stock": "4"
+    },
+    {
+      "nombre": "m89",
+      "marca": "nuevos",
+      "precio": "45",
+      "stock": "78",
+      "id": "1759643478035"
     }
   ],
   "ventas": [

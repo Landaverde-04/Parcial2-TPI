@@ -1,5 +1,5 @@
-const VENTAS_URL = 'http://172.23.243.26:3000/ventas';
-const PRODUCTOS_URL = 'http://172.23.243.26:3000/productos';
+const VENTAS_URL = 'https://172.23.243.26:3000/ventas'; //ventas
+const PRODUCTOS_URL = 'https://172.23.243.26:3000/productos'; //productos
 
 let productos = [];
 
@@ -20,25 +20,34 @@ function setTodayDate() {
 async function loadProductos() {
     try {
         const response = await fetch(PRODUCTOS_URL);
-        productos = await response.json();
+        const data = await response.json();  // 👈 se obtiene el objeto completo
+        const productos = data.productos;    // 👈 se accede al arreglo de productos
         
         const select = document.getElementById('productoId');
         const editSelect = document.getElementById('editProductoId');
         
+        // Limpiar selects y agregar opción inicial
         select.innerHTML = '<option value="">Seleccione un producto</option>';
         editSelect.innerHTML = '<option value="">Seleccione un producto</option>';
         
+        // Llenar ambos selects con los productos
         productos.forEach(producto => {
-            const option = `<option value="${producto.id}" data-precio="${producto.precio}" data-nombre="${producto.nombre}">
-                ${producto.nombre} - ${producto.marca} ($${parseFloat(producto.precio).toFixed(2)})
-            </option>`;
-            select.innerHTML += option;
-            editSelect.innerHTML += option;
+            const optionHTML = `
+                <option value="${producto.id}" 
+                        data-precio="${producto.precio}" 
+                        data-nombre="${producto.nombre}">
+                    ${producto.nombre} - ${producto.marca} ($${parseFloat(producto.precio).toFixed(2)})
+                </option>
+            `;
+            select.innerHTML += optionHTML;
+            editSelect.innerHTML += optionHTML;
         });
+
     } catch (error) {
         alert('Error al cargar productos: ' + error.message);
     }
 }
+
 
 // Calcular total al cambiar producto o cantidad
 document.getElementById('productoId').addEventListener('change', calcularTotal);
@@ -114,7 +123,8 @@ document.getElementById('ventaForm').addEventListener('submit', async (e) => {
 async function loadVentas() {
     try {
         const response = await fetch(VENTAS_URL);
-        const ventas = await response.json();
+        const data = await response.json();  // 👈 se obtiene el objeto completo
+        const ventas = data.ventas;          // 👈 se accede al arreglo de ventas
         
         const tbody = document.getElementById('ventasList');
         tbody.innerHTML = '';
@@ -139,6 +149,7 @@ async function loadVentas() {
         alert('Error al cargar ventas: ' + error.message);
     }
 }
+
 
 // Editar venta
 async function editVenta(id) {
