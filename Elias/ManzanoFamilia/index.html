@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Familia Manzano - Intranet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header i {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .info-card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h2 i {
+            font-size: 1.3rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .info-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .network-info {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .network-info h3 {
+            color: #2196F3;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .network-info p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .security-badge i {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <i class="fas fa-home"></i>
+            <h1>Familia Manzano</h1>
+            <p>Servidor Web Intranet Residencial</p>
+        </div>
+
+        <div class="content">
+            <div class="info-card">
+                <h2><i class="fas fa-user-circle"></i>Información del Estudiante</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Nombre:</strong>
+                        [Tu Nombre Completo]
+                    </div>
+                    <div class="info-item">
+                        <strong>Carnet:</strong>
+                        MG22098
+                    </div>
+                    <div class="info-item">
+                        <strong>Carrera:</strong>
+                        Ingeniería de Sistemas Informáticos
+                    </div>
+                    <div class="info-item">
+                        <strong>Materia:</strong>
+                        TPI-115
+                    </div>
+                </div>
+                <span class="badge">Universidad de El Salvador</span>
+            </div>
+
+            <div class="info-card">
+                <h2><i class="fas fa-users"></i>Familia Manzano</h2>
+                <p style="margin-top: 10px; line-height: 1.8;">
+                    Bienvenido al servidor web de la familia Manzano. Este sitio está configurado 
+                    exclusivamente para la red residencial local y forma parte del Parcial 2 de 
+                    Técnicas de Programación para Internet.
+                </p>
+                <div class="info-grid" style="margin-top: 15px;">
+                    <div class="info-item">
+                        <strong>Apellido:</strong>
+                        Manzano
+                    </div>
+                    <div class="info-item">
+                        <strong>Integrantes:</strong>
+                        [Número de integrantes]
+                    </div>
+                    <div class="info-item">
+                        <strong>Ubicación:</strong>
+                        El Salvador
+                    </div>
+                </div>
+            </div>
+
+            <div class="network-info">
+                <h3><i class="fas fa-network-wired"></i>Información de Red</h3>
+                <p><strong>Servidor Virtual:</strong> www.familia.manzano</p>
+                <p><strong>Red Residencial:</strong> 192.168.0.0/24</p>
+                <p><strong>Tipo de Servidor:</strong> Nginx en Windows</p>
+                <p><strong>Protocolo:</strong> HTTP (solo para intranet)</p>
+            </div>
+
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                    <strong>Acceso Restringido</strong><br>
+                    Este sitio solo es accesible desde la red residencial local
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><i class="fas fa-info-circle"></i> Parcial 2 - TPI-115 - 2025</p>
+            <p>Servidor configurado con restricción de acceso a red local</p>
+        </div>
+    </div>
+</body>
+</html>
