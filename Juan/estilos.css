@@ -294,7 +294,7 @@ footer p{
     font-size: 1.1rem;
 }
 
-/* Product Detail Styles */
+/* estilo de detalle de producto */
 #producto-detalle {
     padding: 20px;
     max-width: 800px;
@@ -356,7 +356,7 @@ footer p{
     background-color: #1a2a6c;
 }
 
-/* Cart Styles */
+/* estilo del carrito */
 #carrito-contenido {
     padding: 20px;
     max-width: 800px;

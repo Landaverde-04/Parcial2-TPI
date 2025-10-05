@@ -1,149 +1,265 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChemiStore</title>
-    <link rel="StyleSheet" href="estilos.css" type="text/css" media="screen" />
-    <script src="code.js"></script>
-    <script
-      src="https://kit.fontawesome.com/b20a70b737.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
 
-  <body>
-    <div class="btn-arriba">
-      <a href="">
-        <i class="fa-solid fa-arrow-up"></i>
-      </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChemiStore</title>
+  <link rel="StyleSheet" href="estilos.css" type="text/css" media="screen" />
+  <script src="code.js"></script>
+  <script src="https://kit.fontawesome.com/b20a70b737.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="btn-arriba">
+    <a href="">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
+  </div>
+
+  <header>
+    <img src="imagenes/logo-sf1.png" alt="logo sin fondo en el header" />
+    <h2>Categorías de nuestros productos</h2>
+
+    <div class="btn-carrito">
+      <buttom href="">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </buttom>
     </div>
 
-        <header>
-      <img src="/imagenes/logo-sf1.png" alt="logo sin fondo en el header" />
-      <h2>Categorías de nuestros productos</h2>
-
-      <div class="btn-carrito">
-        <buttom href="">
-          <i class="fa-solid fa-cart-shopping"></i>
-        </buttom>
-      </div>
-
-      <div class="categorias">
-        <nav class="navegacion">
-          <div class="categoria-item">
-            <a href="index.html?category=1" class="categoria-texto" data-category="1">Retro</a>
-            <div class="categoria-imagen">
-              <img src="/imagenes/retro.png" alt="Camiseta retro" />
-            </div>
+    <div class="categorias">
+      <nav class="navegacion">
+        <div class="categoria-item">
+          <a href="index.html?category=1" class="categoria-texto" data-category="1">Retro</a>
+          <div class="categoria-imagen">
+            <img src="imagenes/retro.png" alt="Camiseta retro" />
           </div>
-
-            <div class="categoria-item">
-            <a href="index.html?category=2" class="categoria-texto" data-category="2">Actualidad</a>
-            <div class="categoria-imagen">
-              <img src="/imagenes/actualidad.png" alt="Camiseta actualidad" />
-            </div>
-          </div>
-          
-            <div class="categoria-item">
-            <a href="index.html?category=3" class="categoria-texto" data-category="3">Niños</a>
-            <div class="categoria-imagen">
-              <img src="/imagenes/niño1.png" alt="Camiseta niño" />
-            </div>
-          </div>
-          
-            <div class="categoria-item">
-            <a href="index.html?category=4" class="categoria-texto" data-category="4">Hombre</a>
-            <div class="categoria-imagen">
-              <img src="/imagenes/hombre1.png" alt="Camiseta hombre" />
-            </div>
-          </div>
-
-            <div class="categoria-item">
-            <a href="index.html?category=5" class="categoria-texto" data-category="5">Mujer</a>
-            <div class="categoria-imagen">
-              <img src="/imagenes/mujer.png" alt="Camiseta mujer" />
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <h2>Danos tu opinión</h2>
-      <p>En el siguiente apartado agradeceríamos que nos dieras tu opinión sobre tu experiencia en la tienda y sus productos, eso nos ayuda a mejorar y a ofrer a nuestros clientes siempre la mejor experiencia, puedes hacerlo de manera anónina, con tu nombre o como a ti te parezca mejor, muchas gracias por tu apoyo y preferencia.</p>>
-      <form id="review-form" class="review-form">
-        <label for="review-name">Nombre:</label>
-        <input type="text" id="review-name" required>
-
-        <label for="review-comment">Comentario:</label>
-        <textarea id="review-comment" required></textarea>
-
-        <button type="submit">Publicar</button>
-      </form>
-
-      <div id="reviews-list"></div>
-    </main>
-
-    <footer>
-      <div class="contenedor-img1">
-        <img src="/imagenes/logo-sf1.png" alt="logo sin fondo en footer" />
-      </div>
-
-      <div class="footer-content">
-        <div class="footer-column">
-          <h3>Contacto</h3>
-          <ul>
-            <li>
-              <strong>E-mail:</strong>
-              <a href="https://accounts.google.com/">chemistore.sv@gmail.com</a>
-            </li>
-            <li><strong>Teléfono:</strong> +503 1234-5678</li>
-            <li>
-              <strong>Dirección:</strong> Avenida Cuscatlán y 2° Calle Poniente,
-              local #34, San Salvador, El Salvador
-            </li>
-          </ul>
         </div>
 
-        <div class="footer-column">
-          <h3>Enlaces</h3>
-          <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="quiensomos.html">Sobre Nosotros</a></li>
-            <li><a href="carrito.html">Carrito</a></li>
-            <li><a href="opinion.html">Danos tu opinión</a></li>
-          </ul>
+        <div class="categoria-item">
+          <a href="index.html?category=2" class="categoria-texto" data-category="2">Actualidad</a>
+          <div class="categoria-imagen">
+            <img src="imagenes/actualidad.png" alt="Camiseta actualidad" />
+          </div>
         </div>
 
-        <div class="footer-column">
-          <h3>Siguenos</h3>
-          <ul class="footer-icons">
-            <li>
-              <a href="https://facebook.com" target="_blank"
-                ><i class="fab fa-facebook"></i
-              ></a>
-            </li>
-            <li>
-              <a href="https://instagram.com" target="_blank">
-                <i class="fab fa-instagram"></i
-              ></a>
-            </li>
-            <li>
-              <a href="https://www.tiktok.com/signup" target="_blank">
-                <i class="fab fa-tiktok"></i
-              ></a>
-            </li>
-            <li>
-              <a href="https://x.com" target="_blank">
-                <i class="fab fa-twitter"></i
-              ></a>
-            </li>
-          </ul>
+        <div class="categoria-item">
+          <a href="index.html?category=3" class="categoria-texto" data-category="3">Niños</a>
+          <div class="categoria-imagen">
+            <img src="imagenes/niño1.png" alt="Camiseta niño" />
+          </div>
         </div>
+
+        <div class="categoria-item">
+          <a href="index.html?category=4" class="categoria-texto" data-category="4">Hombre</a>
+          <div class="categoria-imagen">
+            <img src="imagenes/hombre1.png" alt="Camiseta hombre" />
+          </div>
+        </div>
+
+        <div class="categoria-item">
+          <a href="index.html?category=5" class="categoria-texto" data-category="5">Mujer</a>
+          <div class="categoria-imagen">
+            <img src="imagenes/mujer.png" alt="Camiseta mujer" />
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h2>Danos tu opinión</h2>
+    <p>En el siguiente apartado agradeceríamos que nos dieras tu opinión sobre tu experiencia en la tienda y sus
+      productos, eso nos ayuda a mejorar y a ofrer a nuestros clientes siempre la mejor experiencia, puedes hacerlo de
+      manera anónina, con tu nombre o como a ti te parezca mejor, muchas gracias por tu apoyo y preferencia.</p>
+    <form id="review-form" class="review-form">
+      <label for="review-name">Nombre:</label>
+      <input type="text" id="review-name" required>
+
+      <label for="review-comment">Comentario:</label>
+      <textarea id="review-comment" required></textarea>
+
+      <button type="submit">Publicar</button>
+    </form>
+
+    <div id="reviews-list"></div>
+  </main>
+
+  <footer>
+    <div class="contenedor-img1">
+      <img src="imagenes/logo-sf1.png" alt="logo sin fondo en footer" />
+    </div>
+
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Contacto</h3>
+        <ul>
+          <li>
+            <strong>E-mail:</strong>
+            <a href="https://accounts.google.com/">chemistore.sv@gmail.com</a>
+          </li>
+          <li><strong>Teléfono:</strong> +503 1234-5678</li>
+          <li>
+            <strong>Dirección:</strong> Avenida Cuscatlán y 2° Calle Poniente,
+            local #34, San Salvador, El Salvador
+          </li>
+        </ul>
       </div>
-      <p>Desarrollado por: Urrutia Najarro, Juan José</p>
-      <p>Carnet: UN22001</p>
-    </footer>
-  </body>
+
+      <div class="footer-column">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="quiensomos.html">Sobre Nosotros</a></li>
+          <li><a href="carrito.html">Carrito</a></li>
+          <li><a href="opinion.html">Danos tu opinión</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Siguenos</h3>
+        <ul class="footer-icons">
+          <li>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+          </li>
+          <li>
+            <a href="https://instagram.com" target="_blank">
+              <i class="fab fa-instagram"></i></a>
+          </li>
+          <li>
+            <a href="https://www.tiktok.com/signup" target="_blank">
+              <i class="fab fa-tiktok"></i></a>
+          </li>
+          <li>
+            <a href="https://x.com" target="_blank">
+              <i class="fab fa-twitter"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <p>Desarrollado por: Urrutia Najarro, Juan José</p>
+    <p>Carnet: UN22001</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const API_URL = "http://172.23.162.164:3000/comentario";
+      const form = document.getElementById("review-form");
+      const nameInput = document.getElementById("review-name");
+      const commentInput = document.getElementById("review-comment");
+      const reviewsList = document.getElementById("reviews-list");
+
+      // Guardar nombre en localStorage
+      let storedName = localStorage.getItem("reviewerName");
+      if (storedName) {
+        nameInput.value = storedName;
+        nameInput.disabled = true;
+      }
+
+      // Cargar comentarios
+      async function loadComments() {
+        try {
+          const res = await fetch(API_URL);
+          if (!res.ok) throw new Error("Error al cargar");
+          const comentarios = await res.json();
+          renderComments(comentarios);
+        } catch (err) {
+          console.warn("No se pudieron cargar los comentarios");
+        }
+      }
+
+      // Renderizar comentarios
+      function renderComments(comentarios) {
+        reviewsList.innerHTML = "";
+        comentarios.forEach((comentario) => {
+          const div = document.createElement("div");
+          div.classList.add("comentario-item");
+
+          // Agregamos botón eliminar solo si el comentario es del usuario guardado
+          const puedeEliminar = storedName === comentario.nombre;
+          div.innerHTML = `
+        <p><strong>${comentario.nombre}</strong></p>
+        <p>${comentario.comentario}</p>
+        ${puedeEliminar ? `<button class="delete-btn" data-nombre="${comentario.nombre}" data-comentario="${comentario.comentario}">Eliminar</button>` : ""}
+      `;
+
+          reviewsList.appendChild(div);
+        });
+
+        // Añadir evento a los botones eliminar
+        document.querySelectorAll(".delete-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            const nombre = e.target.getAttribute("data-nombre");
+            const comentario = e.target.getAttribute("data-comentario");
+            deleteComment(nombre, comentario);
+          });
+        });
+      }
+
+      // Agregar comentario
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const nombre = nameInput.value.trim();
+        const comentario = commentInput.value.trim();
+        if (!nombre || !comentario) return;
+
+        // Si no hay nombre guardado, lo guardamos
+        if (!storedName) {
+          localStorage.setItem("reviewerName", nombre);
+          storedName = nombre;
+          nameInput.disabled = true;
+        } else if (storedName !== nombre) {
+          alert("Solo puedes comentar con tu nombre registrado.");
+          return;
+        }
+
+        const nuevoComentario = { nombre, comentario };
+
+        try {
+          await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(nuevoComentario),
+          });
+          commentInput.value = "";
+          loadComments();
+        } catch {
+          console.warn("No se pudo agregar el comentario");
+        }
+      });
+
+      // Eliminar comentario (por nombre y texto)
+      async function deleteComment(nombre, comentarioTexto) {
+        try {
+          // Primero obtener todos los comentarios actuales
+          const res = await fetch(API_URL);
+          const comentarios = await res.json();
+
+          // Buscar el comentario que coincida exactamente
+          const comentarioEncontrado = comentarios.find(
+            (c) => c.nombre === nombre && c.comentario === comentarioTexto
+          );
+
+          if (!comentarioEncontrado) return;
+
+          // Enviar DELETE con el id en la URL (JSON Server requiere id en URL para DELETE)
+          await fetch(`${API_URL}/${comentarioEncontrado.id}`, {
+            method: "DELETE"
+          });
+
+          loadComments();
+        } catch {
+          console.warn("No se pudo eliminar el comentario");
+        }
+      }
+
+      loadComments();
+    });
+  </script>
+
+
+
+
+</body>
+
 </html>
