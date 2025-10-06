@@ -46,7 +46,7 @@
         return;
       }
       try {
-        const res = await fetch(`https://172.23.18.211/api/usuarios?usuario=${encodeURIComponent(usuario)}&password=${encodeURIComponent(password)}`);
+        const res = await fetch(`/api/usuarios?usuario=${encodeURIComponent(usuario)}&password=${encodeURIComponent(password)}`);
         const users = await res.json();
         if (users.length > 0) {
           localStorage.setItem('usuario', usuario);
@@ -70,13 +70,13 @@
       }
       try {
 
-        const res = await fetch(`https://172.23.18.211/api/usuarios?usuario=${encodeURIComponent(usuario)}`);
+        const res = await fetch(`/api/usuarios?usuario=${encodeURIComponent(usuario)}`);
         const users = await res.json();
         if (users.length > 0) {
           error.textContent = 'El usuario ya existe';
           return;
         }
-        await fetch('https://172.23.18.211/api/usuarios', {
+        await fetch('/api/usuarios', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ usuario, password })

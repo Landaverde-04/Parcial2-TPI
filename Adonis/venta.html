@@ -83,15 +83,16 @@ if (autoId) {
     btnCancelar.addEventListener('click', function() {
         window.location.href = './catalogo.html';
     });
-    fetch(`https://172.23.18.211/api/autos/${autoId}`)
+    fetch(`/api/autos/${autoId}`)
         .then(res => res.json())
         .then(auto => {
             document.getElementById('marca').value = auto.marca;
             document.getElementById('modelo').value = auto.modelo;
             document.getElementById('anio').value = auto.anio;
-            document.getElementById('estado').value = auto.estado;
-           
-            document.getElementById('precio').value = auto.precio;
+            document.getElementById('estado').value = auto.estado;        
+           let precioStr = String(auto.precio);
+           let precioNumero = Number(precioStr.replace(/,/g, ''));
+            document.getElementById('precio').value = precioNumero;
             if (auto.imagen) {
                 imagen = auto.imagen;
                 const imgPreview = document.createElement('img');
@@ -134,21 +135,22 @@ form.addEventListener('submit', async function(e) {
         imagen = await toBase64(imagenInput.files[0]);
     }
 
+    
+    const precioNumerico = Number(precio);
+    const precioFormateado = precioNumerico.toLocaleString('es-MX');
 
-    const precioFormateado = Number(precio).toLocaleString('es-MX');
-
-    const autoData = { marca, modelo, anio, estado, precio: precioFormateado, imagen, usuario };
+    const autoData = { marca, modelo, anio, estado, precio: precioNumerico, imagen, usuario };
 
     try {
         if (autoId) {
-            await fetch(`https://172.23.18.211/api/autos/${autoId}`, {
+            await fetch(`/api/autos/${autoId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(autoData)
             });
             alert('Auto actualizado correctamente!');
         } else {
-            await fetch('https://172.23.18.211/api/autos', {
+            await fetch('/api/autos', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(autoData)

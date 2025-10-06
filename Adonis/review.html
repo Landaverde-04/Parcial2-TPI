@@ -45,7 +45,7 @@
   const stars = document.querySelectorAll("#rating span");
   let rating = 0;
 
-  // Manejar la selección de estrellas
+
   stars.forEach((star, index) => {
     star.addEventListener("click", () => {
       rating = parseInt(star.getAttribute("data-value"));
@@ -58,7 +58,7 @@
     });
   });
 
-  // Enviar reseña
+
   document.querySelector('.form-reseña').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -71,7 +71,7 @@
 
     const texto = document.getElementById('reseña').value;
     const reseña = {
-      usuario: usuarioActual, // enviamos usuario
+      usuario: usuarioActual, 
       texto: texto,
       calificacion: rating
     };
@@ -81,7 +81,7 @@
       alert('Por favor escribe tu reseña.');
       return;
     }
-      await fetch('https://172.23.18.211/api/reseñas/', {
+      await fetch('/api/reviews/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reseña)
@@ -91,7 +91,7 @@
       stars.forEach(s => s.classList.remove("selected"));
       rating = 0;
 
-      mostrarReseñas(); // recargar reseñas
+      mostrarReseñas(); 
     } catch (err) {
       alert('Error al enviar la reseña');
       console.error(err);
@@ -105,14 +105,14 @@
     const contenedor = document.querySelector('.reseñas-container');
     contenedor.querySelectorAll('.reseña-dinamica, .reseñas-navbar').forEach(r => r.remove());
 
-    const usuarioActual = localStorage.getItem('usuario'); // usuario como string
+    const usuarioActual = localStorage.getItem('usuario'); 
     if (!usuarioActual) {
       window.location.href = './login.html';
       return;
     }
 
     try {
-      const res = await fetch('https://172.23.18.211/api/reseñas/');
+      const res = await fetch('/api/reviews/');
       let reseñas = await res.json();
       reseñas = reseñas.reverse();
 
@@ -128,7 +128,7 @@
         div.className = 'reseña reseña-dinamica';
 
         let eliminarBtnHTML = '';
-        if (r.usuario === usuarioActual) { // solo si es propio
+        if (r.usuario === usuarioActual) { 
           eliminarBtnHTML = `
             <button class="btn-eliminar" title="Eliminar" data-id="${r.id}" style="background:none; border:none; cursor:pointer; align-self:end;">
               <img src="./assets/basura.png" alt="Eliminar" style="width:24px;height:24px;filter:brightness(0.7);">
@@ -149,14 +149,14 @@
         if (btnEliminar) {
           btnEliminar.addEventListener('click', async function() {
             if (confirm('¿Seguro que deseas eliminar esta reseña?')) {
-              await fetch(`https://172.23.18.211/api/reseñas/${r.id}/`, { method: 'DELETE' });
+              await fetch(`/api/reviews/${r.id}/`, { method: 'DELETE' });
               mostrarReseñas();
             }
           });
         }
       });
 
-      // Paginación
+
       if (reseñas.length > reseñasPorPagina) {
         const navbar = document.createElement('div');
         navbar.className = 'reseñas-navbar';
@@ -181,7 +181,7 @@
 
   mostrarReseñas();
 
-  // Cerrar sesión
+
   const btnCerrar = document.getElementById('cerrarSesion');
   if (btnCerrar) {
     btnCerrar.addEventListener('click', function(e) {
