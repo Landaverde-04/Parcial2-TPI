@@ -129,28 +129,28 @@
     <p>Carnet: UN22001</p>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const productId = Number(urlParams.get('id'));
-      const apiBase = 'http://172.23.162.164:3000';
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = Number(urlParams.get('id'));
+    const apiBase = `${window.location.origin}/code`;
 
-      if (productId) {
-        Promise.all([
-          fetch(`${apiBase}/camisetas`).then(res => res.json()),
-          fetch(`${apiBase}/tallas`).then(res => res.json())
-        ])
-          .then(([camisetas, tallas]) => {
-            const producto = camisetas.find(p => p.id == productId);
+    if (productId) {
+      Promise.all([
+        fetch(`${apiBase}/camisetas`).then(res => res.json()),
+        fetch(`${apiBase}/tallas`).then(res => res.json())
+      ])
+        .then(([camisetas, tallas]) => {
+          const producto = camisetas.find(p => p.id == productId);
 
-            if (producto) {
-              const tallasIds = Array.isArray(producto.talla) ? producto.talla : [producto.talla];
-              const tallasDisponibles = tallasIds
-                .map(id => tallas.find(t => t.id == id)?.nombre)
-                .filter(Boolean);
+          if (producto) {
+            const tallasIds = Array.isArray(producto.talla) ? producto.talla : [producto.talla];
+            const tallasDisponibles = tallasIds
+              .map(id => tallas.find(t => t.id == id)?.nombre)
+              .filter(Boolean);
 
-              const main = document.getElementById('producto-detalle');
-              main.innerHTML = `
+            const main = document.getElementById('producto-detalle');
+            main.innerHTML = `
           <div class="producto-container">
             <div class="producto-imagen">
               <img src="${producto.img}" alt="${producto.nombre}">
@@ -170,47 +170,73 @@
           </div>
         `;
 
-              document.getElementById('agregar-carrito').addEventListener('click', function () {
-                const talla = document.getElementById('talla-select').value;
-                const cantidad = parseInt(document.getElementById('cantidad-input').value);
+            document.getElementById('agregar-carrito').addEventListener('click', function () {
+              const talla = document.getElementById('talla-select').value;
+              const cantidad = parseInt(document.getElementById('cantidad-input').value);
 
-                if (cantidad < 1) {
-                  alert('Por favor ingrese una cantidad válida.');
-                  return;
-                }
+              if (cantidad < 1) {
+                alert('Por favor ingrese una cantidad válida.');
+                return;
+              }
 
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const existingItem = cart.find(item => item.id === producto.id && item.talla === talla);
+              let cart = JSON.parse(localStorage.getItem('cart')) || [];
+              const existingItem = cart.find(item => item.id === producto.id && item.talla === talla);
 
-                if (existingItem) {
-                  existingItem.cantidad += cantidad;
-                } else {
-                  cart.push({
-                    id: producto.id,
-                    nombre: producto.nombre,
-                    img: producto.img,
-                    precio: producto.precio,
-                    talla: talla,
-                    cantidad: cantidad
-                  });
-                }
+              if (existingItem) {
+                existingItem.cantidad += cantidad;
+              } else {
+                cart.push({
+                  id: producto.id,
+                  nombre: producto.nombre,
+                  img: producto.img,
+                  precio: producto.precio,
+                  talla: talla,
+                  cantidad: cantidad
+                });
+              }
 
-                localStorage.setItem('cart', JSON.stringify(cart));
-                alert('Producto agregado al carrito');
-              });
-            } else {
-              document.getElementById('producto-detalle').innerHTML = '<p>Producto no encontrado.</p>';
-            }
-          })
-          .catch(error => {
-            console.error('Error fetching data:', error);
-            document.getElementById('producto-detalle').innerHTML = '<p>Error al cargar los datos del producto.</p>';
-          });
-      } else {
-        document.getElementById('producto-detalle').innerHTML = '<p>ID de producto no especificado.</p>';
-      }
-    });
-  </script>
+              localStorage.setItem('cart', JSON.stringify(cart));
+
+              // 🔹 NUEVO: también guardar el pedido en el JSON del servidor
+              fetch(`${apiBase}/pedidos`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  idProducto: producto.id,
+                  nombre: producto.nombre,
+                  img: producto.img,
+                  precio: producto.precio,
+                  talla: talla,
+                  cantidad: cantidad,
+                  fecha: new Date().toISOString()
+                })
+              })
+                .then(res => {
+                  if (!res.ok) throw new Error('Error al guardar el pedido en el JSON');
+                  return res.json();
+                })
+                .then(() => {
+                  alert('Producto agregado al carrito y guardado en pedidos');
+                })
+                .catch(err => {
+                  console.error('Error al guardar el pedido:', err);
+                  alert('Producto agregado al carrito, pero no se pudo guardar en pedidos');
+                });
+            });
+          } else {
+            document.getElementById('producto-detalle').innerHTML = '<p>Producto no encontrado.</p>';
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          document.getElementById('producto-detalle').innerHTML = '<p>Error al cargar los datos del producto.</p>';
+        });
+    } else {
+      document.getElementById('producto-detalle').innerHTML = '<p>ID de producto no especificado.</p>';
+    }
+  });
+</script>
+
 
 
 </body>
