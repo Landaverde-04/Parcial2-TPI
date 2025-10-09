@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="404" content="error-page">
+  <meta name="description" content="Página de ChemiStore no fue encontrada, lo sentimos - Error 404
+  ">
+  <title>Error 404 - Página no encontrada</title>
+  <style>
+    /* Estilos base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 30% 50%, midnightblue, #000010);
+      color: #f1f4ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 10rem;
+      color: #4fc3f7;
+      text-shadow: 0 0 25px #4fc3f7;
+      animation: pulse 2.5s infinite alternate;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #bbdefb;
+    }
+
+    p {
+      max-width: 420px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      color: #c5cae9;
+    }
+
+    a {
+      text-decoration: none;
+      background-color: #4fc3f7;
+      color: #000;
+      padding: 12px 32px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s ease;
+      box-shadow: 0 0 15px #4fc3f7;
+    }
+
+    a:hover {
+      background-color: #81d4fa;
+      box-shadow: 0 0 25px #81d4fa, 0 0 50px #4fc3f7;
+      transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+      0% {
+        text-shadow: 0 0 10px #4fc3f7, 0 0 25px #2196f3;
+      }
+      100% {
+        text-shadow: 0 0 20px #81d4fa, 0 0 40px #4fc3f7;
+      }
+    }
+
+    /* Esferas decorativas animadas */
+    .orb {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,195,247,0.6) 0%, transparent 70%);
+      opacity: 0.25;
+      animation: float 6s ease-in-out infinite alternate;
+      filter: blur(2px);
+    }
+
+    .orb:nth-child(1) {
+      top: 10%;
+      left: 10%;
+    }
+
+    .orb:nth-child(2) {
+      bottom: 15%;
+      right: 8%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-40px);
+      }
+    }
+
+    /* Responsividad */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 6rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 0.9rem;
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb"></div>
+  <div class="orb"></div>
+
+  <h1>CHEEEEEEEEM!
+    Casi... error 404</h1>
+  <h2>Página no encontrada</h2>
+  <p>Lo sentimos, la página que buscas no existe o fue movida.  
+  Puedes regresar al inicio y seguir explorando nuestro sitio.</p>
+  <a href="/">Volver al inicio</a>
+</body>
+</html>

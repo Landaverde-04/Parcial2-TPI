@@ -79,8 +79,10 @@
       cart = JSON.parse(localStorage.getItem('cart')) || [];
 
       try {
-        const camisetasRes = await fetch('http://172.23.162.164:3000/camisetas');
-        const tallasRes = await fetch('http://172.23.162.164:3000/tallas');
+        const apiBase = `${window.location.origin}/code`;
+
+        const camisetasRes = await fetch(`${apiBase}/camisetas`);
+        const tallasRes = await fetch(`${apiBase}/tallas`);
 
         const camisetas = await camisetasRes.json();
         const tallas = await tallasRes.json();
@@ -126,28 +128,27 @@
           .filter(t => t);
 
         return `
-            <div class="carrito-item">
-              <img src="${item.img}" alt="${item.nombre}" style="width:100px;">
-              <div class="item-details">
-                <h4>${item.nombre}</h4>
-                <p>Precio unitario: $${item.precio}</p>
-                <label>Talla:
-                  <select class="talla-select" data-index="${index}">
-                    ${availableTallas.map(t => `<option value="${t.id}" ${t.id.toString() === item.tallaId.toString() ? 'selected' : ''}>${t.nombre}</option>`).join('')}
-                  </select>
-                </label>
-                <label>Cantidad:
-                  <input type="number" class="cantidad-input" data-index="${index}" min="1" value="${item.cantidad}">
-                </label>
-                <p>Subtotal: $${subtotal.toFixed(2)}</p>
-                <button class="remove-btn" data-index="${index}">Eliminar</button>
-              </div>
+          <div class="carrito-item">
+            <img src="${item.img}" alt="${item.nombre}" style="width:100px;">
+            <div class="item-details">
+              <h4>${item.nombre}</h4>
+              <p>Precio unitario: $${item.precio}</p>
+              <label>Talla:
+                <select class="talla-select" data-index="${index}">
+                  ${availableTallas.map(t => `<option value="${t.id}" ${t.id.toString() === item.tallaId.toString() ? 'selected' : ''}>${t.nombre}</option>`).join('')}
+                </select>
+              </label>
+              <label>Cantidad:
+                <input type="number" class="cantidad-input" data-index="${index}" min="1" value="${item.cantidad}">
+              </label>
+              <p>Subtotal: $${subtotal.toFixed(2)}</p>
+              <button class="remove-btn" data-index="${index}">Eliminar</button>
             </div>
-          `;
+          </div>
+        `;
       }).join('');
 
       totalContainer.innerHTML = `<h4>Total: $${total.toFixed(2)}</h4>`;
-
 
       document.querySelectorAll('.cantidad-input').forEach(input => {
         input.addEventListener('change', function () {
@@ -203,10 +204,36 @@
       renderCart();
     }
 
-    function removeItem(index) {
+    // ✅ Versión corregida que elimina también cuando solo hay un pedido
+    async function removeItem(index) {
+      const item = cart[index];
       cart.splice(index, 1);
       saveCart();
       renderCart();
+
+      try {
+        const apiBase = `${window.location.origin}/code`;
+        const res = await fetch(`${apiBase}/pedidos`);
+        const pedidos = await res.json();
+
+        const pedido = pedidos.find(p =>
+          (p.idProducto == item.id || p.productoId == item.id) &&
+          (p.talla == item.tallaNombre || p.talla == item.talla)
+        );
+
+        if (pedido && pedido.id) {
+          const deleteRes = await fetch(`${apiBase}/pedidos/${pedido.id}`, { method: 'DELETE' });
+          if (deleteRes.ok) {
+            console.log(`✅ Pedido ${pedido.id} eliminado correctamente del JSON.`);
+          } else {
+            console.warn(`⚠️ No se pudo eliminar el pedido ${pedido.id}.`);
+          }
+        } else {
+          console.warn("⚠️ No se encontró el pedido a eliminar en el JSON:", item);
+        }
+      } catch (error) {
+        console.error("❌ Error al eliminar del JSON:", error);
+      }
     }
 
     function saveCart() {

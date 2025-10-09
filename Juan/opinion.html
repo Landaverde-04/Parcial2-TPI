@@ -22,9 +22,9 @@
     <h2>Categorías de nuestros productos</h2>
 
     <div class="btn-carrito">
-      <buttom href="">
+      <button href="">
         <i class="fa-solid fa-cart-shopping"></i>
-      </buttom>
+      </button>
     </div>
 
     <div class="categorias">
@@ -70,8 +70,9 @@
   <main>
     <h2>Danos tu opinión</h2>
     <p>En el siguiente apartado agradeceríamos que nos dieras tu opinión sobre tu experiencia en la tienda y sus
-      productos, eso nos ayuda a mejorar y a ofrer a nuestros clientes siempre la mejor experiencia, puedes hacerlo de
-      manera anónina, con tu nombre o como a ti te parezca mejor, muchas gracias por tu apoyo y preferencia.</p>
+      productos, eso nos ayuda a mejorar y a ofrecer siempre la mejor experiencia.</p>
+
+    <!-- ✅ Mantener nombre del usuario con localStorage -->
     <form id="review-form" class="review-form">
       <label for="review-name">Nombre:</label>
       <input type="text" id="review-name" required>
@@ -82,6 +83,7 @@
       <button type="submit">Publicar</button>
     </form>
 
+    <!-- ✅ Aquí se muestran los comentarios -->
     <div id="reviews-list"></div>
   </main>
 
@@ -117,23 +119,12 @@
       </div>
 
       <div class="footer-column">
-        <h3>Siguenos</h3>
+        <h3>Síguenos</h3>
         <ul class="footer-icons">
-          <li>
-            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-          </li>
-          <li>
-            <a href="https://instagram.com" target="_blank">
-              <i class="fab fa-instagram"></i></a>
-          </li>
-          <li>
-            <a href="https://www.tiktok.com/signup" target="_blank">
-              <i class="fab fa-tiktok"></i></a>
-          </li>
-          <li>
-            <a href="https://x.com" target="_blank">
-              <i class="fab fa-twitter"></i></a>
-          </li>
+          <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a></li>
+          <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="https://www.tiktok.com/signup" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+          <li><a href="https://x.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
         </ul>
       </div>
     </div>
@@ -141,9 +132,10 @@
     <p>Carnet: UN22001</p>
   </footer>
 
+  <!-- ✅ Este script maneja la lógica de comentarios (solo se añadió la parte de localStorage) -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const API_URL = "http://172.23.162.164:3000/comentario";
+      const API_URL = `${window.location.origin}/code/comentario`;
       const form = document.getElementById("review-form");
       const nameInput = document.getElementById("review-name");
       const commentInput = document.getElementById("review-comment");
@@ -175,35 +167,34 @@
           const div = document.createElement("div");
           div.classList.add("comentario-item");
 
-          // Agregamos botón eliminar solo si el comentario es del usuario guardado
+          // Mostrar botón eliminar solo al autor
           const puedeEliminar = storedName === comentario.nombre;
           div.innerHTML = `
-        <p><strong>${comentario.nombre}</strong></p>
-        <p>${comentario.comentario}</p>
-        ${puedeEliminar ? `<button class="delete-btn" data-nombre="${comentario.nombre}" data-comentario="${comentario.comentario}">Eliminar</button>` : ""}
-      `;
+            <p><strong>${comentario.nombre}</strong></p>
+            <p>${comentario.comentario}</p>
+            ${puedeEliminar ? `<button class="delete-btn" data-id="${comentario.id}">Eliminar</button>` : ""}
+          `;
 
           reviewsList.appendChild(div);
         });
 
-        // Añadir evento a los botones eliminar
         document.querySelectorAll(".delete-btn").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
-            const nombre = e.target.getAttribute("data-nombre");
-            const comentario = e.target.getAttribute("data-comentario");
-            deleteComment(nombre, comentario);
+          btn.addEventListener("click", async (e) => {
+            const id = e.target.getAttribute("data-id");
+            if (confirm("¿Seguro que quieres eliminar este comentario?")) {
+              await deleteComment(id);
+            }
           });
         });
       }
 
-      // Agregar comentario
+      // Enviar comentario
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const nombre = nameInput.value.trim();
         const comentario = commentInput.value.trim();
         if (!nombre || !comentario) return;
 
-        // Si no hay nombre guardado, lo guardamos
         if (!storedName) {
           localStorage.setItem("reviewerName", nombre);
           storedName = nombre;
@@ -213,13 +204,11 @@
           return;
         }
 
-        const nuevoComentario = { nombre, comentario };
-
         try {
           await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(nuevoComentario),
+            body: JSON.stringify({ nombre, comentario }),
           });
           commentInput.value = "";
           loadComments();
@@ -228,25 +217,10 @@
         }
       });
 
-      // Eliminar comentario (por nombre y texto)
-      async function deleteComment(nombre, comentarioTexto) {
+      // Eliminar comentario
+      async function deleteComment(id) {
         try {
-          // Primero obtener todos los comentarios actuales
-          const res = await fetch(API_URL);
-          const comentarios = await res.json();
-
-          // Buscar el comentario que coincida exactamente
-          const comentarioEncontrado = comentarios.find(
-            (c) => c.nombre === nombre && c.comentario === comentarioTexto
-          );
-
-          if (!comentarioEncontrado) return;
-
-          // Enviar DELETE con el id en la URL (JSON Server requiere id en URL para DELETE)
-          await fetch(`${API_URL}/${comentarioEncontrado.id}`, {
-            method: "DELETE"
-          });
-
+          await fetch(`${API_URL}/${id}`, { method: "DELETE" });
           loadComments();
         } catch {
           console.warn("No se pudo eliminar el comentario");
@@ -256,10 +230,5 @@
       loadComments();
     });
   </script>
-
-
-
-
 </body>
-
 </html>

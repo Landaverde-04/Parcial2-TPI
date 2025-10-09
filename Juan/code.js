@@ -2,9 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
   let data = { categorias: [], tallas: [], camisetas: [], comentarios: [] };
   let firstCommentName = null;
 
-  const API_BASE = 'http://172.23.162.164:3000';
+  const API_BASE = `${window.location.origin}/code`;
+  
 
-  // Fetch categorías, tallas y camisetas (si uno falla devolvemos array vacío para no romper todo)
+  // 🔹 Recuperar el nombre del usuario actual desde localStorage (si ya comentó antes)
+  let usuarioActual = localStorage.getItem('usuarioActual');
+
+  // Fetch categorías, tallas y camisetas
   const fetchCategorias = fetch(`${API_BASE}/categorias`).then(r => r.ok ? r.json() : []).catch(() => []);
   const fetchTallas = fetch(`${API_BASE}/tallas`).then(r => r.ok ? r.json() : []).catch(() => []);
   const fetchCamisetas = fetch(`${API_BASE}/camisetas`).then(r => r.ok ? r.json() : []).catch(() => []);
@@ -15,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
       data.tallas = Array.isArray(tallas) ? tallas : [];
       data.camisetas = Array.isArray(camisetas) ? camisetas : [];
 
-      // Render productos si existe el grid
       const grid = document.getElementById('productos-grid');
       if (grid) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -28,11 +31,10 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(err => {
       console.error('Error fetching productos:', err);
-      // Intentamos renderizar 
       renderProducts(data.camisetas || []);
     });
 
-  // Cargar comentarios desde JSON Server
+  // Cargar comentarios
   function loadComments() {
     fetch(`${API_BASE}/comentario`)
       .then(r => {
@@ -50,12 +52,10 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 
-  // Sólo cargamos comentarios si existe el formulario (así no bloqueamos la página principal)
   if (document.getElementById('review-form')) {
     loadComments();
   }
 
-  // render de los productos
   function renderProducts(productos) {
     const grid = document.getElementById('productos-grid');
     if (!grid) return;
@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const tallas = data.tallas || [];
 
     (productos || []).forEach(producto => {
-      // producto.talla puede no existir
       const productoTallas = Array.isArray(producto.talla) ? producto.talla : [];
       const categoria = categorias.find(c => c.id === producto.categoriaId)?.nombre || 'Desconocida';
       const tallasNombres = productoTallas
@@ -91,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // render de los comentarios
+  // 🔹 Render de comentarios con control de autor
   function renderComments(comments) {
     const list = document.getElementById('reviews-list');
     if (!list) return;
@@ -100,17 +99,17 @@ document.addEventListener('DOMContentLoaded', function() {
     comments.forEach(comment => {
       const div = document.createElement('div');
       div.className = 'review-card';
+      
+      const puedeEliminar = comment.nombre === usuarioActual;
+
       div.innerHTML = `
         <h4>${escapeHtml(comment.nombre)}</h4>
         <p>${escapeHtml(comment.comentario)}</p>
-        <button class="delete-btn" data-id="${comment.id}">Eliminar</button>
+        ${puedeEliminar ? `<button class="delete-btn" data-id="${comment.id}">Eliminar</button>` : ''}
       `;
 
-      // Solo permitir eliminar comentarios que no sean de la lista original (id <= 3)
-      const deleteBtn = div.querySelector('.delete-btn');
-      if (comment.id && comment.id <= 3) {
-        deleteBtn.style.display = 'none';
-      } else if (comment.id) {
+      if (puedeEliminar) {
+        const deleteBtn = div.querySelector('.delete-btn');
         deleteBtn.addEventListener('click', () => {
           if (confirm('¿Seguro que quieres eliminar este comentario?')) {
             deleteComment(comment.id);
@@ -133,15 +132,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!r.ok) throw new Error('Error al agregar comentario');
         return r.json();
       })
-      .then(newComment => {
+      .then(() => {
+        if (!usuarioActual) {
+          usuarioActual = comment.nombre;
+          localStorage.setItem('usuarioActual', usuarioActual);
+        }
         loadComments();
       })
       .catch(err => {
         alert('Error al agregar comentario: ' + err.message);
+        localStorage.removeItem('usuarioActual');
+        usuarioActual = null;
       });
   }
 
-  // Eliminar comentario (DELETE)
+  // Eliminar comentario
   function deleteComment(id) {
     fetch(`${API_BASE}/comentario/${id}`, {
       method: 'DELETE'
@@ -155,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 
-  //  envío y POST
+  // Envío del formulario
   const reviewForm = document.getElementById('review-form');
   if (reviewForm) {
     reviewForm.addEventListener('submit', e => {
@@ -167,23 +172,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (!name || !comment) return alert('Por favor, complete todos los campos.');
 
-      if (firstCommentName === null) {
-        firstCommentName = name;
-      } else if (name !== firstCommentName) {
-        alert('Debe usar el mismo nombre que en su primer comentario.');
+      // 🔹 Guardar nombre en localStorage antes de enviar si no existe
+      if (!usuarioActual) {
+        usuarioActual = name;
+        localStorage.setItem('usuarioActual', usuarioActual);
+      } else if (usuarioActual !== name) {
+        alert('Solo puedes comentar con tu nombre registrado.');
         return;
       }
 
       const newComment = { nombre: name, comentario: comment };
-
       addComment(newComment);
 
-      if (nameEl) nameEl.value = '';
-      if (commentEl) commentEl.value = '';
+      commentEl.value = '';
     });
   }
 
-  // pequeña función para escapar HTML en comentarios/nombres
   function escapeHtml(str) {
     if (typeof str !== 'string') return '';
     return str.replace(/[&<>"']/g, tag => ({
