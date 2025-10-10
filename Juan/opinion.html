@@ -72,7 +72,7 @@
     <p>En el siguiente apartado agradeceríamos que nos dieras tu opinión sobre tu experiencia en la tienda y sus
       productos, eso nos ayuda a mejorar y a ofrecer siempre la mejor experiencia.</p>
 
-    <!-- ✅ Mantener nombre del usuario con localStorage -->
+    /*  para mantener nombre del usuario con localStorage */
     <form id="review-form" class="review-form">
       <label for="review-name">Nombre:</label>
       <input type="text" id="review-name" required>
@@ -83,7 +83,7 @@
       <button type="submit">Publicar</button>
     </form>
 
-    <!-- ✅ Aquí se muestran los comentarios -->
+   /* aca se muestran los comentarios */
     <div id="reviews-list"></div>
   </main>
 
@@ -132,7 +132,7 @@
     <p>Carnet: UN22001</p>
   </footer>
 
-  <!-- ✅ Este script maneja la lógica de comentarios (solo se añadió la parte de localStorage) -->
+  /*logica dentro de mantener el nombre y comentarios*/
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const API_URL = `${window.location.origin}/code/comentario`;

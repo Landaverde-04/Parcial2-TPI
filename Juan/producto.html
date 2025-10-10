@@ -197,7 +197,7 @@
 
               localStorage.setItem('cart', JSON.stringify(cart));
 
-              // 🔹 NUEVO: también guardar el pedido en el JSON del servidor
+              // guarda el pedido (lo que se agrega al carrito) en el json
               fetch(`${apiBase}/pedidos`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
