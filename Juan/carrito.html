@@ -204,7 +204,7 @@
       renderCart();
     }
 
-    // ✅ Versión corregida que elimina también cuando solo hay un pedido
+    // eliminar los pedidos (Lo que esta dentro del carrito) del json
     async function removeItem(index) {
       const item = cart[index];
       cart.splice(index, 1);
@@ -224,15 +224,15 @@
         if (pedido && pedido.id) {
           const deleteRes = await fetch(`${apiBase}/pedidos/${pedido.id}`, { method: 'DELETE' });
           if (deleteRes.ok) {
-            console.log(`✅ Pedido ${pedido.id} eliminado correctamente del JSON.`);
+            console.log(`Pedido ${pedido.id} eliminado correctamente.`);
           } else {
-            console.warn(`⚠️ No se pudo eliminar el pedido ${pedido.id}.`);
+            console.warn(`No se pudo eliminar el pedido ${pedido.id}.`);
           }
         } else {
-          console.warn("⚠️ No se encontró el pedido a eliminar en el JSON:", item);
+          console.warn("No se encontró el pedido a eliminar:", item);
         }
       } catch (error) {
-        console.error("❌ Error al eliminar del JSON:", error);
+        console.error("Error al eliminar:", error);
       }
     }
 

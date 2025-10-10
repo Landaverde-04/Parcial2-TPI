@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const API_BASE = `${window.location.origin}/code`;
   
 
-  // 🔹 Recuperar el nombre del usuario actual desde localStorage (si ya comentó antes)
+  // lo siguiente es para recuperar el nombre del usuario actual desde localStorage (si ya comentó antes o es alguien nuevo)
   let usuarioActual = localStorage.getItem('usuarioActual');
 
   // Fetch categorías, tallas y camisetas
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
       renderProducts(data.camisetas || []);
     });
 
-  // Cargar comentarios
+  // Cargar comentarios que ya existen
   function loadComments() {
     fetch(`${API_BASE}/comentario`)
       .then(r => {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // 🔹 Render de comentarios con control de autor
+  //  Render de comentarios con control de autor
   function renderComments(comments) {
     const list = document.getElementById('reviews-list');
     if (!list) return;
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Agregar comentario (POST)
+  // Agregar comentario (POST) 
   function addComment(comment) {
     fetch(`${API_BASE}/comentario`, {
       method: 'POST',
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 
-  // Eliminar comentario
+  // Eliminar comentario (DELETE)
   function deleteComment(id) {
     fetch(`${API_BASE}/comentario/${id}`, {
       method: 'DELETE'
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 
-  // Envío del formulario
+  // Envío del formulario (el comentario junto con el nombre de quien comenta)
   const reviewForm = document.getElementById('review-form');
   if (reviewForm) {
     reviewForm.addEventListener('submit', e => {
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (!name || !comment) return alert('Por favor, complete todos los campos.');
 
-      // 🔹 Guardar nombre en localStorage antes de enviar si no existe
+      // con esto se guarda el nombre en localStorage antes de enviar si no existe
       if (!usuarioActual) {
         usuarioActual = name;
         localStorage.setItem('usuarioActual', usuarioActual);
