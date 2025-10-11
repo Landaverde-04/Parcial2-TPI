@@ -1,5 +1,5 @@
-const VENTAS_URL = 'http://172.23.243.26:3000/ventas';
-const PRODUCTOS_URL = 'http://172.23.243.26:3000/productos';
+const VENTAS_URL = 'https://172.23.243.26:3000/ventas';
+const PRODUCTOS_URL = 'https://172.23.243.26:3000/productos';
 
 let productos = [];
 
@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadProductos();
     loadVentas();
     setTodayDate();
+    updateStats(); // Cargar estadísticas al inicio
 });
 
 // Establecer fecha de hoy por defecto
@@ -16,11 +17,33 @@ function setTodayDate() {
     document.getElementById('fecha').value = today;
 }
 
+// Función para actualizar las estadísticas
+async function updateStats() {
+    try {
+        const response = await fetch(VENTAS_URL);
+        const data = await response.json();
+        const ventas = data.ventas;
+        
+        // Calcular total de ventas en dinero
+        let totalAmount = 0;
+        ventas.forEach(venta => {
+            totalAmount += parseFloat(venta.total);
+        });
+        
+        // Actualizar displays
+        document.getElementById('totalVentasAmount').textContent = '$' + totalAmount.toFixed(2);
+        document.getElementById('totalVentasCount').textContent = ventas.length;
+    } catch (error) {
+        console.error('Error al actualizar estadísticas:', error);
+    }
+}
+
 // Cargar productos para los selectores
 async function loadProductos() {
     try {
         const response = await fetch(PRODUCTOS_URL);
-        productos = await response.json();
+        const data = await response.json();  
+        const productos = data.productos;    
         
         const select = document.getElementById('productoId');
         const editSelect = document.getElementById('editProductoId');
@@ -29,12 +52,17 @@ async function loadProductos() {
         editSelect.innerHTML = '<option value="">Seleccione un producto</option>';
         
         productos.forEach(producto => {
-            const option = `<option value="${producto.id}" data-precio="${producto.precio}" data-nombre="${producto.nombre}">
-                ${producto.nombre} - ${producto.marca} ($${parseFloat(producto.precio).toFixed(2)})
-            </option>`;
-            select.innerHTML += option;
-            editSelect.innerHTML += option;
+            const optionHTML = `
+                <option value="${producto.id}" 
+                        data-precio="${producto.precio}" 
+                        data-nombre="${producto.nombre}">
+                    ${producto.nombre} - ${producto.marca} ($${parseFloat(producto.precio).toFixed(2)})
+                </option>
+            `;
+            select.innerHTML += optionHTML;
+            editSelect.innerHTML += optionHTML;
         });
+
     } catch (error) {
         alert('Error al cargar productos: ' + error.message);
     }
@@ -54,7 +82,7 @@ function calcularTotal() {
     if (selectedOption && selectedOption.dataset.precio) {
         const precio = parseFloat(selectedOption.dataset.precio);
         const total = precio * parseFloat(cantidad);
-        document.getElementById('totalDisplay').textContent = `Total: $${total.toFixed(2)}`;
+        document.getElementById('totalDisplay').textContent = '$' + total.toFixed(2);
     }
 }
 
@@ -66,7 +94,7 @@ function calcularTotalEdit() {
     if (selectedOption && selectedOption.dataset.precio) {
         const precio = parseFloat(selectedOption.dataset.precio);
         const total = precio * parseFloat(cantidad);
-        document.getElementById('editTotalDisplay').textContent = `Total: $${total.toFixed(2)}`;
+        document.getElementById('editTotalDisplay').textContent = '$' + total.toFixed(2);
     }
 }
 
@@ -102,8 +130,9 @@ document.getElementById('ventaForm').addEventListener('submit', async (e) => {
             alert('Venta registrada exitosamente');
             document.getElementById('ventaForm').reset();
             setTodayDate();
-            document.getElementById('totalDisplay').textContent = 'Total: $0.00';
+            document.getElementById('totalDisplay').textContent = '$0.00';
             loadVentas();
+            updateStats(); // Actualizar estadísticas después de registrar venta
         }
     } catch (error) {
         alert('Error al registrar venta: ' + error.message);
@@ -114,7 +143,8 @@ document.getElementById('ventaForm').addEventListener('submit', async (e) => {
 async function loadVentas() {
     try {
         const response = await fetch(VENTAS_URL);
-        const ventas = await response.json();
+        const data = await response.json();  
+        const ventas = data.ventas;          
         
         const tbody = document.getElementById('ventasList');
         tbody.innerHTML = '';
@@ -135,6 +165,8 @@ async function loadVentas() {
             `;
             tbody.appendChild(tr);
         });
+        
+        updateStats(); // Actualizar estadísticas después de cargar ventas
     } catch (error) {
         alert('Error al cargar ventas: ' + error.message);
     }
@@ -194,6 +226,7 @@ document.getElementById('editForm').addEventListener('submit', async (e) => {
             alert('Venta actualizada exitosamente');
             cancelEdit();
             loadVentas();
+            updateStats(); // Actualizar estadísticas después de editar
         }
     } catch (error) {
         alert('Error al actualizar venta: ' + error.message);
@@ -204,7 +237,7 @@ document.getElementById('editForm').addEventListener('submit', async (e) => {
 function cancelEdit() {
     document.getElementById('editSection').style.display = 'none';
     document.getElementById('editForm').reset();
-    document.getElementById('editTotalDisplay').textContent = 'Total: $0.00';
+    document.getElementById('editTotalDisplay').textContent = '$0.00';
 }
 
 // Eliminar venta
@@ -218,6 +251,7 @@ async function deleteVenta(id) {
             if (response.ok) {
                 alert('Venta eliminada exitosamente');
                 loadVentas();
+                updateStats(); // Actualizar estadísticas después de eliminar
             }
         } catch (error) {
             alert('Error al eliminar venta: ' + error.message);
