@@ -57,38 +57,45 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function renderProducts(productos) {
-    const grid = document.getElementById('productos-grid');
-    if (!grid) return;
+  const grid = document.getElementById('productos-grid');
+  if (!grid) return;
 
-    grid.innerHTML = '';
-    const categorias = data.categorias || [];
-    const tallas = data.tallas || [];
+  grid.innerHTML = '';
+  const categorias = data.categorias || [];
+  const tallas = data.tallas || [];
 
-    (productos || []).forEach(producto => {
-      const productoTallas = Array.isArray(producto.talla) ? producto.talla : [];
-      const categoria = categorias.find(c => c.id === producto.categoriaId)?.nombre || 'Desconocida';
-      const tallasNombres = productoTallas
-        .map(id => tallas.find(t => t.id === id)?.nombre || 'Desconocida')
-        .join(', ');
+  (productos || []).forEach(producto => {
+    const productoTallas = Array.isArray(producto.talla) ? producto.talla : [];
 
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <img src="${producto.img}" alt="${producto.nombre}">
-        <h4>${producto.nombre}</h4>
-        <p><strong>Categoría:</strong> ${categoria}</p>
-        <p>${producto.descripcion}</p>
-        <p class="precio">$${producto.precio}</p>
-        <p><strong>Tallas:</strong> ${tallasNombres}</p>
-      `;
+    // Asegurar que ambos sean números para que coincidan correctamente
+    const categoria = categorias.find(c => parseInt(c.id) === parseInt(producto.categoriaId))?.nombre || 'Desconocida';
 
-      card.addEventListener('click', () => {
-        window.location.href = `producto.html?id=${producto.id}`;
-      });
+    // Igual para las tallas
+    const tallasNombres = productoTallas
+      .map(id => {
+        const tallaObj = tallas.find(t => parseInt(t.id) === parseInt(id));
+        return tallaObj ? tallaObj.nombre : 'Desconocida';
+      })
+      .join(', ');
 
-      grid.appendChild(card);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${producto.img}" alt="${producto.nombre}">
+      <h4>${producto.nombre}</h4>
+      <p><strong>Categoría:</strong> ${categoria}</p>
+      <p>${producto.descripcion}</p>
+      <p class="precio">$${producto.precio}</p>
+      <p><strong>Tallas:</strong> ${tallasNombres}</p>
+    `;
+
+    card.addEventListener('click', () => {
+      window.location.href = `producto.html?id=${producto.id}`;
     });
-  }
+
+    grid.appendChild(card);
+  });
+}
 
   //  Render de comentarios con control de autor
   function renderComments(comments) {
